@@ -1,27 +1,122 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
+import { PageHero, SectionEyebrow, Button } from "@/components/ui";
 
 export const metadata: Metadata = { title: "What We Do" };
 
+const PILLARS = [
+  {
+    title: "We Build Culturally Responsive Tools",
+    description:
+      "Every solution TryCycle develops is shaped by the communities it serves — not designed externally and applied uniformly. Cultural safety, language, and lived experience inform every design decision.",
+  },
+  {
+    title: "We Partner, Not Just Deliver",
+    description:
+      "Our relationships are collaborative from the start. We work alongside community organizations, health authorities, and frontline providers — listening first, building second.",
+  },
+  {
+    title: "We Focus on Prevention and Early Intervention",
+    description:
+      "TryCycle solutions are designed to reach people before crisis — building protective factors, strengthening connections, and supporting wellbeing before it becomes an emergency.",
+  },
+  {
+    title: "We Measure What Matters",
+    description:
+      "Outcomes matter more than outputs. Our platform generates actionable insight for care teams and organizations — not just usage data, but indicators of real impact.",
+  },
+] as const;
+
+const POPULATIONS = [
+  "Indigenous communities (First Nations, Métis, Inuit)",
+  "Veterans and active service members",
+  "Children, youth, and families",
+  "People navigating transitional care",
+  "Rural and remote communities",
+  "Healthcare organizations and care teams",
+] as const;
+
 export default function Page() {
   return (
-    <div className="min-h-screen pt-32 pb-24">
-      <div className="mx-auto max-w-4xl px-6">
-        <p
-          className="mb-4 text-[0.7rem] font-medium tracking-[0.22em] uppercase"
-          style={{ color: "var(--color-teal)" }}
-        >
-          TryCycle
-        </p>
-        <h1
-          className="text-4xl font-bold mb-6"
-          style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
-        >
-          What We Do
-        </h1>
-        <p style={{ color: "var(--color-muted)" }}>
-          This page is coming soon.
-        </p>
-      </div>
-    </div>
+    <>
+      <PageHero
+        eyebrow="About Us"
+        title="What We Do"
+        description="TryCycle builds culturally responsive digital mental health tools — designed with the communities they serve, not just for them."
+      />
+
+      <section
+        className="py-16 lg:py-20"
+        style={{ background: "var(--color-navy)", borderTop: "1px solid var(--color-border)" }}
+      >
+        <div className="mx-auto max-w-4xl px-6">
+
+          <div className="space-y-5 mb-16">
+            {PILLARS.map((p, i) => (
+              <div
+                key={p.title}
+                className="rounded-2xl p-6 flex gap-5"
+                style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
+              >
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-[0.72rem] font-bold shrink-0 mt-0.5"
+                  style={{
+                    background: "oklch(0.65 0.12 185 / 0.12)",
+                    color: "var(--color-teal)",
+                    border: "1px solid oklch(0.65 0.12 185 / 0.20)",
+                  }}
+                  aria-hidden="true"
+                >
+                  {i + 1}
+                </div>
+                <div>
+                  <h3
+                    className="text-[0.92rem] font-semibold mb-1.5"
+                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+                  >
+                    {p.title}
+                  </h3>
+                  <p className="text-[0.82rem] leading-relaxed" style={{ color: "var(--color-muted)" }}>
+                    {p.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <div>
+              <SectionEyebrow className="mb-4 block">Who We Serve</SectionEyebrow>
+              <ul className="space-y-2.5">
+                {POPULATIONS.map((p) => (
+                  <li key={p} className="flex items-center gap-2.5">
+                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "var(--color-teal)" }} aria-hidden="true" />
+                    <span className="text-[0.85rem]" style={{ color: "var(--color-muted)" }}>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div
+              className="rounded-2xl p-6"
+              style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
+            >
+              <p
+                className="text-[0.92rem] font-bold mb-2"
+                style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+              >
+                Want to learn more?
+              </p>
+              <p className="text-[0.82rem] leading-relaxed mb-5" style={{ color: "var(--color-muted)" }}>
+                Book a meeting with our team to explore how TryCycle can support your organization
+                or community.
+              </p>
+              <Button href="/book-appointment" variant="primary" size="sm">
+                Book an Appointment
+              </Button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </>
   );
 }
