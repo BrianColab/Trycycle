@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ContactDrawer } from "./ContactDrawer";
 
 const NAV_ITEMS = [
   {
@@ -41,7 +42,6 @@ const NAV_ITEMS = [
   { label: "Testimonials", href: "/testimonials" },
   { label: "FAQ", href: "/faq" },
   { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
 ] as const;
 
 type NavItem =
@@ -176,7 +176,7 @@ function DropdownMenu({ item }: { item: NavItem & { children: { label: string; h
   );
 }
 
-function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+function MobileMenu({ open, onClose, onContact }: { open: boolean; onClose: () => void; onContact: () => void }) {
   const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
 
   useEffect(() => {
@@ -288,6 +288,17 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
         >
           Book an Appointment
         </Link>
+        <button
+          onClick={() => { onClose(); onContact(); }}
+          className="flex items-center justify-center w-full px-6 py-3 text-[0.85rem] font-medium transition-colors duration-200 mt-2"
+          style={{
+            borderRadius: "9999px",
+            border: "1px solid oklch(0 0 0 / 0.12)",
+            color: "oklch(0.28 0.04 240)",
+          }}
+        >
+          Contact Us
+        </button>
       </div>
     </div>
   );
@@ -296,6 +307,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 12);
@@ -343,6 +355,16 @@ export function Header() {
 
           {/* CTA + hamburger */}
           <div className="ml-auto flex items-center gap-3">
+            <button
+              onClick={() => setContactOpen(true)}
+              className="hidden lg:inline-flex items-center px-4 py-2 text-[0.72rem] font-medium tracking-[0.12em] uppercase transition-colors duration-200 hover:text-teal"
+              style={{
+                color: "oklch(0.30 0.03 240)",
+                fontFamily: "var(--font-inter, Inter, sans-serif)",
+              }}
+            >
+              Contact
+            </button>
             <Link
               href="/book-appointment"
               className="hidden lg:inline-flex items-center px-5 py-2 text-[0.78rem] font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.99]"
@@ -371,7 +393,8 @@ export function Header() {
         </div>
       </header>
 
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} onContact={() => setContactOpen(true)} />
+      <ContactDrawer open={contactOpen} onClose={() => setContactOpen(false)} />
     </>
   );
 }

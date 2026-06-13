@@ -456,6 +456,50 @@ function SuccessScreen({
   );
 }
 
+/* ── Auto-message builder ── */
+function buildAutoMessage(
+  staffName: string | null,
+  userName: string,
+  organization: string,
+  reason: string,
+  date: string | null,
+  slot: TimeSlot | null
+): string {
+  const staffFirst = staffName?.split(" ")[0] ?? null;
+  const hasName   = userName.trim().length > 0;
+  const hasOrg    = organization.trim().length > 0;
+  const hasReason = reason.length > 0;
+
+  const sentences: string[] = [];
+
+  if (staffFirst) {
+    sentences.push(
+      hasName
+        ? `Hi ${staffFirst}, my name is ${userName.trim()}${hasOrg ? ` from ${organization.trim()}` : ""}.`
+        : `Hi ${staffFirst},`
+    );
+  } else if (hasName) {
+    sentences.push(`My name is ${userName.trim()}${hasOrg ? ` from ${organization.trim()}` : ""}.`);
+  }
+
+  if (hasReason) {
+    sentences.push(`I would like to meet regarding: ${reason}.`);
+  }
+
+  if (date) {
+    const formatted = new Date(date + "T12:00:00").toLocaleDateString("en-CA", {
+      weekday: "long", year: "numeric", month: "long", day: "numeric",
+    });
+    sentences.push(
+      slot
+        ? `My preferred date is ${formatted} at ${formatTimeSlot(slot)}.`
+        : `My preferred date is ${formatted}.`
+    );
+  }
+
+  return sentences.join(" ");
+}
+
 /* ── Form state ── */
 interface FormState {
   name: string;
@@ -495,6 +539,7 @@ export function BookingClient() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
+  const [messageEdited, setMessageEdited] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
 
@@ -536,6 +581,20 @@ export function BookingClient() {
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStaff?.id, selectedDate]);
+
+  // Auto-populate message from current selections whenever user hasn't manually edited it
+  useEffect(() => {
+    if (messageEdited) return;
+    const autoMsg = buildAutoMessage(
+      selectedStaff?.name ?? null,
+      form.name,
+      form.organization,
+      form.reason,
+      selectedDate,
+      selectedSlot
+    );
+    setForm((f) => ({ ...f, message: autoMsg }));
+  }, [selectedStaff?.name, form.name, form.organization, form.reason, selectedDate, selectedSlot, messageEdited]);
 
   const set = useCallback(<K extends keyof FormState>(key: K, val: FormState[K]) => {
     setForm((f) => ({ ...f, [key]: val }));
@@ -634,6 +693,7 @@ export function BookingClient() {
               setBookedSlots([]);
               setForm(INITIAL_FORM);
               setErrors({});
+              setMessageEdited(false);
             }}
           />
         </div>
@@ -888,21 +948,59 @@ export function BookingClient() {
                   </select>
                 </Field>
 
-                <Field label="Message (optional)" id={msgId}>
+                {/* Message — auto-fills from selections, user can override */}
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label
+                      htmlFor={msgId}
+                      className="text-[0.82rem] font-medium"
+                      style={{ color: "var(--color-ivory)" }}
+                    >
+                      Message
+                      {!messageEdited && form.message && (
+                        <span
+                          className="ml-2 text-[0.68rem] font-medium px-1.5 py-0.5 rounded-full"
+                          style={{
+                            background: "oklch(0.65 0.12 185 / 0.12)",
+                            color: "var(--color-teal)",
+                            border: "1px solid oklch(0.65 0.12 185 / 0.22)",
+                          }}
+                        >
+                          auto-filled
+                        </span>
+                      )}
+                    </label>
+                    {messageEdited && (
+                      <button
+                        type="button"
+                        onClick={() => setMessageEdited(false)}
+                        className="text-[0.72rem] font-medium transition-opacity duration-150 hover:opacity-70"
+                        style={{ color: "var(--color-teal)" }}
+                      >
+                        Reset to auto
+                      </button>
+                    )}
+                  </div>
                   <textarea
                     id={msgId}
                     value={form.message}
-                    onChange={(e) => set("message", e.target.value)}
-                    rows={4}
-                    placeholder="Anything you'd like us to know before the meeting…"
-                    style={{ ...inputStyle, resize: "vertical", minHeight: "100px" }}
+                    onChange={(e) => {
+                      if (!messageEdited) setMessageEdited(true);
+                      set("message", e.target.value);
+                    }}
+                    rows={5}
+                    placeholder="Fill in your name, reason, and a date above and your message will write itself…"
+                    style={{ ...inputStyle, resize: "vertical", minHeight: "120px" }}
                     onFocus={(e) => Object.assign(e.currentTarget.style, { ...inputFocusStyle, resize: "vertical" })}
                     onBlur={(e) => {
                       e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
                       e.currentTarget.style.boxShadow = "none";
                     }}
                   />
-                </Field>
+                  <p className="mt-1.5 text-[0.72rem]" style={{ color: "oklch(0.58 0.02 90)" }}>
+                    Auto-filled from your selections. Edit freely to add more context.
+                  </p>
+                </div>
 
                 {/* Disclaimer checkbox */}
                 <div>
