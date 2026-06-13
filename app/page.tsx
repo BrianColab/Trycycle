@@ -1,20 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button, SectionEyebrow } from "@/components/ui";
+import { Button } from "@/components/ui";
 
 /* ── Impact strip data ── */
 const IMPACT = [
   {
     label: "Earlier Engagement",
     description: "Connecting people sooner",
-    iconBg: "oklch(0.70 0.18 55 / 0.18)",
     iconColor: "oklch(0.78 0.18 55)",
     iconPath: "M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
   },
   {
     label: "Real-Time Insight",
     description: "Actionable information",
-    iconBg: "oklch(0.72 0.16 80 / 0.18)",
     iconColor: "oklch(0.80 0.16 80)",
     iconPath:
       "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z",
@@ -22,7 +20,6 @@ const IMPACT = [
   {
     label: "Prevention-Focused",
     description: "Better decisions",
-    iconBg: "oklch(0.60 0.15 230 / 0.18)",
     iconColor: "oklch(0.70 0.15 230)",
     iconPath:
       "M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z",
@@ -30,7 +27,6 @@ const IMPACT = [
   {
     label: "Healthier Communities",
     description: "Stronger together",
-    iconBg: "oklch(0.65 0.12 185 / 0.18)",
     iconColor: "oklch(0.72 0.12 185)",
     iconPath:
       "M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z",
@@ -42,6 +38,7 @@ const SOLUTIONS = [
   {
     href: "/solutions/buddys-quest",
     name: "Buddy's Quest",
+    tag: "Youth & Family",
     description: "Empowering youth through engaging digital experiences.",
     iconBg: "#2a7a3b",
     iconPath:
@@ -50,6 +47,7 @@ const SOLUTIONS = [
   {
     href: "/solutions/talking-stick",
     name: "Talking Stick",
+    tag: "Indigenous Communities",
     description: "Anonymous, culturally safe support for communities.",
     iconBg: "#6a1b9a",
     iconPath:
@@ -58,6 +56,7 @@ const SOLUTIONS = [
   {
     href: "/solutions/tetherall",
     name: "TetherAll",
+    tag: "Connection & Support",
     description: "Real-time data and analytics for better health outcomes.",
     iconBg: "#1565c0",
     iconPath:
@@ -66,6 +65,7 @@ const SOLUTIONS = [
   {
     href: "/solutions/ontario-legion-health",
     name: "Ontario Legion Health",
+    tag: "Veterans",
     description: "Supporting veterans and families with compassionate tools.",
     iconBg: "#b71c1c",
     iconPath:
@@ -83,30 +83,32 @@ const PREVIEW_VIDEOS = [
 /* ── Preview testimonials ── */
 const PREVIEW_TESTIMONIALS = [
   {
-    quote:
-      "Talking Stick has created a safe space in our community where people feel heard and supported.",
+    quote: "Talking Stick has created a safe space in our community where people feel heard and supported.",
     name: "Community Leader",
     org: "Northern Ontario",
+    cat: "Community",
   },
   {
-    quote:
-      "TetherAll has transformed the way we access data and make decisions that improve care.",
+    quote: "TetherAll has transformed the way we access data and make decisions that improve care.",
     name: "Healthcare Administrator",
     org: "Saskatchewan",
+    cat: "Healthcare",
   },
   {
-    quote:
-      "Buddy's Quest helps youth build confidence and resilience in such important ways.",
+    quote: "Buddy's Quest helps youth build confidence and resilience in such important ways.",
     name: "Youth Program Coordinator",
     org: "Ontario",
+    cat: "Youth",
   },
   {
-    quote:
-      "Working with TryCycle has been a game changer for our organization.",
+    quote: "Working with TryCycle has been a game changer for our organization.",
     name: "Non-profit Partner",
     org: "Alberta",
+    cat: "Partners",
   },
 ] as const;
+
+const FILTER_PILLS = ["All", "Community", "Healthcare", "Veterans", "Indigenous", "Youth", "Partners"] as const;
 
 /* ── Preview FAQ ── */
 const PREVIEW_FAQS_LEFT = [
@@ -128,7 +130,8 @@ const PREVIEW_FAQS_RIGHT = [
 function Hero() {
   return (
     <section
-      className="relative flex items-center min-h-[92dvh] overflow-hidden"
+      className="relative flex items-center overflow-hidden"
+      style={{ minHeight: "82vh" }}
       aria-label="TryCycle — digital health solutions"
     >
       <Image
@@ -140,34 +143,34 @@ function Hero() {
         sizes="100vw"
       />
 
-      {/* Dark overlay */}
+      {/* Primary overlay — very light at top so hero connects to white header */}
       <div
         className="absolute inset-0"
         aria-hidden="true"
         style={{
           background:
-            "linear-gradient(to bottom, oklch(0.12 0.04 240 / 0.55) 0%, oklch(0.12 0.04 240 / 0.88) 100%)",
+            "linear-gradient(to bottom, oklch(0.12 0.04 240 / 0.08) 0%, oklch(0.12 0.04 240 / 0.55) 45%, oklch(0.12 0.04 240 / 0.82) 100%)",
         }}
       />
-      {/* Left-side text readability gradient */}
+      {/* Left-column text readability gradient */}
       <div
         className="absolute inset-0"
         aria-hidden="true"
         style={{
           background:
-            "linear-gradient(105deg, oklch(0.12 0.04 240 / 0.50) 35%, transparent 80%)",
+            "linear-gradient(100deg, oklch(0.12 0.04 240 / 0.42) 30%, transparent 72%)",
         }}
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 pt-36 pb-24">
-        <div className="max-w-[620px]">
+      <div className="relative mx-auto w-full max-w-6xl px-6 pt-32 pb-20">
+        <div className="max-w-[580px]">
           <h1
-            className="font-bold leading-[1.04] mb-6"
+            className="font-bold leading-[1.05] mb-5"
             style={{
               fontFamily: "var(--font-space-grotesk, sans-serif)",
-              fontSize: "clamp(2.6rem, 6vw, 4rem)",
+              fontSize: "clamp(2.4rem, 5.5vw, 3.6rem)",
               letterSpacing: "-0.02em",
-              color: "var(--color-ivory)",
+              color: "oklch(0.97 0.01 90)",
             }}
           >
             Innovative solutions.
@@ -178,24 +181,19 @@ function Hero() {
           </h1>
 
           <p
-            className="text-[0.95rem] leading-[1.65] mb-10 max-w-[480px]"
-            style={{ color: "oklch(0.82 0.02 90)" }}
+            className="text-[0.92rem] leading-[1.65] mb-9 max-w-[460px]"
+            style={{ color: "oklch(0.84 0.02 90)" }}
           >
             TryCycle builds secure, accessible, and easy-to-use platforms
             that support people, inform decisions, and improve lives.
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3">
             <Button href="#solutions" variant="primary" size="lg">
               Explore Solutions
             </Button>
             <Button href="/media/videos" variant="ghost" size="lg">
-              <svg
-                className="w-4 h-4"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M8 5.14v14l11-7-11-7z" />
               </svg>
               Watch Overview
@@ -204,12 +202,11 @@ function Hero() {
         </div>
       </div>
 
+      {/* Bottom fade to dark section below */}
       <div
-        className="absolute inset-x-0 bottom-0 h-28 pointer-events-none"
+        className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
         aria-hidden="true"
-        style={{
-          background: "linear-gradient(to bottom, transparent, var(--color-navy))",
-        }}
+        style={{ background: "linear-gradient(to bottom, transparent, oklch(0.14 0.04 235))" }}
       />
     </section>
   );
@@ -219,44 +216,43 @@ function Hero() {
 function ImpactStrip() {
   return (
     <section
+      aria-label="Key impact areas"
       style={{
-        background: "oklch(0.16 0.04 230)",
-        borderTop: "1px solid var(--color-border)",
-        borderBottom: "1px solid var(--color-border)",
+        background: "oklch(0.14 0.04 235)",
+        borderBottom: "1px solid oklch(1 0 0 / 0.08)",
       }}
     >
-      <div className="mx-auto max-w-6xl px-6 py-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {IMPACT.map((item) => (
-            <div key={item.label} className="flex items-start gap-3">
-              <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
-                style={{ background: item.iconBg }}
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {IMPACT.map((item, i) => (
+            <div
+              key={item.label}
+              className="flex items-start gap-3 py-7 px-4 lg:px-6"
+              style={{
+                borderRight: i < IMPACT.length - 1 ? "1px solid oklch(1 0 0 / 0.08)" : "none",
+              }}
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.6}
+                viewBox="0 0 24 24"
+                style={{ color: item.iconColor, width: "20px", height: "20px", flexShrink: 0, marginTop: "2px" }}
                 aria-hidden="true"
               >
-                <svg
-                  className="w-4.5 h-4.5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.75}
-                  viewBox="0 0 24 24"
-                  style={{ color: item.iconColor, width: "18px", height: "18px" }}
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d={item.iconPath} />
-                </svg>
-              </div>
+                <path strokeLinecap="round" strokeLinejoin="round" d={item.iconPath} />
+              </svg>
               <div>
                 <p
-                  className="text-[0.82rem] font-semibold mb-0.5"
+                  className="text-[0.80rem] font-semibold mb-0.5"
                   style={{
                     fontFamily: "var(--font-space-grotesk, sans-serif)",
-                    color: "var(--color-ivory)",
+                    color: "oklch(0.96 0.01 90)",
                   }}
                 >
                   {item.label}
                 </p>
-                <p className="text-[0.75rem]" style={{ color: "var(--color-muted)" }}>
+                <p className="text-[0.73rem] leading-snug" style={{ color: "oklch(0.65 0.02 90)" }}>
                   {item.description}
                 </p>
               </div>
@@ -268,21 +264,21 @@ function ImpactStrip() {
   );
 }
 
-/* ── Solutions ── */
+/* ── Our Solutions ── */
 function SolutionsSection() {
   return (
     <section
       id="solutions"
-      className="py-20 lg:py-24"
+      className="py-16 lg:py-20"
       style={{ background: "var(--color-navy)" }}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h2
-            className="text-[1.9rem] font-bold"
+            className="text-[1.8rem] font-bold"
             style={{
               fontFamily: "var(--font-space-grotesk, sans-serif)",
-              color: "var(--color-ivory)",
+              color: "oklch(0.96 0.01 90)",
               letterSpacing: "-0.02em",
             }}
           >
@@ -290,25 +286,26 @@ function SolutionsSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {SOLUTIONS.map((s) => (
             <Link
               key={s.href}
               href={s.href}
-              className="group rounded-2xl p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="group flex flex-col rounded-2xl p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
               style={{
-                background: "oklch(0.97 0.005 60)",
-                border: "1px solid oklch(0 0 0 / 0.08)",
+                background: "oklch(0.97 0.004 60)",
+                border: "1px solid oklch(0 0 0 / 0.07)",
+                boxShadow: "0 2px 12px oklch(0 0 0 / 0.06)",
               }}
             >
-              {/* Product icon */}
+              {/* Product icon placeholder */}
               <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 mx-auto"
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto"
                 style={{ background: s.iconBg }}
                 aria-hidden="true"
               >
                 <svg
-                  className="w-7 h-7"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="white"
                   strokeWidth={1.5}
@@ -319,29 +316,35 @@ function SolutionsSection() {
                 </svg>
               </div>
 
+              <p
+                className="text-[0.75rem] font-medium text-center mb-1"
+                style={{ color: "oklch(0.55 0.05 185)" }}
+              >
+                {s.tag}
+              </p>
               <h3
-                className="text-[0.95rem] font-bold mb-2 text-center"
+                className="text-[0.90rem] font-bold mb-2 text-center"
                 style={{
                   fontFamily: "var(--font-space-grotesk, sans-serif)",
-                  color: "oklch(0.15 0.04 240)",
+                  color: "oklch(0.14 0.04 240)",
                 }}
               >
                 {s.name}
               </h3>
               <p
-                className="text-[0.80rem] leading-relaxed text-center flex-1"
-                style={{ color: "oklch(0.42 0.02 90)" }}
+                className="text-[0.78rem] leading-relaxed text-center flex-1"
+                style={{ color: "oklch(0.43 0.02 90)" }}
               >
                 {s.description}
               </p>
 
               <div
-                className="flex items-center justify-center gap-1 text-[0.75rem] font-semibold mt-5"
-                style={{ color: "var(--color-teal)" }}
+                className="flex items-center justify-center gap-1 mt-5 text-[0.74rem] font-semibold"
+                style={{ color: "oklch(0.55 0.10 185)" }}
               >
                 Learn More
                 <svg
-                  className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                  className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth={2.5}
@@ -363,87 +366,78 @@ function SolutionsSection() {
 function VideosSection() {
   return (
     <section
-      className="py-16 lg:py-20"
+      className="py-14 lg:py-16"
       style={{
-        background: "oklch(0.14 0.04 235)",
-        borderTop: "1px solid var(--color-border)",
+        background: "oklch(0.13 0.04 235)",
+        borderTop: "1px solid oklch(1 0 0 / 0.07)",
       }}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex items-end justify-between mb-8">
+        {/* Row header */}
+        <div className="flex items-end justify-between mb-7">
           <div>
             <h2
-              className="text-[1.6rem] font-bold"
+              className="text-[1.5rem] font-bold"
               style={{
                 fontFamily: "var(--font-space-grotesk, sans-serif)",
-                color: "var(--color-ivory)",
+                color: "oklch(0.96 0.01 90)",
                 letterSpacing: "-0.02em",
               }}
             >
               Videos
             </h2>
-            <p className="text-[0.85rem] mt-1" style={{ color: "var(--color-muted)" }}>
+            <p className="text-[0.80rem] mt-0.5" style={{ color: "oklch(0.62 0.02 90)" }}>
               See our solutions in action.
             </p>
           </div>
           <Link
             href="/media/videos"
-            className="text-[0.80rem] font-semibold flex items-center gap-1 hover:opacity-80 transition-opacity"
+            className="text-[0.76rem] font-semibold flex items-center gap-1 hover:opacity-75 transition-opacity"
             style={{ color: "var(--color-teal)" }}
           >
             View all videos
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
             </svg>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {PREVIEW_VIDEOS.map((v) => (
             <Link
               key={v.title}
               href="/media/videos"
-              className="group block rounded-2xl overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="group block rounded-xl overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+              style={{
+                background: "var(--color-card)",
+                border: "1px solid oklch(1 0 0 / 0.08)",
+              }}
             >
               {/* Thumbnail placeholder */}
               <div
-                className="relative h-44 flex items-center justify-center"
+                className="relative h-40 flex items-center justify-center"
                 style={{
-                  background: "linear-gradient(135deg, oklch(0.18 0.05 220) 0%, oklch(0.12 0.04 240) 100%)",
+                  background: "linear-gradient(135deg, oklch(0.19 0.05 220) 0%, oklch(0.12 0.04 240) 100%)",
                 }}
               >
                 <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-                  style={{
-                    background: "oklch(1 0 0 / 0.90)",
-                  }}
+                  className="w-11 h-11 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                  style={{ background: "oklch(1 0 0 / 0.88)" }}
                   aria-hidden="true"
                 >
-                  <svg className="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24" style={{ color: "oklch(0.12 0.04 240)" }} aria-hidden="true">
+                  <svg className="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24" style={{ color: "oklch(0.12 0.04 240)" }} aria-hidden="true">
                     <path d="M8 5.14v14l11-7-11-7z" />
                   </svg>
                 </div>
               </div>
-              <div
-                className="px-4 py-3"
-                style={{
-                  background: "var(--color-card)",
-                  border: "1px solid var(--color-border)",
-                  borderTop: "none",
-                  borderBottomLeftRadius: "16px",
-                  borderBottomRightRadius: "16px",
-                }}
-              >
+              <div className="px-4 py-3">
                 <p
-                  className="text-[0.85rem] font-semibold"
-                  style={{
-                    fontFamily: "var(--font-space-grotesk, sans-serif)",
-                    color: "var(--color-ivory)",
-                  }}
+                  className="text-[0.82rem] font-semibold"
+                  style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.96 0.01 90)" }}
                 >
                   {v.title}
                 </p>
-                <p className="text-[0.75rem] mt-0.5" style={{ color: "var(--color-muted)" }}>
+                <p className="text-[0.73rem] mt-0.5" style={{ color: "oklch(0.62 0.02 90)" }}>
                   {v.label}
                 </p>
               </div>
@@ -455,66 +449,62 @@ function VideosSection() {
   );
 }
 
-/* ── Testimonials preview ── */
+/* ── Testimonials preview — WHITE BACKGROUND ── */
 function TestimonialsSection() {
-  const FILTER_LABELS = ["All", "Community", "Healthcare", "Veterans", "Indigenous", "Youth", "Partners"] as const;
-
   return (
     <section
-      className="py-16 lg:py-20"
-      style={{
-        background: "var(--color-navy)",
-        borderTop: "1px solid var(--color-border)",
-      }}
+      className="py-14 lg:py-16"
+      style={{ background: "oklch(0.97 0.004 60)" }}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+        {/* Row header */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
           <div>
             <h2
-              className="text-[1.6rem] font-bold"
+              className="text-[1.5rem] font-bold"
               style={{
                 fontFamily: "var(--font-space-grotesk, sans-serif)",
-                color: "var(--color-ivory)",
+                color: "oklch(0.14 0.04 240)",
                 letterSpacing: "-0.02em",
               }}
             >
               Testimonials
             </h2>
-            <p className="text-[0.82rem] mt-1" style={{ color: "var(--color-muted)" }}>
+            <p className="text-[0.78rem] mt-0.5" style={{ color: "oklch(0.48 0.02 90)" }}>
               Search by keyword or filter by category.
             </p>
           </div>
-          {/* Search bar (decorative on homepage) */}
+          {/* Search bar (decorative) */}
           <div
-            className="flex items-center gap-2 px-3 py-2 rounded-lg w-full sm:w-56"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg w-full sm:w-52"
             style={{
-              background: "oklch(1 0 0 / 0.05)",
-              border: "1px solid var(--color-border)",
+              background: "oklch(1 0 0)",
+              border: "1px solid oklch(0 0 0 / 0.12)",
             }}
             aria-hidden="true"
           >
-            <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" style={{ color: "var(--color-muted)" }} aria-hidden="true">
+            <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" style={{ color: "oklch(0.60 0.01 90)" }} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
-            <span className="text-[0.80rem]" style={{ color: "oklch(1 0 0 / 0.25)" }}>
+            <span className="text-[0.76rem]" style={{ color: "oklch(0.68 0.01 90)" }}>
               Search testimonials…
             </span>
           </div>
         </div>
 
         {/* Filter pills */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {FILTER_LABELS.map((label, i) => (
+        <div className="flex flex-wrap gap-1.5 mb-7">
+          {FILTER_PILLS.map((label, i) => (
             <span
               key={label}
-              className="px-3 py-1 rounded-full text-[0.72rem] font-medium"
+              className="px-3 py-1 rounded-full text-[0.70rem] font-medium"
               style={
                 i === 0
-                  ? { background: "var(--color-teal)", color: "var(--color-navy)" }
+                  ? { background: "oklch(0.55 0.10 185)", color: "oklch(1 0 0)" }
                   : {
-                      background: "oklch(1 0 0 / 0.06)",
-                      color: "var(--color-muted)",
-                      border: "1px solid var(--color-border)",
+                      background: "oklch(0.90 0.005 90)",
+                      color: "oklch(0.40 0.02 90)",
+                      border: "1px solid oklch(0 0 0 / 0.08)",
                     }
               }
               aria-hidden="true"
@@ -524,43 +514,44 @@ function TestimonialsSection() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {PREVIEW_TESTIMONIALS.map((t) => (
             <div
               key={t.name}
-              className="rounded-2xl p-5 flex flex-col"
+              className="rounded-xl p-5 flex flex-col"
               style={{
-                background: "var(--color-card)",
-                border: "1px solid var(--color-border)",
+                background: "oklch(1 0 0)",
+                border: "1px solid oklch(0 0 0 / 0.07)",
+                boxShadow: "0 2px 10px oklch(0 0 0 / 0.05)",
               }}
             >
               <svg
-                className="w-6 h-6 mb-3 shrink-0"
+                className="w-5 h-5 mb-3 shrink-0"
                 fill="currentColor"
                 viewBox="0 0 24 24"
-                style={{ color: "var(--color-teal)" }}
+                style={{ color: "oklch(0.55 0.10 185)" }}
                 aria-hidden="true"
               >
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>
               <p
-                className="text-[0.82rem] leading-relaxed flex-1 mb-4"
-                style={{ color: "oklch(0.88 0.01 90)" }}
+                className="text-[0.78rem] leading-relaxed flex-1 mb-3"
+                style={{ color: "oklch(0.38 0.02 90)" }}
               >
                 {t.quote}
               </p>
-              <div>
+              <div
+                className="pt-3"
+                style={{ borderTop: "1px solid oklch(0 0 0 / 0.06)" }}
+              >
                 <p
-                  className="text-[0.78rem] font-semibold"
-                  style={{
-                    fontFamily: "var(--font-space-grotesk, sans-serif)",
-                    color: "var(--color-ivory)",
-                  }}
+                  className="text-[0.75rem] font-semibold"
+                  style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.20 0.04 240)" }}
                 >
                   {t.name}
                 </p>
-                <p className="text-[0.72rem]" style={{ color: "var(--color-muted)" }}>
-                  {t.org}
+                <p className="text-[0.70rem]" style={{ color: "oklch(0.55 0.02 90)" }}>
+                  {t.org} · {t.cat}
                 </p>
               </div>
             </div>
@@ -570,8 +561,8 @@ function TestimonialsSection() {
         <div className="text-center">
           <Link
             href="/testimonials"
-            className="text-[0.80rem] font-semibold hover:opacity-80 transition-opacity"
-            style={{ color: "var(--color-teal)" }}
+            className="text-[0.76rem] font-semibold hover:opacity-75 transition-opacity"
+            style={{ color: "oklch(0.45 0.10 185)" }}
           >
             View all testimonials →
           </Link>
@@ -581,72 +572,72 @@ function TestimonialsSection() {
   );
 }
 
-/* ── FAQ preview ── */
+/* ── FAQ preview — WHITE BACKGROUND ── */
 function FaqSection() {
   return (
     <section
-      className="py-16 lg:py-20"
+      className="py-14 lg:py-16"
       style={{
-        background: "oklch(0.14 0.04 235)",
-        borderTop: "1px solid var(--color-border)",
+        background: "oklch(0.94 0.006 60)",
+        borderTop: "1px solid oklch(0 0 0 / 0.07)",
       }}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-8">
+        <div className="mb-7">
           <h2
-            className="text-[1.6rem] font-bold mb-1"
+            className="text-[1.5rem] font-bold mb-0.5"
             style={{
               fontFamily: "var(--font-space-grotesk, sans-serif)",
-              color: "var(--color-ivory)",
+              color: "oklch(0.14 0.04 240)",
               letterSpacing: "-0.02em",
             }}
           >
             Frequently Asked Questions
           </h2>
-          <p className="text-[0.82rem]" style={{ color: "var(--color-muted)" }}>
-            Browse common questions or search for answers.
+          <p className="text-[0.78rem]" style={{ color: "oklch(0.48 0.02 90)" }}>
+            Browse common questions or visit our full FAQ for more.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-0 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10">
           <div>
             {PREVIEW_FAQS_LEFT.map((q) => (
               <details
                 key={q}
                 className="group"
-                style={{ borderBottom: "1px solid var(--color-border)" }}
+                style={{ borderBottom: "1px solid oklch(0 0 0 / 0.08)" }}
               >
                 <summary
                   className="flex items-center justify-between py-4 cursor-pointer list-none"
-                  style={{ color: "var(--color-ivory)" }}
+                  style={{ color: "oklch(0.18 0.04 240)" }}
                 >
                   <span
-                    className="text-[0.88rem] font-medium pr-4"
+                    className="text-[0.84rem] font-medium pr-3"
                     style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
                   >
                     {q}
                   </span>
                   <svg
-                    className="w-4 h-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
+                    className="w-3.5 h-3.5 shrink-0 transition-transform duration-200 group-open:rotate-180"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth={2}
                     viewBox="0 0 24 24"
-                    style={{ color: "var(--color-muted)" }}
+                    style={{ color: "oklch(0.55 0.02 90)" }}
                     aria-hidden="true"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="m19 9-7 7-7-7" />
                   </svg>
                 </summary>
                 <p
-                  className="pb-4 text-[0.82rem] leading-relaxed"
-                  style={{ color: "var(--color-muted)" }}
+                  className="pb-4 text-[0.78rem] leading-relaxed"
+                  style={{ color: "oklch(0.48 0.02 90)" }}
                 >
-                  For more details on this topic, please visit our{" "}
-                  <Link href="/faq" className="underline underline-offset-2 hover:opacity-80" style={{ color: "var(--color-teal)" }}>
+                  Visit our{" "}
+                  <Link href="/faq" className="underline underline-offset-2" style={{ color: "oklch(0.45 0.10 185)" }}>
                     full FAQ page
-                  </Link>
-                  .
+                  </Link>{" "}
+                  for the complete answer.
                 </p>
               </details>
             ))}
@@ -656,50 +647,50 @@ function FaqSection() {
               <details
                 key={q}
                 className="group"
-                style={{ borderBottom: "1px solid var(--color-border)" }}
+                style={{ borderBottom: "1px solid oklch(0 0 0 / 0.08)" }}
               >
                 <summary
                   className="flex items-center justify-between py-4 cursor-pointer list-none"
-                  style={{ color: "var(--color-ivory)" }}
+                  style={{ color: "oklch(0.18 0.04 240)" }}
                 >
                   <span
-                    className="text-[0.88rem] font-medium pr-4"
+                    className="text-[0.84rem] font-medium pr-3"
                     style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
                   >
                     {q}
                   </span>
                   <svg
-                    className="w-4 h-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
+                    className="w-3.5 h-3.5 shrink-0 transition-transform duration-200 group-open:rotate-180"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth={2}
                     viewBox="0 0 24 24"
-                    style={{ color: "var(--color-muted)" }}
+                    style={{ color: "oklch(0.55 0.02 90)" }}
                     aria-hidden="true"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="m19 9-7 7-7-7" />
                   </svg>
                 </summary>
                 <p
-                  className="pb-4 text-[0.82rem] leading-relaxed"
-                  style={{ color: "var(--color-muted)" }}
+                  className="pb-4 text-[0.78rem] leading-relaxed"
+                  style={{ color: "oklch(0.48 0.02 90)" }}
                 >
-                  For more details on this topic, please visit our{" "}
-                  <Link href="/faq" className="underline underline-offset-2 hover:opacity-80" style={{ color: "var(--color-teal)" }}>
+                  Visit our{" "}
+                  <Link href="/faq" className="underline underline-offset-2" style={{ color: "oklch(0.45 0.10 185)" }}>
                     full FAQ page
-                  </Link>
-                  .
+                  </Link>{" "}
+                  for the complete answer.
                 </p>
               </details>
             ))}
           </div>
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-5">
           <Link
             href="/faq"
-            className="text-[0.80rem] font-semibold hover:opacity-80 transition-opacity"
-            style={{ color: "var(--color-teal)" }}
+            className="text-[0.76rem] font-semibold hover:opacity-75 transition-opacity"
+            style={{ color: "oklch(0.45 0.10 185)" }}
           >
             View All FAQs →
           </Link>
@@ -709,7 +700,7 @@ function FaqSection() {
   );
 }
 
-/* ── Bottom CTA strip (3 cards) ── */
+/* ── Bottom CTA — FOREST GREEN ── */
 function CtaStrip() {
   const CTA_CARDS = [
     {
@@ -717,7 +708,7 @@ function CtaStrip() {
       title: "Book an Appointment",
       description: "Schedule a time to connect with our team.",
       iconPath:
-        "M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z",
+        "M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5",
     },
     {
       href: "/contact",
@@ -737,30 +728,21 @@ function CtaStrip() {
 
   return (
     <section
-      className="py-16 lg:py-20"
-      style={{
-        background: "oklch(0.11 0.04 240)",
-        borderTop: "1px solid var(--color-border)",
-      }}
+      className="py-14 lg:py-16"
+      style={{ background: "var(--color-forest)" }}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {CTA_CARDS.map((card) => (
             <Link
               key={card.href}
               href={card.href}
-              className="group flex flex-col items-center text-center p-8 rounded-2xl transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              style={{
-                background: "oklch(1 0 0 / 0.04)",
-                border: "1px solid var(--color-border)",
-              }}
+              className="group flex flex-col items-center text-center p-7 rounded-2xl transition-all duration-200 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
+              style={{ border: "1px solid oklch(1 0 0 / 0.14)" }}
             >
               <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4"
-                style={{
-                  background: "oklch(0.65 0.12 185 / 0.12)",
-                  border: "1px solid oklch(0.65 0.12 185 / 0.22)",
-                }}
+                className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                style={{ background: "oklch(1 0 0 / 0.12)" }}
                 aria-hidden="true"
               >
                 <svg
@@ -769,24 +751,37 @@ function CtaStrip() {
                   stroke="currentColor"
                   strokeWidth={1.5}
                   viewBox="0 0 24 24"
-                  style={{ color: "var(--color-teal)" }}
+                  style={{ color: "oklch(1 0 0)" }}
                   aria-hidden="true"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d={card.iconPath} />
                 </svg>
               </div>
               <p
-                className="text-[0.92rem] font-bold mb-1.5"
-                style={{
-                  fontFamily: "var(--font-space-grotesk, sans-serif)",
-                  color: "var(--color-ivory)",
-                }}
+                className="text-[0.88rem] font-bold mb-1"
+                style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.97 0.01 90)" }}
               >
                 {card.title}
               </p>
-              <p className="text-[0.80rem] leading-relaxed" style={{ color: "var(--color-muted)" }}>
+              <p className="text-[0.76rem] leading-relaxed mb-4" style={{ color: "oklch(0.85 0.03 155)" }}>
                 {card.description}
               </p>
+              <div
+                className="flex items-center gap-1 text-[0.74rem] font-semibold"
+                style={{ color: "oklch(1 0 0 / 0.70)" }}
+              >
+                Learn more
+                <svg
+                  className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </div>
             </Link>
           ))}
         </div>

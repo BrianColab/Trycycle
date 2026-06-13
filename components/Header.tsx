@@ -48,6 +48,39 @@ type NavItem =
   | { label: string; href: string; children?: never }
   | { label: string; children: { label: string; href: string }[]; href?: never };
 
+/* ── Logo: icon is colored (shows on white), text is white (hidden on white).
+   We render the icon portion with mix-blend-mode:multiply and add the wordmark
+   as HTML text. Replace /logo-dark.webp once a dark version is available. ── */
+function Logo({ onClick }: { onClick?: () => void }) {
+  return (
+    <Link href="/" className="shrink-0 flex items-center gap-2" onClick={onClick}>
+      {/* Colored bicycle icon — mix-blend:multiply keeps colors, hides white */}
+      <span className="relative block" style={{ width: 38, height: 38 }}>
+        <Image
+          src="/logo.webp"
+          alt=""
+          fill
+          className="object-left object-contain"
+          style={{ mixBlendMode: "multiply", objectPosition: "left center" }}
+          sizes="38px"
+          priority
+        />
+      </span>
+      {/* Wordmark as HTML since logo.webp has white text (invisible on white bg) */}
+      <span
+        aria-label="TryCycle"
+        className="text-[1.15rem] font-bold tracking-tight leading-none"
+        style={{
+          fontFamily: "var(--font-space-grotesk, sans-serif)",
+          color: "oklch(0.12 0.04 240)",
+        }}
+      >
+        TryCycle
+      </span>
+    </Link>
+  );
+}
+
 function DropdownMenu({ item }: { item: NavItem & { children: { label: string; href: string }[] } }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -86,8 +119,11 @@ function DropdownMenu({ item }: { item: NavItem & { children: { label: string; h
         ref={buttonRef}
         aria-expanded={open}
         aria-haspopup="menu"
-        className="flex items-center gap-1 text-[0.7rem] font-medium tracking-[0.18em] uppercase text-ivory/70 hover:text-teal transition-colors duration-200"
-        style={{ fontFamily: "var(--font-inter, Inter, sans-serif)" }}
+        className="flex items-center gap-1 text-[0.7rem] font-medium tracking-[0.18em] uppercase transition-colors duration-200"
+        style={{
+          fontFamily: "var(--font-inter, Inter, sans-serif)",
+          color: open ? "var(--color-teal)" : "oklch(0.30 0.03 240)",
+        }}
         onClick={() => setOpen((v) => !v)}
       >
         {item.label}
@@ -105,25 +141,29 @@ function DropdownMenu({ item }: { item: NavItem & { children: { label: string; h
 
       {open && (
         <div
-          className="absolute top-full left-0 pt-3 z-50"
+          className="absolute top-full left-0 pt-2 z-50"
           style={{ minWidth: "200px" }}
         >
           <div
-            className="rounded-xl border border-border bg-card shadow-[0_20px_60px_-20px_oklch(0_0_0_/0.55)] backdrop-blur-2xl overflow-hidden"
-            style={{ borderColor: "oklch(1 0 0 / 0.12)" }}
+            className="rounded-xl overflow-hidden"
+            style={{
+              background: "oklch(1 0 0)",
+              border: "1px solid oklch(0 0 0 / 0.10)",
+              boxShadow: "0 8px 32px oklch(0 0 0 / 0.12), 0 2px 8px oklch(0 0 0 / 0.06)",
+            }}
           >
             <div
               className="h-[2px] w-full"
               style={{
-                background:
-                  "linear-gradient(to right, transparent, oklch(0.65 0.12 185 / 0.60), transparent)",
+                background: "linear-gradient(to right, transparent, oklch(0.65 0.12 185 / 0.60), transparent)",
               }}
             />
             {item.children.map((child) => (
               <Link
                 key={child.href}
                 href={child.href}
-                className="block px-5 py-3 text-[0.82rem] text-ivory/75 hover:text-ivory hover:bg-white/5 transition-colors duration-150"
+                className="block px-5 py-3 text-[0.82rem] transition-colors duration-150 hover:bg-black/[0.04]"
+                style={{ color: "oklch(0.28 0.03 240)" }}
                 onClick={() => setOpen(false)}
               >
                 {child.label}
@@ -154,19 +194,21 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
     <div
       className="fixed inset-0 z-40 flex flex-col"
-      style={{ background: "oklch(0.12 0.04 240 / 0.98)", backdropFilter: "blur(16px)" }}
+      style={{ background: "oklch(1 0 0)", backdropFilter: "blur(16px)" }}
       role="dialog"
       aria-modal="true"
       aria-label="Navigation menu"
     >
-      <div className="flex items-center justify-between px-6 h-16 border-b border-white/10">
-        <Link href="/" onClick={onClose}>
-          <Image src="/logo.webp" alt="TryCycle" width={120} height={40} className="h-8 w-auto" />
-        </Link>
+      <div
+        className="flex items-center justify-between px-6 h-16 border-b"
+        style={{ borderColor: "oklch(0 0 0 / 0.08)" }}
+      >
+        <Logo onClick={onClose} />
         <button
           onClick={onClose}
           aria-label="Close menu"
-          className="p-2 text-ivory/70 hover:text-ivory"
+          className="p-2"
+          style={{ color: "oklch(0.35 0.03 240)" }}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -183,7 +225,8 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                 <button
                   onClick={() => setExpandedGroup(isOpen ? null : item.label)}
                   aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between py-3 text-[0.9rem] font-medium text-ivory/80 hover:text-ivory"
+                  className="flex w-full items-center justify-between py-3 text-[0.9rem] font-medium"
+                  style={{ color: "oklch(0.22 0.04 240)" }}
                 >
                   {item.label}
                   <svg
@@ -204,7 +247,8 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                         key={child.href}
                         href={child.href}
                         onClick={onClose}
-                        className="block py-2 text-[0.85rem] text-ivory/60 hover:text-teal transition-colors"
+                        className="block py-2 text-[0.85rem] transition-colors"
+                        style={{ color: "oklch(0.45 0.05 185)" }}
                       >
                         {child.label}
                       </Link>
@@ -219,7 +263,8 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
               key={item.href}
               href={item.href!}
               onClick={onClose}
-              className="block py-3 text-[0.9rem] font-medium text-ivory/80 hover:text-ivory"
+              className="block py-3 text-[0.9rem] font-medium"
+              style={{ color: "oklch(0.22 0.04 240)" }}
             >
               {item.label}
             </Link>
@@ -227,12 +272,19 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
         })}
       </nav>
 
-      <div className="px-6 pb-8 pt-4 border-t border-white/10">
+      <div
+        className="px-6 pb-8 pt-4 border-t"
+        style={{ borderColor: "oklch(0 0 0 / 0.08)" }}
+      >
         <Link
           href="/book-appointment"
           onClick={onClose}
-          className="flex items-center justify-center w-full px-6 py-3 rounded-pill text-[0.85rem] font-semibold text-navy bg-teal hover:bg-teal-light transition-colors duration-200"
-          style={{ borderRadius: "9999px", background: "var(--color-teal)", color: "var(--color-navy)" }}
+          className="flex items-center justify-center w-full px-6 py-3 text-[0.85rem] font-semibold transition-colors duration-200"
+          style={{
+            borderRadius: "9999px",
+            background: "var(--color-teal)",
+            color: "var(--color-navy)",
+          }}
         >
           Book an Appointment
         </Link>
@@ -254,28 +306,15 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-30 transition-all duration-300 ${
-          scrolled ? "border-b border-white/10" : ""
-        }`}
+        className={`fixed top-0 inset-x-0 z-30 transition-all duration-300`}
         style={{
-          background: scrolled
-            ? "oklch(0.12 0.04 240 / 0.90)"
-            : "oklch(0.12 0.04 240 / 0.70)",
-          backdropFilter: "blur(16px)",
+          background: "oklch(1 0 0)",
+          borderBottom: scrolled ? "1px solid oklch(0 0 0 / 0.08)" : "1px solid oklch(0 0 0 / 0.06)",
+          boxShadow: scrolled ? "0 2px 16px oklch(0 0 0 / 0.06)" : "none",
         }}
       >
         <div className="mx-auto max-w-7xl px-6 h-16 flex items-center gap-8">
-          {/* Logo */}
-          <Link href="/" className="shrink-0">
-            <Image
-              src="/logo.webp"
-              alt="TryCycle"
-              width={140}
-              height={46}
-              className="h-9 w-auto"
-              priority
-            />
-          </Link>
+          <Logo />
 
           {/* Desktop nav */}
           <nav
@@ -290,8 +329,11 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href!}
-                  className="text-[0.7rem] font-medium tracking-[0.18em] uppercase text-ivory/70 hover:text-teal transition-colors duration-200"
-                  style={{ fontFamily: "var(--font-inter, Inter, sans-serif)" }}
+                  className="text-[0.7rem] font-medium tracking-[0.18em] uppercase transition-colors duration-200 hover:text-teal"
+                  style={{
+                    fontFamily: "var(--font-inter, Inter, sans-serif)",
+                    color: "oklch(0.30 0.03 240)",
+                  }}
                 >
                   {item.label}
                 </Link>
@@ -307,7 +349,7 @@ export function Header() {
               style={{
                 borderRadius: "9999px",
                 background: "var(--color-teal)",
-                color: "var(--color-navy)",
+                color: "oklch(0.12 0.04 240)",
                 boxShadow: "var(--shadow-teal)",
               }}
             >
@@ -315,7 +357,8 @@ export function Header() {
             </Link>
 
             <button
-              className="lg:hidden p-2 text-ivory/70 hover:text-ivory"
+              className="lg:hidden p-2"
+              style={{ color: "oklch(0.30 0.03 240)" }}
               onClick={() => setMobileOpen(true)}
               aria-label="Open navigation menu"
               aria-expanded={mobileOpen}
