@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+model Appointment {
+  id           String            @id @default(cuid())
+  // Staff info (denormalised — staff are a fixed config, not DB rows)
+  staffId      String
+  staffName    String
+  staffEmail   String
+  staffRole    String
+  // Slot — date is YYYY-MM-DD, time is 24-hour HH:MM, timezone is IANA name
+  date         String            // e.g. "2026-06-15"
+  time         String            // e.g. "09:00" (24-hour, no seconds)
+  timezone     String            // e.g. "America/Toronto"
+  // Contact
+  name         String
+  email        String
+  organization String
+  phone        String?
+  reason       String
+  message      String?
+  // Lifecycle
+  status       AppointmentStatus @default(PENDING)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  // Prevent double-booking the same staff slot
+  @@unique([staffId, date, time])
+  @@index([staffId, date])
+}
