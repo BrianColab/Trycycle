@@ -49,11 +49,11 @@ export default function Page() {
               className="text-[0.92rem] font-semibold mb-2"
               style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
             >
-              Team profiles coming soon
+              Profiles being finalized
             </p>
             <p className="text-[0.82rem] leading-relaxed max-w-sm mx-auto" style={{ color: "var(--color-muted)" }}>
-              We are adding individual bios and photos for each member of the TryCycle leadership team.
-              Check back shortly.
+              Individual bios and photos for the TryCycle leadership team are being prepared
+              and will be published here shortly.
             </p>
           </div>
 

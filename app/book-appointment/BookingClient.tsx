@@ -686,11 +686,14 @@ export function BookingClient() {
                 {/* Staff */}
                 <fieldset>
                   <legend
-                    className="text-[0.95rem] font-semibold mb-4 block"
+                    className="text-[0.95rem] font-semibold mb-2 block"
                     style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
                   >
                     1. Select a staff member
                   </legend>
+                  <p className="mb-4 text-[0.73rem]" style={{ color: "oklch(0.58 0.02 90)" }}>
+                    Demo contacts shown for preview. Real staff will be confirmed before launch.
+                  </p>
                   {errors.staff && (
                     <p className="mb-3 text-[0.78rem]" style={{ color: "oklch(0.72 0.15 25)" }} role="alert">
                       {errors.staff}

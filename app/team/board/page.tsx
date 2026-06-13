@@ -49,10 +49,11 @@ export default function Page() {
               className="text-[0.92rem] font-semibold mb-2"
               style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
             >
-              Board profiles coming soon
+              Profiles being finalized
             </p>
             <p className="text-[0.82rem] leading-relaxed max-w-sm mx-auto" style={{ color: "var(--color-muted)" }}>
-              Individual profiles for TryCycle&apos;s Board of Directors will be published here shortly.
+              Individual profiles for TryCycle&apos;s Board of Directors are being prepared
+              and will be published here shortly.
             </p>
           </div>
 

@@ -22,11 +22,17 @@ export const metadata: Metadata = {
     template: "%s | TryCycle",
   },
   description:
-    "TryCycle delivers innovative digital health and community-tech solutions — supporting Indigenous communities, veterans, youth, and healthcare organizations.",
+    "TryCycle delivers culturally responsive digital health tools — supporting Indigenous communities, veterans, youth, and healthcare organizations across Canada.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://trycycle.ca"),
   openGraph: {
     type: "website",
     siteName: "TryCycle",
+    title: "TryCycle — Innovative Solutions. Stronger Communities.",
+    description:
+      "TryCycle delivers culturally responsive digital health tools — supporting Indigenous communities, veterans, youth, and healthcare organizations across Canada.",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 

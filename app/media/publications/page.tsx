@@ -27,7 +27,7 @@ export default function Page() {
               className="text-[0.92rem] font-semibold mb-2"
               style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
             >
-              Publications coming soon
+              Publications being compiled
             </p>
             <p className="text-[0.82rem] leading-relaxed" style={{ color: "var(--color-muted)" }}>
               Our publications library is being compiled. Check back shortly for research,

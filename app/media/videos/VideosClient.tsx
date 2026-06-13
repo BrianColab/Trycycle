@@ -370,7 +370,7 @@ export function VideosClient() {
             className="mt-12 text-center text-[0.75rem]"
             style={{ color: "oklch(0.70 0.02 90 / 0.50)" }}
           >
-            * Video content shown is placeholder demo data for demonstration purposes.
+            * Demo video content shown for preview purposes.
           </p>
 
           {/* CTA */}

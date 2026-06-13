@@ -285,7 +285,7 @@ export function TestimonialsClient() {
             className="mt-12 text-center text-[0.75rem]"
             style={{ color: "oklch(0.70 0.02 90 / 0.50)" }}
           >
-            * Testimonials shown are placeholder demo content for demonstration purposes.
+            * Demo testimonials shown for preview purposes.
           </p>
 
           {/* CTA */}

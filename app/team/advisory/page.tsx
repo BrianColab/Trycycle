@@ -49,10 +49,11 @@ export default function Page() {
               className="text-[0.92rem] font-semibold mb-2"
               style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
             >
-              Advisory profiles coming soon
+              Profiles being finalized
             </p>
             <p className="text-[0.82rem] leading-relaxed max-w-sm mx-auto" style={{ color: "var(--color-muted)" }}>
-              Profiles for TryCycle&apos;s Advisory Committee members will be published here shortly.
+              Profiles for TryCycle&apos;s Advisory Committee members are being prepared
+              and will be published here shortly.
             </p>
           </div>
 
