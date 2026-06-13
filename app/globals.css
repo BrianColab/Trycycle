@@ -87,6 +87,20 @@ body {
   color: var(--color-ivory);
 }
 
+/* ── Light section context — inner page content areas ──
+   Apply .section-light to any section that should be light-themed.
+   All child elements using CSS variables automatically resolve to light. */
+.section-light {
+  --color-navy:       oklch(0.97 0.005 60);
+  --color-card:       oklch(1 0 0);
+  --color-card-hover: oklch(0.95 0.004 60);
+  --color-border:     oklch(0 0 0 / 0.08);
+  --color-ivory:      oklch(0.14 0.04 240);
+  --color-muted:      oklch(0.48 0.02 90);
+  --shadow-base:      0 8px 24px -4px oklch(0 0 0 / 0.09);
+  --shadow-card:      0 2px 12px oklch(0 0 0 / 0.07);
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;

@@ -15,7 +15,7 @@ export default function Page() {
         description="Found a security issue? We take all reports seriously and respond promptly."
       />
       <section
-        className="pb-20 lg:pb-28"
+        className="pb-20 lg:pb-28 section-light"
         style={{ background: "var(--color-navy)", borderTop: "1px solid var(--color-border)" }}
       >
         <div className="mx-auto max-w-3xl px-6 space-y-5">

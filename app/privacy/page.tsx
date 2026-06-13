@@ -15,7 +15,7 @@ export default function Page() {
         description="How TryCycle collects, uses, and protects personal information."
       />
       <section
-        className="pb-20 lg:pb-28"
+        className="pb-20 lg:pb-28 section-light"
         style={{ background: "var(--color-navy)", borderTop: "1px solid var(--color-border)" }}
       >
         <div className="mx-auto max-w-4xl px-6">

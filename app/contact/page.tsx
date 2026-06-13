@@ -41,7 +41,7 @@ export default function Page() {
         description="We'd love to hear from you. Use the options below to reach the right team."
       />
 
-      <section className="pb-20 lg:pb-28" style={{ background: "var(--color-navy)" }}>
+      <section className="pb-20 lg:pb-28 section-light" style={{ background: "var(--color-navy)" }}>
         <div className="mx-auto max-w-4xl px-6">
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">

@@ -12,7 +12,7 @@ function AccordionItem({ item }: { item: FaqItem }) {
   const triggerId = useId();
 
   return (
-    <div className="border-b border-white/[0.10]">
+    <div className="border-b border-black/[0.08]">
       <h3>
         <button
           id={triggerId}
@@ -25,7 +25,7 @@ function AccordionItem({ item }: { item: FaqItem }) {
             className="text-[0.95rem] font-semibold leading-snug transition-colors duration-150"
             style={{
               fontFamily: "var(--font-space-grotesk, sans-serif)",
-              color: open ? "var(--color-teal)" : "oklch(0.96 0.01 90 / 0.90)",
+              color: open ? "var(--color-teal)" : "var(--color-ivory)",
             }}
           >
             {item.question}
@@ -35,7 +35,7 @@ function AccordionItem({ item }: { item: FaqItem }) {
               open ? "rotate-180" : "rotate-0"
             }`}
             aria-hidden="true"
-            style={{ color: open ? "var(--color-teal)" : "oklch(0.96 0.01 90 / 0.50)" }}
+            style={{ color: open ? "var(--color-teal)" : "oklch(0 0 0 / 0.35)" }}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -81,17 +81,17 @@ function CategoryTab({
       className="flex items-center gap-2 px-4 py-2 rounded-pill text-[0.78rem] font-medium transition-all duration-200 shrink-0"
       style={{
         borderRadius: "9999px",
-        background: active ? "var(--color-teal)" : "oklch(1 0 0 / 0.07)",
-        color: active ? "var(--color-navy)" : "var(--color-muted)",
-        border: active ? "none" : "1px solid oklch(1 0 0 / 0.12)",
+        background: active ? "var(--color-teal)" : "oklch(0 0 0 / 0.05)",
+        color: active ? "oklch(0.12 0.04 240)" : "var(--color-muted)",
+        border: active ? "none" : "1px solid oklch(0 0 0 / 0.10)",
       }}
     >
       {label}
       <span
         className="text-[0.7rem] font-semibold px-1.5 py-0.5 rounded-full"
         style={{
-          background: active ? "oklch(0 0 0 / 0.15)" : "oklch(1 0 0 / 0.08)",
-          color: active ? "var(--color-navy)" : "var(--color-muted)",
+          background: active ? "oklch(0 0 0 / 0.15)" : "oklch(0 0 0 / 0.06)",
+          color: active ? "oklch(0.12 0.04 240)" : "var(--color-muted)",
         }}
       >
         {count}
@@ -149,7 +149,7 @@ export function FaqClient() {
         description="Find answers about TryCycle, our solutions, partnerships, privacy, appointments, and support."
       />
 
-      <section className="pb-24" style={{ background: "var(--color-navy)" }}>
+      <section className="pb-24 section-light" style={{ background: "var(--color-navy)" }}>
         <div className="mx-auto max-w-4xl px-6">
 
           {/* Search */}
@@ -182,8 +182,8 @@ export function FaqClient() {
               placeholder="Search questions…"
               className="w-full rounded-xl pl-11 pr-4 py-3 text-[0.88rem] transition-all duration-200"
               style={{
-                background: "oklch(1 0 0 / 0.05)",
-                border: "1px solid oklch(1 0 0 / 0.15)",
+                background: "oklch(1 0 0)",
+                border: "1px solid oklch(0 0 0 / 0.12)",
                 color: "var(--color-ivory)",
                 outline: "none",
                 borderRadius: "12px",
@@ -193,7 +193,7 @@ export function FaqClient() {
                 e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 185 / 0.12)";
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = "oklch(1 0 0 / 0.15)";
+                e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.12)";
                 e.currentTarget.style.boxShadow = "none";
               }}
             />

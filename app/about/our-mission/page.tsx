@@ -49,7 +49,7 @@ export default function Page() {
       />
 
       <section
-        className="py-16 lg:py-20"
+        className="py-16 lg:py-20 section-light"
         style={{ background: "var(--color-navy)", borderTop: "1px solid var(--color-border)" }}
       >
         <div className="mx-auto max-w-4xl px-6">

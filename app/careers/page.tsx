@@ -35,7 +35,7 @@ export default function Page() {
         description="We're building something meaningful. If our mission resonates, we'd love to meet you."
       />
 
-      <section className="pb-20 lg:pb-28" style={{ background: "var(--color-navy)" }}>
+      <section className="pb-20 lg:pb-28 section-light" style={{ background: "var(--color-navy)" }}>
         <div className="mx-auto max-w-4xl px-6">
 
           {/* Current openings */}

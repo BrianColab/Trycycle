@@ -80,8 +80,8 @@ function StaffCard({
         <div
           className="w-9 h-9 rounded-full flex items-center justify-center text-[0.72rem] font-bold shrink-0"
           style={{
-            background: selected ? "oklch(0.65 0.12 185 / 0.25)" : "oklch(1 0 0 / 0.08)",
-            color: selected ? "var(--color-teal)" : "var(--color-muted)",
+            background: selected ? "oklch(0.65 0.12 185 / 0.20)" : "oklch(0 0 0 / 0.07)",
+            color: selected ? "var(--color-teal)" : "oklch(0.50 0.03 230)",
           }}
           aria-hidden="true"
         >
@@ -219,7 +219,7 @@ function Calendar({
               onClick={() => !isDisabled && onSelect(dateStr)}
               aria-label={`${date.toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" })}${isDisabled ? " (unavailable)" : ""}`}
               aria-pressed={isSelected}
-              className="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-[0.82rem] font-medium transition-all duration-150 disabled:cursor-not-allowed hover:enabled:bg-white/10"
+              className="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-[0.82rem] font-medium transition-all duration-150 disabled:cursor-not-allowed hover:enabled:bg-black/[0.06]"
               style={{
                 background: isSelected
                   ? "var(--color-teal)"
@@ -227,12 +227,12 @@ function Calendar({
                   ? "oklch(0.65 0.12 185 / 0.15)"
                   : "transparent",
                 color: isSelected
-                  ? "var(--color-navy)"
+                  ? "oklch(1 0 0)"
                   : isDisabled
-                  ? "oklch(1 0 0 / 0.20)"
+                  ? "oklch(0 0 0 / 0.25)"
                   : isToday
                   ? "var(--color-teal)"
-                  : "var(--color-ivory)",
+                  : "oklch(0.18 0.04 240)",
                 outline: isToday && !isSelected ? "1px solid oklch(0.65 0.12 185 / 0.40)" : "none",
               }}
             >
@@ -264,7 +264,7 @@ function TimeSlotPicker({
           <div
             key={slot}
             className="py-2.5 px-3 rounded-lg text-[0.8rem] animate-pulse"
-            style={{ background: "oklch(1 0 0 / 0.05)", height: "40px" }}
+            style={{ background: "oklch(0 0 0 / 0.06)", height: "40px" }}
             aria-hidden="true"
           />
         ))}
@@ -297,18 +297,18 @@ function TimeSlotPicker({
                 background: selected
                   ? "var(--color-teal)"
                   : booked
-                  ? "oklch(1 0 0 / 0.03)"
-                  : "oklch(1 0 0 / 0.07)",
+                  ? "oklch(0 0 0 / 0.03)"
+                  : "oklch(1 0 0)",
                 color: selected
-                  ? "var(--color-navy)"
+                  ? "oklch(0.12 0.04 240)"
                   : booked
-                  ? "oklch(1 0 0 / 0.25)"
-                  : "var(--color-ivory)",
+                  ? "oklch(0 0 0 / 0.28)"
+                  : "oklch(0.18 0.04 240)",
                 border: booked
-                  ? "1px solid oklch(1 0 0 / 0.06)"
+                  ? "1px solid oklch(0 0 0 / 0.06)"
                   : selected
                   ? "none"
-                  : "1px solid oklch(1 0 0 / 0.12)",
+                  : "1px solid oklch(0 0 0 / 0.11)",
                 textDecoration: booked ? "line-through" : "none",
               }}
             >
@@ -318,7 +318,7 @@ function TimeSlotPicker({
         })}
       </div>
       {bookedSlots.length > 0 && (
-        <p className="mt-2 text-[0.72rem]" style={{ color: "oklch(1 0 0 / 0.30)" }}>
+        <p className="mt-2 text-[0.72rem]" style={{ color: "oklch(0 0 0 / 0.40)" }}>
           Strikethrough slots are already booked for this date.
         </p>
       )}
@@ -359,9 +359,9 @@ function Field({
 }
 
 const inputStyle = {
-  background: "oklch(1 0 0 / 0.05)",
-  border: "1px solid oklch(1 0 0 / 0.20)",
-  color: "var(--color-ivory)",
+  background: "oklch(1 0 0)",
+  border: "1px solid oklch(0 0 0 / 0.13)",
+  color: "oklch(0.14 0.04 240)",
   borderRadius: "12px",
   width: "100%",
   padding: "10px 14px",
@@ -618,7 +618,7 @@ export function BookingClient() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen pt-24 pb-24" style={{ background: "var(--color-navy)" }}>
+      <div className="min-h-screen pt-24 pb-24 section-light" style={{ background: "var(--color-navy)" }}>
         <div className="mx-auto max-w-2xl px-6">
           <SuccessScreen
             staffName={selectedStaff!.name}
@@ -644,7 +644,7 @@ export function BookingClient() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-12" style={{ background: "var(--color-navy)" }}>
+      <section className="pt-32 pb-12 section-light" style={{ background: "var(--color-navy)" }}>
         <div className="mx-auto max-w-4xl px-6">
           <SectionEyebrow className="mb-4 block">Connect With Us</SectionEyebrow>
           <h1
@@ -661,7 +661,7 @@ export function BookingClient() {
         </div>
       </section>
 
-      <section className="pb-24" style={{ background: "var(--color-navy)" }}>
+      <section className="pb-24 section-light" style={{ background: "var(--color-navy)" }}>
         <div className="mx-auto max-w-4xl px-6">
           <SafetyNotice />
 
@@ -794,7 +794,7 @@ export function BookingClient() {
                     style={inputStyle}
                     onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(1 0 0 / 0.20)";
+                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
                       e.currentTarget.style.boxShadow = "none";
                     }}
                   />
@@ -812,7 +812,7 @@ export function BookingClient() {
                     style={inputStyle}
                     onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(1 0 0 / 0.20)";
+                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
                       e.currentTarget.style.boxShadow = "none";
                     }}
                   />
@@ -830,7 +830,7 @@ export function BookingClient() {
                     style={inputStyle}
                     onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(1 0 0 / 0.20)";
+                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
                       e.currentTarget.style.boxShadow = "none";
                     }}
                   />
@@ -846,7 +846,7 @@ export function BookingClient() {
                     style={inputStyle}
                     onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(1 0 0 / 0.20)";
+                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
                       e.currentTarget.style.boxShadow = "none";
                     }}
                   />
@@ -869,18 +869,18 @@ export function BookingClient() {
                     }}
                     onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(1 0 0 / 0.20)";
+                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
                       e.currentTarget.style.boxShadow = "none";
                     }}
                   >
-                    <option value="" disabled style={{ background: "oklch(0.17 0.04 230)", color: "oklch(0.70 0.02 90)" }}>
+                    <option value="" disabled style={{ background: "oklch(0.97 0.005 60)", color: "oklch(0.55 0.02 90)" }}>
                       Select a reason…
                     </option>
                     {APPOINTMENT_REASONS.map((r) => (
                       <option
                         key={r}
                         value={r}
-                        style={{ background: "oklch(0.17 0.04 230)", color: "oklch(0.96 0.01 90)" }}
+                        style={{ background: "oklch(1 0 0)", color: "oklch(0.14 0.04 240)" }}
                       >
                         {r}
                       </option>
@@ -898,7 +898,7 @@ export function BookingClient() {
                     style={{ ...inputStyle, resize: "vertical", minHeight: "100px" }}
                     onFocus={(e) => Object.assign(e.currentTarget.style, { ...inputFocusStyle, resize: "vertical" })}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(1 0 0 / 0.20)";
+                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
                       e.currentTarget.style.boxShadow = "none";
                     }}
                   />

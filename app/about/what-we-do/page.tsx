@@ -48,7 +48,7 @@ export default function Page() {
       />
 
       <section
-        className="py-16 lg:py-20"
+        className="py-16 lg:py-20 section-light"
         style={{ background: "var(--color-navy)" }}
       >
         <div className="mx-auto max-w-6xl px-6">
