@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Board of Directors" };
+export const metadata: Metadata = {
+  title: "Board of Directors",
+  description: "TryCycle's Board of Directors provides strategic guidance and governance across health systems, community development, law, and finance.",
+};
 
 export default function Page() {
   return (

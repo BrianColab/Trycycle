@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero, SectionEyebrow, Button } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Talking Stick" };
+export const metadata: Metadata = {
+  title: "Talking Stick",
+  description: "Talking Stick is TryCycle's culturally grounded digital wellness platform built with and for Indigenous communities — honouring tradition, sovereignty, and holistic healing.",
+};
 
 const FEATURES = [
   {

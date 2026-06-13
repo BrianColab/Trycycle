@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Leadership" };
+export const metadata: Metadata = {
+  title: "Leadership",
+  description: "Meet the TryCycle leadership team — experts in digital health, community partnerships, Indigenous wellness, and social enterprise.",
+};
 
 export default function Page() {
   return (

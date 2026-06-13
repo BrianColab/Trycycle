@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero, Button } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Contact" };
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Get in touch with TryCycle for demos, partnerships, media inquiries, and general questions.",
+};
 
 const METHODS = [
   {

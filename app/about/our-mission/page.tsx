@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero, SectionEyebrow } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Our Mission" };
+export const metadata: Metadata = {
+  title: "Our Mission",
+  description: "TryCycle's mission: to build culturally responsive digital mental health tools that reach underserved communities before crisis — grounded in six core values.",
+};
 
 const VALUES = [
   {

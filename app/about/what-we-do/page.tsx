@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero, SectionEyebrow, Button } from "@/components/ui";
 
-export const metadata: Metadata = { title: "What We Do" };
+export const metadata: Metadata = {
+  title: "What We Do",
+  description: "TryCycle builds culturally responsive digital mental health tools — designed with the communities they serve, supporting Indigenous peoples, veterans, youth, and healthcare organizations.",
+};
 
 const PILLARS = [
   {

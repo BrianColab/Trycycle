@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Advisory Committee" };
+export const metadata: Metadata = {
+  title: "Advisory Committee",
+  description: "TryCycle's Advisory Committee brings specialized knowledge in Indigenous health, clinical practice, veteran wellness, youth development, and digital ethics.",
+};
 
 export default function Page() {
   return (

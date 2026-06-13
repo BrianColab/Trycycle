@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero, SectionEyebrow, Button } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Ontario Legion Health" };
+export const metadata: Metadata = {
+  title: "Ontario Legion Health",
+  description: "Ontario Legion Health is TryCycle's purpose-built digital wellness platform for veterans and military families — culturally competent, peer-supported, and family-inclusive.",
+};
 
 const FEATURES = [
   {

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero, Button } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Careers" };
+export const metadata: Metadata = {
+  title: "Careers",
+  description: "Join the TryCycle team. We build culturally responsive digital health tools with and for the communities they serve.",
+};
 
 const VALUES = [
   {

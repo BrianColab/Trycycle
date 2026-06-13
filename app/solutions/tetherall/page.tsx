@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero, SectionEyebrow, Button } from "@/components/ui";
 
-export const metadata: Metadata = { title: "TetherAll" };
+export const metadata: Metadata = {
+  title: "TetherAll",
+  description: "TetherAll bridges individuals and their support networks — coordinated check-ins, network mapping, and shared progress so no one faces mental health challenges alone.",
+};
 
 const FEATURES = [
   {

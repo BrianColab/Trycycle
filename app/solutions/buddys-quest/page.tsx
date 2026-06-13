@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero, SectionEyebrow, Button } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Buddy's Quest" };
+export const metadata: Metadata = {
+  title: "Buddy's Quest",
+  description: "Buddy's Quest is TryCycle's digital mental health companion for children and youth — age-appropriate tools supporting early intervention, family involvement, and protective wellbeing.",
+};
 
 const FEATURES = [
   {

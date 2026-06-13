@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero, SectionEyebrow } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Our Story" };
+export const metadata: Metadata = {
+  title: "Our Story",
+  description: "How TryCycle began — from a founding belief that communities deserve digital tools built with them, not for them.",
+};
 
 const MILESTONES = [
   {

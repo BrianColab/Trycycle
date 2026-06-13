@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -51,14 +51,29 @@ type NavItem =
 function DropdownMenu({ item }: { item: NavItem & { children: { label: string; href: string }[] } }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
     function handler(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node)) close();
     }
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
-  }, []);
+  }, [close]);
+
+  useEffect(() => {
+    if (!open) return;
+    function handler(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        close();
+        buttonRef.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open, close]);
 
   return (
     <div
@@ -68,8 +83,9 @@ function DropdownMenu({ item }: { item: NavItem & { children: { label: string; h
       onMouseLeave={() => setOpen(false)}
     >
       <button
+        ref={buttonRef}
         aria-expanded={open}
-        aria-haspopup="true"
+        aria-haspopup="menu"
         className="flex items-center gap-1 text-[0.7rem] font-medium tracking-[0.18em] uppercase text-ivory/70 hover:text-teal transition-colors duration-200"
         style={{ fontFamily: "var(--font-inter, Inter, sans-serif)" }}
         onClick={() => setOpen((v) => !v)}
