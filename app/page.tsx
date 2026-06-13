@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui";
-import { SectionEyebrow } from "@/components/ui";
+import { Button, SectionEyebrow } from "@/components/ui";
 
 /* ── Static data ── */
 
@@ -10,218 +10,168 @@ const SOLUTIONS = [
     name: "Buddy's Quest",
     tag: "Youth & Family",
     description:
-      "A digital companion supporting children and families navigating mental health challenges with engaging, age-appropriate tools.",
-    glowHue: "185",
+      "A digital companion supporting children and families navigating mental health challenges with engaging, age-appropriate tools built for early intervention.",
+    hue: "185",
+    iconPath:
+      "M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z",
   },
   {
     href: "/solutions/talking-stick",
     name: "Talking Stick",
     tag: "Indigenous Communities",
     description:
-      "Culturally grounded digital wellness tools built with and for Indigenous communities, honouring tradition and supporting healing.",
-    glowHue: "145",
+      "Culturally grounded digital wellness tools built with and for Indigenous communities, honouring tradition and supporting healing pathways.",
+    hue: "145",
+    iconPath:
+      "M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3z",
   },
   {
     href: "/solutions/tetherall",
     name: "TetherAll",
     tag: "Connection & Support",
     description:
-      "A platform that bridges individuals and their support networks, ensuring no one faces challenges alone.",
-    glowHue: "215",
+      "A platform bridging individuals with their support networks — ensuring no one faces challenges alone.",
+    hue: "215",
+    iconPath:
+      "M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244",
   },
   {
     href: "/solutions/ontario-legion-health",
     name: "Ontario Legion Health",
     tag: "Veterans",
     description:
-      "Purpose-built digital wellness tools for veterans and their families, supporting mental health and community connection.",
-    glowHue: "30",
+      "Purpose-built digital wellness tools for veterans and their families — supporting mental health and community connection.",
+    hue: "30",
+    iconPath:
+      "M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z",
   },
 ] as const;
-
-const IMPACT_ITEMS = [
-  {
-    label: "Earlier Engagement",
-    description: "Reaching people before crisis — building protective factors when they matter most.",
-  },
-  {
-    label: "Real-Time Insight",
-    description: "Actionable data that helps care teams make informed, timely decisions.",
-  },
-  {
-    label: "Prevention-Focused",
-    description: "Built for long-term wellbeing, not just crisis response.",
-  },
-  {
-    label: "Healthier Communities",
-    description: "Measurable outcomes that strengthen individuals, families, and communities.",
-  },
-] as const;
-
-const EXPLORE_ITEMS = [
-  {
-    href: "/media/videos",
-    label: "Videos",
-    description:
-      "Watch our solutions in action — demos, community stories, and partner perspectives.",
-    iconPath:
-      "M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z",
-  },
-  {
-    href: "/testimonials",
-    label: "Testimonials",
-    description:
-      "Hear from the communities, partners, and healthcare organizations we serve.",
-    iconPath:
-      "M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z",
-  },
-  {
-    href: "/faq",
-    label: "FAQ",
-    description:
-      "Answers to common questions about our platform, partnerships, and programs.",
-    iconPath:
-      "M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z",
-  },
-] as const;
-
-/* ── Shared arrow icon ── */
-function ArrowRight() {
-  return (
-    <svg
-      className="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-    </svg>
-  );
-}
 
 /* ── Hero ── */
 function Hero() {
   return (
     <section
       className="relative flex items-center min-h-[92dvh] overflow-hidden"
-      style={{ background: "var(--color-navy)" }}
       aria-label="TryCycle — digital health solutions"
     >
-      {/* Layered glow */}
+      <Image
+        src="/assets/trycycle/hero/hero-landscape.jpg"
+        alt=""
+        fill
+        priority
+        className="object-cover object-center"
+        sizes="100vw"
+      />
+
+      {/* Dark overlay — navy gradient per DESIGN.md */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0"
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 72% 44%, oklch(0.20 0.07 185 / 0.22) 0%, transparent 65%)," +
-            "radial-gradient(ellipse 55% 70% at 8% 88%, oklch(0.18 0.06 155 / 0.18) 0%, transparent 55%)",
-        }}
-      />
-      {/* Subtle dot texture */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          backgroundImage: "radial-gradient(circle, oklch(1 0 0 / 0.06) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
+            "linear-gradient(to bottom, oklch(0.12 0.04 240 / 0.60) 0%, oklch(0.12 0.04 240 / 0.90) 100%)",
         }}
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 pt-36 pb-20">
-        <div className="max-w-2xl">
+      {/* Left gradient for text legibility */}
+      <div
+        className="absolute inset-0"
+        aria-hidden="true"
+        style={{
+          background:
+            "linear-gradient(105deg, oklch(0.12 0.04 240 / 0.55) 35%, transparent 80%)",
+        }}
+      />
+
+      <div className="relative mx-auto w-full max-w-6xl px-6 pt-36 pb-24">
+        <div className="max-w-[640px]">
           <SectionEyebrow className="mb-6 block">
-            Digital Mental Health Solutions
+            Digital Health Solutions
           </SectionEyebrow>
 
           <h1
-            className="text-5xl sm:text-6xl lg:text-[4.5rem] font-bold leading-[1.08] tracking-tight mb-6"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+            className="font-bold leading-[1.05] mb-7"
+            style={{
+              fontFamily: "var(--font-space-grotesk, sans-serif)",
+              fontSize: "clamp(2.8rem, 6vw, 4rem)",
+              letterSpacing: "-0.02em",
+            }}
           >
-            <span style={{ color: "var(--color-ivory)" }}>Innovative Solutions.</span>
+            <span style={{ color: "var(--color-ivory)" }}>
+              Innovative solutions.
+              <br />
+              Stronger communities.
+            </span>
             <br />
-            <span style={{ color: "var(--color-teal)" }}>Stronger Communities.</span>
+            <span style={{ color: "var(--color-teal)" }}>Better outcomes.</span>
           </h1>
 
           <p
-            className="text-[1.05rem] leading-relaxed mb-10 max-w-xl"
-            style={{ color: "oklch(0.80 0.02 90)" }}
+            className="text-[0.95rem] leading-[1.65] mb-10 max-w-[480px]"
+            style={{ color: "oklch(0.82 0.02 90)" }}
           >
-            TryCycle delivers culturally responsive digital health tools — supporting
-            Indigenous communities, veterans, youth, and healthcare organizations
-            across Canada.
+            TryCycle delivers culturally responsive digital health tools —
+            supporting Indigenous communities, veterans, youth, and healthcare
+            organizations across Canada.
           </p>
 
           <div className="flex flex-wrap gap-4">
             <Button href="/book-appointment" variant="primary" size="lg">
               Book an Appointment
             </Button>
-            <Button href="#solutions" variant="ghost" size="lg">
-              Explore Our Solutions
+            <Button href="/about/what-we-do" variant="ghost" size="lg">
+              Learn More
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Bottom fade to next section */}
+      {/* Fade to next section */}
       <div
-        className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+        className="absolute inset-x-0 bottom-0 h-28 pointer-events-none"
         aria-hidden="true"
         style={{
-          background: "linear-gradient(to bottom, transparent, oklch(0.14 0.04 235))",
+          background: "linear-gradient(to bottom, transparent, var(--color-navy))",
         }}
       />
     </section>
   );
 }
 
-/* ── Impact strip ── */
-function ImpactStrip() {
+/* ── Editorial intro statement ── */
+function IntroStatement() {
   return (
     <section
-      className="py-14"
+      className="py-16 lg:py-20"
       style={{
-        background: "oklch(0.14 0.04 235)",
+        background: "var(--color-navy)",
         borderBottom: "1px solid var(--color-border)",
       }}
-      aria-label="Our approach"
     >
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {IMPACT_ITEMS.map((item) => (
-            <div key={item.label}>
-              <div className="flex items-center gap-2 mb-2">
-                <div
-                  className="w-1.5 h-1.5 rounded-full shrink-0"
-                  style={{ background: "var(--color-teal)" }}
-                  aria-hidden="true"
-                />
-                <p
-                  className="text-[0.85rem] font-semibold"
-                  style={{
-                    fontFamily: "var(--font-space-grotesk, sans-serif)",
-                    color: "var(--color-ivory)",
-                  }}
-                >
-                  {item.label}
-                </p>
-              </div>
-              <p
-                className="text-[0.8rem] leading-relaxed pl-3.5"
-                style={{ color: "var(--color-muted)" }}
-              >
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
+      <div className="mx-auto max-w-3xl px-6 text-center">
+        <p
+          className="text-[1rem] sm:text-[1.1rem] leading-[1.8]"
+          style={{ color: "oklch(0.80 0.02 90)" }}
+        >
+          We build culturally grounded digital health tools for the communities
+          that need them most — Indigenous Peoples, veterans, youth, and
+          families. Our solutions reach people{" "}
+          <span
+            style={{
+              color: "var(--color-ivory)",
+              fontWeight: 500,
+            }}
+          >
+            before crisis
+          </span>
+          , not after.
+        </p>
       </div>
     </section>
   );
 }
 
-/* ── Solutions cards ── */
+/* ── Solutions ── */
 function SolutionsSection() {
   return (
     <section
@@ -233,45 +183,102 @@ function SolutionsSection() {
         <div className="mb-12">
           <SectionEyebrow className="mb-3 block">What We Build</SectionEyebrow>
           <h2
-            className="text-3xl sm:text-4xl font-bold tracking-tight"
+            className="text-[2rem] font-bold"
             style={{
               fontFamily: "var(--font-space-grotesk, sans-serif)",
               color: "var(--color-ivory)",
+              letterSpacing: "-0.02em",
             }}
           >
             Our Solutions
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {SOLUTIONS.map((s) => (
             <Link
               key={s.href}
               href={s.href}
-              className="group relative rounded-2xl p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="group relative rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
               style={{
                 background: "var(--color-card)",
                 border: "1px solid var(--color-border)",
                 boxShadow: "var(--shadow-card)",
               }}
             >
-              {/* Accent top line on hover */}
+              {/* Top accent line on hover */}
               <div
-                className="absolute inset-x-0 top-0 h-[2px] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute inset-x-0 top-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
-                  background: `linear-gradient(to right, transparent, oklch(0.65 0.12 ${s.glowHue}), transparent)`,
+                  background: `linear-gradient(to right, transparent, oklch(0.65 0.12 ${s.hue} / 0.60), transparent)`,
                 }}
                 aria-hidden="true"
               />
 
-              <div>
+              {/* Visual thumbnail */}
+              <div
+                className="relative h-48 w-full overflow-hidden"
+                style={{
+                  background: `linear-gradient(135deg, oklch(0.19 0.06 ${s.hue}) 0%, oklch(0.13 0.04 240) 100%)`,
+                }}
+                aria-hidden="true"
+              >
+                <svg
+                  className="absolute inset-0 w-full h-full"
+                  viewBox="0 0 400 192"
+                  preserveAspectRatio="xMidYMid slice"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="370"
+                    cy="-20"
+                    r="140"
+                    fill="none"
+                    stroke={`oklch(0.65 0.12 ${s.hue} / 0.13)`}
+                    strokeWidth="1"
+                  />
+                  <circle
+                    cx="370"
+                    cy="-20"
+                    r="95"
+                    fill="none"
+                    stroke={`oklch(0.65 0.12 ${s.hue} / 0.09)`}
+                    strokeWidth="1"
+                  />
+                </svg>
+
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                    style={{
+                      background: "oklch(0.65 0.12 185 / 0.12)",
+                      border: "1px solid oklch(0.65 0.12 185 / 0.22)",
+                    }}
+                  >
+                    <svg
+                      className="w-7 h-7"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={1.5}
+                      viewBox="0 0 24 24"
+                      style={{ color: "var(--color-teal)" }}
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d={s.iconPath}
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card body */}
+              <div className="flex flex-col flex-1 p-6">
                 <span
-                  className="inline-block px-2.5 py-0.5 rounded-full text-[0.65rem] font-semibold tracking-widest uppercase mb-3"
-                  style={{
-                    background: "oklch(0.65 0.12 185 / 0.10)",
-                    color: "var(--color-teal)",
-                    border: "1px solid oklch(0.65 0.12 185 / 0.18)",
-                  }}
+                  className="text-[0.63rem] font-semibold tracking-[0.20em] uppercase mb-3"
+                  style={{ color: "var(--color-teal)" }}
                 >
                   {s.tag}
                 </span>
@@ -284,17 +291,32 @@ function SolutionsSection() {
                 >
                   {s.name}
                 </h3>
-                <p className="text-[0.82rem] leading-relaxed" style={{ color: "var(--color-muted)" }}>
+                <p
+                  className="text-[0.82rem] leading-relaxed flex-1"
+                  style={{ color: "var(--color-muted)" }}
+                >
                   {s.description}
                 </p>
-              </div>
-
-              <div
-                className="flex items-center gap-1.5 text-[0.78rem] font-semibold mt-auto"
-                style={{ color: "var(--color-teal)" }}
-              >
-                Learn more
-                <ArrowRight />
+                <div
+                  className="flex items-center gap-1.5 text-[0.78rem] font-semibold mt-5"
+                  style={{ color: "var(--color-teal)" }}
+                >
+                  Learn more
+                  <svg
+                    className="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </div>
               </div>
             </Link>
           ))}
@@ -304,92 +326,7 @@ function SolutionsSection() {
   );
 }
 
-/* ── Explore preview cards ── */
-function ExploreSection() {
-  return (
-    <section
-      className="py-20 lg:py-24"
-      style={{
-        background: "oklch(0.14 0.04 235)",
-        borderTop: "1px solid var(--color-border)",
-      }}
-    >
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-12">
-          <SectionEyebrow className="mb-3 block">Go Deeper</SectionEyebrow>
-          <h2
-            className="text-3xl sm:text-4xl font-bold tracking-tight"
-            style={{
-              fontFamily: "var(--font-space-grotesk, sans-serif)",
-              color: "var(--color-ivory)",
-            }}
-          >
-            Explore More
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {EXPLORE_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="group rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              style={{
-                background: "var(--color-card)",
-                border: "1px solid var(--color-border)",
-                boxShadow: "var(--shadow-card)",
-              }}
-            >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                style={{
-                  background: "oklch(0.65 0.12 185 / 0.12)",
-                  color: "var(--color-teal)",
-                }}
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d={item.iconPath} />
-                </svg>
-              </div>
-
-              <div className="flex-1">
-                <h3
-                  className="text-[1rem] font-bold mb-1.5"
-                  style={{
-                    fontFamily: "var(--font-space-grotesk, sans-serif)",
-                    color: "var(--color-ivory)",
-                  }}
-                >
-                  {item.label}
-                </h3>
-                <p className="text-[0.82rem] leading-relaxed" style={{ color: "var(--color-muted)" }}>
-                  {item.description}
-                </p>
-              </div>
-
-              <div
-                className="flex items-center gap-1.5 text-[0.78rem] font-semibold"
-                style={{ color: "var(--color-teal)" }}
-              >
-                View all
-                <ArrowRight />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── Bottom CTA strip ── */
+/* ── CTA strip ── */
 function CtaStrip() {
   return (
     <section
@@ -404,10 +341,11 @@ function CtaStrip() {
           Let&apos;s Connect
         </SectionEyebrow>
         <h2
-          className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
+          className="text-[2rem] font-bold mb-4"
           style={{
             fontFamily: "var(--font-space-grotesk, sans-serif)",
             color: "var(--color-ivory)",
+            letterSpacing: "-0.02em",
           }}
         >
           Ready to work together?
@@ -449,9 +387,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ImpactStrip />
+      <IntroStatement />
       <SolutionsSection />
-      <ExploreSection />
       <CtaStrip />
     </>
   );
