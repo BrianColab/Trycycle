@@ -11,16 +11,21 @@ const FEATURES = [
     title: "Age-Appropriate Tools",
     description:
       "Interactive, engaging content built for young people ages 8–18 — accessible, safe, and informed by developmental research.",
+    iconPath:
+      "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25",
   },
   {
     title: "Family Involvement",
     description:
       "Caregivers are included in the journey. A family dashboard keeps parents and guardians informed and able to support their child.",
+    iconPath:
+      "M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z",
   },
   {
     title: "Early Intervention Focus",
     description:
       "Reaching young people before challenges escalate. Buddy's Quest supports protective factors and healthy habits at a critical stage.",
+    iconPath: "M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
   },
 ] as const;
 
@@ -44,11 +49,10 @@ export default function Page() {
 
       <section
         className="py-16 lg:py-20"
-        style={{ background: "var(--color-navy)", borderTop: "1px solid var(--color-border)" }}
+        style={{ background: "var(--color-navy)" }}
       >
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
 
-          {/* Feature cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-16">
             {FEATURES.map((f) => (
               <div
@@ -57,39 +61,56 @@ export default function Page() {
                 style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
               >
                 <div
-                  className="w-2 h-2 rounded-full mb-4"
-                  style={{ background: "var(--color-teal)" }}
-                  aria-hidden="true"
-                />
-                <h3
-                  className="text-[0.9rem] font-semibold mb-2"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
                   style={{
-                    fontFamily: "var(--font-space-grotesk, sans-serif)",
-                    color: "var(--color-ivory)",
+                    background: "oklch(0.65 0.12 185 / 0.12)",
+                    border: "1px solid oklch(0.65 0.12 185 / 0.20)",
                   }}
+                  aria-hidden="true"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                    viewBox="0 0 24 24"
+                    style={{ color: "var(--color-teal)" }}
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d={f.iconPath} />
+                  </svg>
+                </div>
+                <h3
+                  className="text-[0.92rem] font-semibold mb-2"
+                  style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
                 >
                   {f.title}
                 </h3>
-                <p className="text-[0.8rem] leading-relaxed" style={{ color: "var(--color-muted)" }}>
+                <p className="text-[0.82rem] leading-relaxed" style={{ color: "var(--color-muted)" }}>
                   {f.description}
                 </p>
               </div>
             ))}
           </div>
 
-          {/* Who it serves + CTA */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div>
-              <SectionEyebrow className="mb-4 block">Who It Serves</SectionEyebrow>
-              <ul className="space-y-2.5">
+              <SectionEyebrow className="mb-5 block">Who It Serves</SectionEyebrow>
+              <ul className="space-y-3">
                 {PARTNERS.map((p) => (
-                  <li key={p} className="flex items-center gap-2.5">
-                    <div
-                      className="w-1.5 h-1.5 rounded-full shrink-0"
-                      style={{ background: "var(--color-teal)" }}
+                  <li key={p} className="flex items-start gap-3">
+                    <svg
+                      className="w-4 h-4 shrink-0 mt-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                      style={{ color: "var(--color-teal)" }}
                       aria-hidden="true"
-                    />
-                    <span className="text-[0.85rem]" style={{ color: "var(--color-muted)" }}>{p}</span>
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                    <span className="text-[0.85rem] leading-snug" style={{ color: "var(--color-muted)" }}>{p}</span>
                   </li>
                 ))}
               </ul>
@@ -101,10 +122,7 @@ export default function Page() {
             >
               <p
                 className="text-[0.95rem] font-bold mb-2"
-                style={{
-                  fontFamily: "var(--font-space-grotesk, sans-serif)",
-                  color: "var(--color-ivory)",
-                }}
+                style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
               >
                 Interested in Buddy&apos;s Quest?
               </p>

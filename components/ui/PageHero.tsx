@@ -10,25 +10,34 @@ interface PageHeroProps {
 
 export function PageHero({ eyebrow, title, titleAccent, description, children }: PageHeroProps) {
   return (
-    <section className="pt-32 pb-16" style={{ background: "var(--color-navy)" }}>
-      <div className="mx-auto max-w-4xl px-6 text-center">
+    <section
+      className="pt-28 pb-14 lg:pt-32 lg:pb-16"
+      style={{
+        background: "var(--color-forest)",
+        borderBottom: "1px solid var(--color-border)",
+      }}
+    >
+      <div className="mx-auto max-w-6xl px-6">
         <SectionEyebrow className="mb-4 block">{eyebrow}</SectionEyebrow>
         <h1
-          className="text-4xl sm:text-5xl font-bold leading-tight tracking-tight mb-6"
-          style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+          className="font-bold leading-[1.1] mb-5"
+          style={{
+            fontFamily: "var(--font-space-grotesk, sans-serif)",
+            color: "var(--color-ivory)",
+            fontSize: "clamp(2rem, 4vw, 2.75rem)",
+            letterSpacing: "-0.02em",
+            maxWidth: "760px",
+          }}
         >
           {title}
           {titleAccent && (
-            <>
-              {" "}
-              <span style={{ color: "var(--color-teal)" }}>{titleAccent}</span>
-            </>
+            <> <span style={{ color: "var(--color-teal)" }}>{titleAccent}</span></>
           )}
         </h1>
         {description && (
           <p
-            className="text-[0.95rem] leading-relaxed max-w-2xl mx-auto"
-            style={{ color: "var(--color-muted)" }}
+            className="text-[0.95rem] leading-[1.65]"
+            style={{ color: "var(--color-muted)", maxWidth: "640px" }}
           >
             {description}
           </p>

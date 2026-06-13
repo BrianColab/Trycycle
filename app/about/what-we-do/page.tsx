@@ -49,9 +49,9 @@ export default function Page() {
 
       <section
         className="py-16 lg:py-20"
-        style={{ background: "var(--color-navy)", borderTop: "1px solid var(--color-border)" }}
+        style={{ background: "var(--color-navy)" }}
       >
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
 
           <div className="space-y-5 mb-16">
             {PILLARS.map((p, i) => (
@@ -91,9 +91,19 @@ export default function Page() {
               <SectionEyebrow className="mb-4 block">Who We Serve</SectionEyebrow>
               <ul className="space-y-2.5">
                 {POPULATIONS.map((p) => (
-                  <li key={p} className="flex items-center gap-2.5">
-                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "var(--color-teal)" }} aria-hidden="true" />
-                    <span className="text-[0.85rem]" style={{ color: "var(--color-muted)" }}>{p}</span>
+                  <li key={p} className="flex items-start gap-3">
+                    <svg
+                      className="w-4 h-4 shrink-0 mt-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                      style={{ color: "var(--color-teal)" }}
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                    <span className="text-[0.85rem] leading-snug" style={{ color: "var(--color-muted)" }}>{p}</span>
                   </li>
                 ))}
               </ul>
