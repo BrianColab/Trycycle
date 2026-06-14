@@ -155,6 +155,37 @@ export default function Page() {
         </div>
       </section>
 
+      {/* ── Video ── */}
+      <section className="py-14 lg:py-18 section-light" style={{ background: "oklch(0.97 0.005 60)", borderBottom: "1px solid var(--color-border)" }}>
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="text-center mb-8">
+            <SectionEyebrow className="mb-3 block">Watch</SectionEyebrow>
+            <h2
+              className="text-[1.45rem] font-bold"
+              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+            >
+              See Buddy&apos;s Quest in action
+            </h2>
+          </div>
+          <div
+            className="relative overflow-hidden rounded-2xl"
+            style={{
+              paddingBottom: "56.25%",
+              background: "oklch(0.12 0.04 240)",
+              border: "1px solid var(--color-border)",
+              boxShadow: "0 20px 60px -12px oklch(0 0 0 / 0.25)",
+            }}
+          >
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://player.vimeo.com/video/1040889807?badge=0&autopause=0&player_id=0&app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+              title="Buddy's Quest"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ── Features ── */}
       <section className="py-16 lg:py-20 section-light" style={{ background: "oklch(0.97 0.005 60)" }}>
         <div className="mx-auto max-w-6xl px-6">
