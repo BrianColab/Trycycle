@@ -47,8 +47,8 @@ html {
 }
 
 body {
-  background-color: var(--color-navy);
-  color: var(--color-ivory);
+  background-color: oklch(0.97 0.005 60);
+  color: oklch(0.14 0.04 240);
   font-family: var(--font-body);
   font-size: 0.9rem;
   line-height: 1.65;
