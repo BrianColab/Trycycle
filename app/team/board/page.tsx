@@ -22,7 +22,7 @@ const BOARD = [
     title: "Director",
     credentials: null,
     bio: "A leader and champion of Indigenous rights. Former Chief of Algonquins of Pikwàkanagàn First Nation, member of the Assembly of First Nations Veterans Council, and Indigenous Liaison for Innovation7. Recipient of an honourary degree from Algonquin College (2023).",
-    photo: "https://trycycle.ca/wp-content/uploads/2024/07/WENDYJOCKO-1.png",
+    photo: "/images/team/WENDYJOCKO-1.png",
     linkedin: "https://www.linkedin.com/in/wendy-jocko-89927ab8/",
   },
   {
