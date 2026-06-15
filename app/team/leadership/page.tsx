@@ -14,7 +14,7 @@ const LEADERS = [
     credentials: null,
     title: "Founder & CEO",
     bio: "For more than 20 years, John has been in the business of creating digital technologies and solutions. He holds a BA from Carleton University, an MA from The Graduate Institute, and is pursuing a PhD at Carleton and Trent Universities.",
-    photo: "/images/team/JOHNMACBETH-2023.webp",
+    photo: "/images/team/JOHNMACBETH-2023.png",
     linkedin: "https://www.linkedin.com/in/john-d-macbeth-88888211/",
   },
   {
@@ -46,7 +46,7 @@ const LEADERS = [
     credentials: "MBA",
     title: "Chief Information Officer",
     bio: "Working at the intersection of technology and medical services for more than 25 years. Degrees from Purdue, University of Arizona, and an MBA from the University of Ottawa.",
-    photo: "/images/team/GEOFFSCHAADT-2023.webp",
+    photo: "/images/team/GEOFFSCHAADT-2023.png",
     linkedin: "https://www.linkedin.com/in/gschaadt/",
   },
   {
@@ -62,7 +62,7 @@ const LEADERS = [
     credentials: null,
     title: "VP, Strategy & Alliances",
     bio: "Working in health and social services since 1984, addressing the needs of marginalized populations. BA from Carleton University, leadership programs at Queen's and University of Toronto.",
-    photo: "/images/team/CAMMACLEOD-1.webp",
+    photo: "/images/team/CAMMACLEOD-1.png",
     linkedin: "https://www.linkedin.com/in/cameron-macleod-6954913/",
   },
   {
@@ -70,7 +70,7 @@ const LEADERS = [
     credentials: "RN",
     title: "Director of Nursing & Indigenous Business Development",
     bio: "Registered nurse with more than eight years serving remote Northern Ontario First Nations communities. A dedicated advocate for culturally responsive care.",
-    photo: "/images/team/DONNAKOEGH.webp",
+    photo: "/images/team/DONNAKOEGH.png",
     linkedin: "https://ca.linkedin.com/in/donna-keogh-156050277",
   },
 ];

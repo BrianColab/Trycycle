@@ -30,7 +30,7 @@ const BOARD = [
     title: "Founder, TryCycle Data Systems",
     credentials: null,
     bio: "Over 25+ years, John has founded several companies leveraging technology to improve the lives of thousands of people. He holds a BA from Carleton University, an MA from The Graduate Institute, and is pursuing a PhD at Carleton and Trent Universities.",
-    photo: "/images/team/JOHNMACBETH.webp",
+    photo: "/images/team/JOHNMACBETH.png",
     linkedin: "https://www.linkedin.com/in/john-d-macbeth-88888211/",
   },
   {
@@ -46,7 +46,7 @@ const BOARD = [
     title: "CEO, TryCycle Data Systems",
     credentials: "CPA, CA",
     bio: "Brett brings 15+ years of executive experience helping growing companies across Commercial Real Estate, Oceanography, Security, Video Management (SaaS), and Amusement. He holds a Bachelor of Commerce from Carleton University and earned his CPA, CA designation in 2010.",
-    photo: "/images/team/BMERRIMAN-2023.webp",
+    photo: "/images/team/BMERRIMAN-2023.png",
     linkedin: "https://www.linkedin.com/in/brett-merriman-cpa-ca/",
   },
 ];
