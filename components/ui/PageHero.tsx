@@ -13,8 +13,8 @@ export function PageHero({ eyebrow, title, titleAccent, description, children }:
     <section
       className="pt-28 pb-14 lg:pt-32 lg:pb-16"
       style={{
-        background: "var(--color-forest)",
-        borderBottom: "1px solid var(--color-border)",
+        background: "linear-gradient(160deg, oklch(0.16 0.04 235) 0%, oklch(0.12 0.04 240) 60%)",
+        borderBottom: "1px solid oklch(1 0 0 / 0.08)",
       }}
     >
       <div className="mx-auto max-w-6xl px-6">
