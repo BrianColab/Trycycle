@@ -14,7 +14,7 @@ const BOARD = [
     title: "Executive Chair",
     credentials: "CA, ICD.D",
     bio: "A Chartered Accountant by training, Ken is an entrepreneur and business executive with a focus on life sciences. He co-founded CroMedica Global Inc., growing it to 2,600 employees across 13 offices in 9 countries. Ken chairs BioCanRx, Canada's National Centre of Excellence for Immunotherapy Cancer Research.",
-    photo: "/images/team/KENNEWPORT.webp",
+    photo: "/images/team/KENNEWPORT.png",
     linkedin: "https://www.linkedin.com/in/ken-newport-bb846217/",
   },
   {
@@ -38,7 +38,7 @@ const BOARD = [
     title: "Director",
     credentials: null,
     bio: "Executive Vice President, Group Benefits at Guardian Life Insurance Company of America. Jonathan has an extensive track record in the health and insurance industries, with previous roles at CVS Health, Aetna, Freedom Disability, and Cigna.",
-    photo: "/images/team/JONATHANMAYHEW.webp",
+    photo: "/images/team/JONATHANMAYHEW.png",
     linkedin: "https://www.linkedin.com/in/jonathan-mayhew-97894ba8/",
   },
   {

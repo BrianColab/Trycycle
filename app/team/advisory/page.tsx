@@ -13,7 +13,7 @@ const ADVISORS = [
     credentials: "MD",
     title: "Medical Director, Rushford Center — Connecticut",
     bio: "Dr. Allen serves as Medical Director of Rushford Center, Chief of Psychiatry at Midstate Medical Center, and VP of Addiction Services for the Behavioral Health Network of Hartford Healthcare. He holds faculty appointments at UConn School of Medicine and Quinnipiac University, and advocates for prevention, screening, and treatment access for substance use disorders.",
-    photo: "/images/team/JONATHANALLEN.webp",
+    photo: "/images/team/JONATHANALLEN.png",
   },
   {
     name: "Jennifer Black",
@@ -48,14 +48,14 @@ const ADVISORS = [
     credentials: "BS",
     title: "Deputy Director, Connecticut Judicial Branch – Court Support Services Division",
     bio: "Deputy Director III overseeing 100+ employees across five state regions. Michael started the first Opioid Diversion Program in Connecticut in 2015 and was appointed to represent the branch on the New England Regional Judicial Opioid Initiative in 2018. His career spans 31+ years in bail services and probation.",
-    photo: "/images/team/MICHAELHINES.webp",
+    photo: "/images/team/MICHAELHINES.png",
   },
   {
     name: "Richard Kopelman",
     credentials: null,
     title: "CEO and Managing Partner, Aprio — Georgia",
     bio: "Leads Aprio, a nationally-recognized top-50 CPA and advisory firm. Richard championed the firm's 2017 rebrand and directed combinations with 12+ firms, expanding to five regions. He believes investing in clients' success starts with investing in the firm's own people, culture, and capabilities.",
-    photo: "/images/team/RICHARDKOPELMAN.webp",
+    photo: "/images/team/RICHARDKOPELMAN.png",
   },
 ];
 

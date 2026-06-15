@@ -22,7 +22,7 @@ const LEADERS = [
     credentials: "CPA, MBA",
     title: "Chief Financial Officer",
     bio: "Finance executive with global experience across cannabis, aerospace/defence, tech, and manufacturing. MBA from the University of Ottawa.",
-    photo: "/images/team/SteveBurwash.webp",
+    photo: "/images/team/SteveBurwash.png",
     linkedin: null,
   },
   {
@@ -30,7 +30,7 @@ const LEADERS = [
     credentials: null,
     title: "Cofounder & Director, Business Development",
     bio: "Member of the Oneida Nation of Wisconsin. Ken's background spans communications, governance, social services, and entrepreneurship. Master's in organizational leadership from The Graduate Institute.",
-    photo: "/images/team/ken-house.webp",
+    photo: "/images/team/ken-house.png",
     linkedin: "https://www.linkedin.com/in/kenneth-g-house-jr-34918b8/",
   },
   {
@@ -38,7 +38,7 @@ const LEADERS = [
     credentials: null,
     title: "Chief Operating Officer",
     bio: "Senior management roles for more than 20 years in startups and established enterprises. Applied Management from Algonquin College.",
-    photo: "/images/team/KELLYGREGOIRE-2023.webp",
+    photo: "/images/team/KELLYGREGOIRE-2023.png",
     linkedin: "https://www.linkedin.com/in/kgregoire/",
   },
   {
@@ -54,7 +54,7 @@ const LEADERS = [
     credentials: "MD",
     title: "Chief Medical Officer",
     bio: "Directed an addiction medicine fellowship and served as Past-President of the Connecticut Chapter of the addiction medicine association. Board certified in Psychiatry/Neurology and Addiction Medicine.",
-    photo: "/images/team/SAMSILVERMAN.webp",
+    photo: "/images/team/SAMSILVERMAN.png",
     linkedin: null,
   },
   {
