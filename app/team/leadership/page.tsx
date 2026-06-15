@@ -92,55 +92,65 @@ export default function Page() {
         description="The people building TryCycle's mission — bringing decades of experience in digital health, Indigenous community partnerships, clinical medicine, and social enterprise."
       />
 
-      <section className="py-16 lg:py-24" style={{ background: "var(--color-navy)" }}>
+      <section className="py-16 lg:py-24" style={{ background: "oklch(0.96 0.006 60)" }}>
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {LEADERS.map((person) => (
               <article
                 key={person.name}
-                className="group flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col rounded-2xl transition-all duration-300 hover:-translate-y-1.5"
                 style={{
-                  background: "var(--color-card)",
-                  border: "1px solid var(--color-border)",
-                  boxShadow: "var(--shadow-card)",
+                  background: "oklch(1 0 0)",
+                  border: "1px solid oklch(0 0 0 / 0.08)",
+                  boxShadow: "0 2px 12px oklch(0 0 0 / 0.07)",
                 }}
               >
-                {/* Photo */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-[oklch(0.92_0.006_60)]">
+                {/* Photo — overflow-hidden isolated here, not on article */}
+                <div className="relative aspect-[4/5] rounded-t-2xl overflow-hidden bg-[oklch(0.88_0.005_240)]">
                   <Image
                     src={person.photo}
                     alt={person.name}
                     fill
-                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="object-cover object-top"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
+                  {/* Dark gradient — name/title overlaid here */}
                   <div
-                    className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
-                    style={{ background: "linear-gradient(to top, var(--color-card), transparent)" }}
-                    aria-hidden="true"
-                  />
+                    className="absolute inset-x-0 bottom-0 pt-16 pb-4 px-4"
+                    style={{
+                      background: "linear-gradient(to top, oklch(0.10 0.04 240 / 0.92) 0%, oklch(0.10 0.04 240 / 0.60) 55%, transparent 100%)",
+                    }}
+                  >
+                    <p
+                      className="text-[0.95rem] font-bold leading-tight text-white mb-0.5"
+                      style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+                    >
+                      {person.name}
+                      {person.credentials && (
+                        <span className="font-normal text-[0.75rem] ml-1.5 text-white/60">{person.credentials}</span>
+                      )}
+                    </p>
+                    <p
+                      className="text-[0.62rem] font-semibold tracking-[0.12em] uppercase leading-snug"
+                      style={{ color: "oklch(0.75 0.12 185)" }}
+                    >
+                      {person.title}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Text */}
-                <div className="flex flex-col flex-1 p-5">
+                {/* Text body */}
+                <div className="flex flex-col flex-1 px-5 pt-4 pb-5">
+                  {/* Teal accent rule */}
+                  <div
+                    className="w-8 h-[2px] mb-3 rounded-full"
+                    style={{ background: "var(--color-teal)" }}
+                    aria-hidden="true"
+                  />
                   <p
-                    className="text-[0.90rem] font-bold leading-tight mb-0.5"
-                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+                    className="text-[0.80rem] leading-[1.72] flex-1"
+                    style={{ color: "oklch(0.42 0.02 240)" }}
                   >
-                    {person.name}
-                    {person.credentials && (
-                      <span className="font-normal text-[0.78rem] ml-1.5" style={{ color: "var(--color-muted)" }}>
-                        {person.credentials}
-                      </span>
-                    )}
-                  </p>
-                  <p
-                    className="text-[0.68rem] font-semibold tracking-[0.10em] uppercase mb-3 leading-snug"
-                    style={{ color: "var(--color-teal)" }}
-                  >
-                    {person.title}
-                  </p>
-                  <p className="text-[0.78rem] leading-[1.65] flex-1 mb-4" style={{ color: "var(--color-muted)" }}>
                     {person.bio}
                   </p>
                   {person.linkedin && (
@@ -148,8 +158,12 @@ export default function Page() {
                       href={person.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[0.73rem] font-medium mt-auto transition-opacity duration-150 hover:opacity-70"
-                      style={{ color: "var(--color-teal)" }}
+                      className="inline-flex items-center gap-2 mt-4 self-start px-3 py-1.5 rounded-full text-[0.72rem] font-semibold transition-all duration-200 hover:opacity-80"
+                      style={{
+                        background: "oklch(0.20 0.10 240 / 0.08)",
+                        color: "oklch(0.25 0.10 240)",
+                        border: "1px solid oklch(0.20 0.10 240 / 0.14)",
+                      }}
                       aria-label={`${person.name} on LinkedIn`}
                     >
                       <LinkedInIcon />

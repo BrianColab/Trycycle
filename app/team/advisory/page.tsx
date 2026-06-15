@@ -12,7 +12,7 @@ const ADVISORS = [
     name: "Jonathan Craig Allen",
     credentials: "MD",
     title: "Medical Director, Rushford Center — Connecticut",
-    bio: "Dr. Allen serves as Medical Director of Rushford Center, Chief of Psychiatry at Midstate Medical Center, and VP of Addiction Services for the Behavioral Health Network of Hartford Healthcare. He holds faculty appointments at UConn School of Medicine and Quinnipiac University, and advocates for prevention, screening, and treatment access for substance use disorders.",
+    bio: "Dr. Allen serves as Medical Director of Rushford Center, Chief of Psychiatry at Midstate Medical Center, and VP of Addiction Services for the Behavioral Health Network of Hartford Healthcare. He holds faculty appointments at UConn School of Medicine and Quinnipiac University.",
     photo: "/images/team/JONATHANALLEN.png",
   },
   {
@@ -47,7 +47,7 @@ const ADVISORS = [
     name: "Michael Hines",
     credentials: "BS",
     title: "Deputy Director, Connecticut Judicial Branch – Court Support Services Division",
-    bio: "Deputy Director III overseeing 100+ employees across five state regions. Michael started the first Opioid Diversion Program in Connecticut in 2015 and was appointed to represent the branch on the New England Regional Judicial Opioid Initiative in 2018. His career spans 31+ years in bail services and probation.",
+    bio: "Deputy Director III overseeing 100+ employees across five state regions. Michael started the first Opioid Diversion Program in Connecticut in 2015 and was appointed to the New England Regional Judicial Opioid Initiative in 2018. His career spans 31+ years in bail services and probation.",
     photo: "/images/team/MICHAELHINES.png",
   },
   {
@@ -68,58 +68,61 @@ export default function Page() {
         description="Specialized expertise in addiction medicine, behavioral health, oncology, veteran wellness, and justice reform — advising TryCycle's strategic direction."
       />
 
-      <section
-        className="py-16 lg:py-24 section-light"
-        style={{ background: "var(--color-navy)" }}
-      >
+      <section className="py-16 lg:py-24" style={{ background: "oklch(0.96 0.006 60)" }}>
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {ADVISORS.map((person) => (
               <article
                 key={person.name}
-                className="group flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col rounded-2xl transition-all duration-300 hover:-translate-y-1.5"
                 style={{
-                  background: "var(--color-card)",
-                  border: "1px solid var(--color-border)",
-                  boxShadow: "var(--shadow-card)",
+                  background: "oklch(1 0 0)",
+                  border: "1px solid oklch(0 0 0 / 0.08)",
+                  boxShadow: "0 2px 12px oklch(0 0 0 / 0.07)",
                 }}
               >
-                {/* Photo */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-[oklch(0.92_0.006_60)]">
+                <div className="relative aspect-[4/5] rounded-t-2xl overflow-hidden bg-[oklch(0.88_0.005_240)]">
                   <Image
                     src={person.photo}
                     alt={person.name}
                     fill
-                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="object-cover object-top"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div
-                    className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
-                    style={{ background: "linear-gradient(to top, var(--color-card), transparent)" }}
-                    aria-hidden="true"
-                  />
+                    className="absolute inset-x-0 bottom-0 pt-16 pb-4 px-4"
+                    style={{
+                      background: "linear-gradient(to top, oklch(0.10 0.04 240 / 0.92) 0%, oklch(0.10 0.04 240 / 0.60) 55%, transparent 100%)",
+                    }}
+                  >
+                    <p
+                      className="text-[0.95rem] font-bold leading-tight text-white mb-0.5"
+                      style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+                    >
+                      {person.name}
+                      {person.credentials && (
+                        <span className="font-normal text-[0.75rem] ml-1.5 text-white/60">{person.credentials}</span>
+                      )}
+                    </p>
+                    <p
+                      className="text-[0.62rem] font-semibold tracking-[0.12em] uppercase leading-snug"
+                      style={{ color: "oklch(0.75 0.12 185)" }}
+                    >
+                      {person.title}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Text */}
-                <div className="flex flex-col flex-1 p-5">
+                <div className="flex flex-col flex-1 px-5 pt-4 pb-5">
+                  <div
+                    className="w-8 h-[2px] mb-3 rounded-full"
+                    style={{ background: "var(--color-teal)" }}
+                    aria-hidden="true"
+                  />
                   <p
-                    className="text-[0.90rem] font-bold leading-tight mb-0.5"
-                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+                    className="text-[0.80rem] leading-[1.72]"
+                    style={{ color: "oklch(0.42 0.02 240)" }}
                   >
-                    {person.name}
-                    {person.credentials && (
-                      <span className="font-normal text-[0.78rem] ml-1.5" style={{ color: "var(--color-muted)" }}>
-                        {person.credentials}
-                      </span>
-                    )}
-                  </p>
-                  <p
-                    className="text-[0.68rem] font-semibold tracking-[0.10em] uppercase mb-3 leading-snug"
-                    style={{ color: "var(--color-teal)" }}
-                  >
-                    {person.title}
-                  </p>
-                  <p className="text-[0.78rem] leading-[1.65]" style={{ color: "var(--color-muted)" }}>
                     {person.bio}
                   </p>
                 </div>
