@@ -14,7 +14,7 @@ const BOARD = [
     title: "Executive Chair",
     credentials: "CA, ICD.D",
     bio: "A Chartered Accountant by training, Ken is an entrepreneur and business executive with a focus on life sciences. He co-founded CroMedica Global Inc., growing it to 2,600 employees across 13 offices in 9 countries. Ken chairs BioCanRx, Canada's National Centre of Excellence for Immunotherapy Cancer Research.",
-    photo: "https://trycycle.ca/wp-content/uploads/2022/09/KENNEWPORT.png",
+    photo: "/images/team/KENNEWPORT.webp",
     linkedin: "https://www.linkedin.com/in/ken-newport-bb846217/",
   },
   {
@@ -30,7 +30,7 @@ const BOARD = [
     title: "Founder, TryCycle Data Systems",
     credentials: null,
     bio: "Over 25+ years, John has founded several companies leveraging technology to improve the lives of thousands of people. He holds a BA from Carleton University, an MA from The Graduate Institute, and is pursuing a PhD at Carleton and Trent Universities.",
-    photo: "https://trycycle.ca/wp-content/uploads/2022/09/JOHNMACBETH.png",
+    photo: "/images/team/JOHNMACBETH.webp",
     linkedin: "https://www.linkedin.com/in/john-d-macbeth-88888211/",
   },
   {
@@ -38,7 +38,7 @@ const BOARD = [
     title: "Director",
     credentials: null,
     bio: "Executive Vice President, Group Benefits at Guardian Life Insurance Company of America. Jonathan has an extensive track record in the health and insurance industries, with previous roles at CVS Health, Aetna, Freedom Disability, and Cigna.",
-    photo: "https://trycycle.ca/wp-content/uploads/2022/09/JONATHANMAYHEW.png",
+    photo: "/images/team/JONATHANMAYHEW.webp",
     linkedin: "https://www.linkedin.com/in/jonathan-mayhew-97894ba8/",
   },
   {
@@ -46,7 +46,7 @@ const BOARD = [
     title: "CEO, TryCycle Data Systems",
     credentials: "CPA, CA",
     bio: "Brett brings 15+ years of executive experience helping growing companies across Commercial Real Estate, Oceanography, Security, Video Management (SaaS), and Amusement. He holds a Bachelor of Commerce from Carleton University and earned his CPA, CA designation in 2010.",
-    photo: "https://trycycle.ca/wp-content/uploads/2024/07/BMERRIMAN-2023.png",
+    photo: "/images/team/BMERRIMAN-2023.webp",
     linkedin: "https://www.linkedin.com/in/brett-merriman-cpa-ca/",
   },
 ];

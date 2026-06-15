@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -11,50 +12,50 @@ const ADVISORS = [
     name: "Jonathan Craig Allen",
     credentials: "MD",
     title: "Medical Director, Rushford Center — Connecticut",
-    bio: "Dr. Allen serves as Medical Director of Rushford Center, Chief of Psychiatry at Midstate Medical Center, and Vice President of Addiction Services for the Behavioral Health Network of Hartford Healthcare. He holds faculty appointments at the University of Connecticut School of Medicine and Quinnipiac University, trains addiction medicine and psychiatry fellows, and advocates for prevention, screening, early intervention, and treatment access for substance use disorders.",
-    initials: "JA",
+    bio: "Dr. Allen serves as Medical Director of Rushford Center, Chief of Psychiatry at Midstate Medical Center, and VP of Addiction Services for the Behavioral Health Network of Hartford Healthcare. He holds faculty appointments at UConn School of Medicine and Quinnipiac University, and advocates for prevention, screening, and treatment access for substance use disorders.",
+    photo: "/images/team/JONATHANALLEN.webp",
   },
   {
     name: "Jennifer Black",
     credentials: "MA, LPC",
     title: "VP, Head of Business Development & Strategy, Beacon Health Options — Connecticut",
-    bio: "A behavioral health professional with over 20 years' experience developing specialty programs. Jennifer leads regional sales strategy at Beacon Health Options and places individual and family whole health outcomes at the heart of all she does. She holds a BA from Cornell University and an MA in Clinical Psychology from the University of Hartford.",
-    initials: "JB",
+    bio: "A behavioral health professional with over 20 years' experience developing specialty programs. Jennifer leads regional sales strategy at Beacon Health Options. She holds a BA from Cornell University and an MA in Clinical Psychology from the University of Hartford.",
+    photo: "/images/team/JENNIFERBLACK.webp",
   },
   {
     name: "Henry Conter",
     credentials: "BESC, MD, MSF, MSC",
     title: "Strategic Health Care Partner, Hoffmann-La Roche — Ontario",
-    bio: "Dr. Conter focuses on re-imagining how all types of people can take control of their care. He practices as a medical oncologist/hematologist at William Osler Health System and is an adjunct professor at Western University's Schulich School of Medicine & Dentistry. He holds degrees from Western Ontario (Mechanical Engineering), McMaster (Medicine), University of Alberta (HTA), and the University of Houston (Finance).",
-    initials: "HC",
+    bio: "Dr. Conter focuses on re-imagining how all types of people can take control of their care. He practices as a medical oncologist/hematologist at William Osler Health System and is an adjunct professor at Western University's Schulich School of Medicine & Dentistry.",
+    photo: "/images/team/HENRYCONTER.webp",
   },
   {
     name: "Joanne Gooley",
     credentials: null,
     title: "Director – Adult and Family Medicine, Kaiser Permanente — California",
-    bio: "Director of five primary care sites in Sacramento. Joanne began as a Registered Dietitian working with chronic disease patients, spent six years in public health, and transitioned to operations management in 2011. She believes access to quality, affordable, respectful health care is essential for health and wellness. She holds degrees from Trent University, Western Ontario, and a Master's in Organizational Leadership from Chapman University.",
-    initials: "JG",
+    bio: "Director of five primary care sites in Sacramento. Joanne began as a Registered Dietitian, spent six years in public health, and transitioned to operations management in 2011. She holds degrees from Trent University, Western Ontario, and a Master's in Organizational Leadership from Chapman University.",
+    photo: "/images/team/joannegooley.webp",
   },
   {
     name: "Glynne Hines",
     credentials: "CMM, CD",
     title: "Major-General (ret'd) — Ontario",
-    bio: "Joined the Canadian Armed Forces in 1970, serving as gunner, crew commander, naval officer on destroyers and submarines, and CELE communications officer. Deployed in the first Gulf War and to Sarajevo with NATO. Retired in 2011, Maj.-Gen. Hines now works with veterans experiencing mental health issues, bringing a life of service and deep compassion to TryCycle's mission.",
-    initials: "GH",
+    bio: "Joined the Canadian Armed Forces in 1970, serving as gunner, crew commander, naval officer on destroyers and submarines, and CELE communications officer. Deployed in the first Gulf War and to Sarajevo with NATO. Retired in 2011, Maj.-Gen. Hines now works with veterans experiencing mental health issues.",
+    photo: "/images/team/GLYNNEHINES.webp",
   },
   {
     name: "Michael Hines",
     credentials: "BS",
     title: "Deputy Director, Connecticut Judicial Branch – Court Support Services Division",
-    bio: "Deputy Director III overseeing 100+ employees across five state regions. Michael started the first Opioid Diversion Program in Connecticut in 2015 and was appointed to represent the branch on the New England Regional Judicial Opioid Initiative in 2018. His career spans 31+ years in bail services and probation. He holds a BS from Eastern Connecticut State University.",
-    initials: "MH",
+    bio: "Deputy Director III overseeing 100+ employees across five state regions. Michael started the first Opioid Diversion Program in Connecticut in 2015 and was appointed to represent the branch on the New England Regional Judicial Opioid Initiative in 2018. His career spans 31+ years in bail services and probation.",
+    photo: "/images/team/MICHAELHINES.webp",
   },
   {
     name: "Richard Kopelman",
     credentials: null,
     title: "CEO and Managing Partner, Aprio — Georgia",
     bio: "Leads Aprio, a nationally-recognized top-50 CPA and advisory firm. Richard championed the firm's 2017 rebrand and directed combinations with 12+ firms, expanding to five regions. He believes investing in clients' success starts with investing in the firm's own people, culture, and capabilities.",
-    initials: "RK",
+    photo: "/images/team/RICHARDKOPELMAN.webp",
   },
 ];
 
@@ -68,54 +69,60 @@ export default function Page() {
       />
 
       <section
-        className="py-16 lg:py-20 section-light"
+        className="py-16 lg:py-24 section-light"
         style={{ background: "var(--color-navy)" }}
       >
         <div className="mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {ADVISORS.map((person) => (
               <article
                 key={person.name}
-                className="flex flex-col rounded-xl p-6 transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
                 style={{
                   background: "var(--color-card)",
                   border: "1px solid var(--color-border)",
                   boxShadow: "var(--shadow-card)",
                 }}
               >
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center text-[1rem] font-bold mb-4 shrink-0"
-                  style={{
-                    background: "oklch(0.65 0.12 185 / 0.15)",
-                    color: "var(--color-teal)",
-                    border: "1px solid oklch(0.65 0.12 185 / 0.25)",
-                  }}
-                  aria-hidden="true"
-                >
-                  {person.initials}
+                {/* Photo */}
+                <div className="relative aspect-[4/5] overflow-hidden bg-[oklch(0.92_0.006_60)]">
+                  <Image
+                    src={person.photo}
+                    alt={person.name}
+                    fill
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div
+                    className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
+                    style={{ background: "linear-gradient(to top, var(--color-card), transparent)" }}
+                    aria-hidden="true"
+                  />
                 </div>
 
-                <p
-                  className="text-[0.95rem] font-bold leading-tight mb-1"
-                  style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
-                >
-                  {person.name}
-                  {person.credentials && (
-                    <span className="font-normal text-[0.80rem] ml-1.5" style={{ color: "var(--color-muted)" }}>
-                      {person.credentials}
-                    </span>
-                  )}
-                </p>
-                <p
-                  className="text-[0.72rem] font-semibold tracking-[0.08em] uppercase mb-4 leading-snug"
-                  style={{ color: "var(--color-teal)" }}
-                >
-                  {person.title}
-                </p>
-
-                <p className="text-[0.80rem] leading-[1.70]" style={{ color: "var(--color-muted)" }}>
-                  {person.bio}
-                </p>
+                {/* Text */}
+                <div className="flex flex-col flex-1 p-5">
+                  <p
+                    className="text-[0.90rem] font-bold leading-tight mb-0.5"
+                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+                  >
+                    {person.name}
+                    {person.credentials && (
+                      <span className="font-normal text-[0.78rem] ml-1.5" style={{ color: "var(--color-muted)" }}>
+                        {person.credentials}
+                      </span>
+                    )}
+                  </p>
+                  <p
+                    className="text-[0.68rem] font-semibold tracking-[0.10em] uppercase mb-3 leading-snug"
+                    style={{ color: "var(--color-teal)" }}
+                  >
+                    {person.title}
+                  </p>
+                  <p className="text-[0.78rem] leading-[1.65]" style={{ color: "var(--color-muted)" }}>
+                    {person.bio}
+                  </p>
+                </div>
               </article>
             ))}
           </div>

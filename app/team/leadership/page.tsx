@@ -14,7 +14,7 @@ const LEADERS = [
     credentials: null,
     title: "Founder & CEO",
     bio: "For more than 20 years, John has been in the business of creating digital technologies and solutions. He holds a BA from Carleton University, an MA from The Graduate Institute, and is pursuing a PhD at Carleton and Trent Universities.",
-    photo: "https://trycycle.ca/wp-content/uploads/2023/08/JOHNMACBETH-2023.png",
+    photo: "/images/team/JOHNMACBETH-2023.webp",
     linkedin: "https://www.linkedin.com/in/john-d-macbeth-88888211/",
   },
   {
@@ -22,7 +22,7 @@ const LEADERS = [
     credentials: "CPA, MBA",
     title: "Chief Financial Officer",
     bio: "Finance executive with global experience across cannabis, aerospace/defence, tech, and manufacturing. MBA from the University of Ottawa.",
-    photo: "https://trycycle.ca/wp-content/uploads/2026/05/SteveBurwash.png",
+    photo: "/images/team/SteveBurwash.webp",
     linkedin: null,
   },
   {
@@ -30,7 +30,7 @@ const LEADERS = [
     credentials: null,
     title: "Cofounder & Director, Business Development",
     bio: "Member of the Oneida Nation of Wisconsin. Ken's background spans communications, governance, social services, and entrepreneurship. Master's in organizational leadership from The Graduate Institute.",
-    photo: "https://trycycle.ca/wp-content/uploads/2024/10/ken-house.png",
+    photo: "/images/team/ken-house.webp",
     linkedin: "https://www.linkedin.com/in/kenneth-g-house-jr-34918b8/",
   },
   {
@@ -38,7 +38,7 @@ const LEADERS = [
     credentials: null,
     title: "Chief Operating Officer",
     bio: "Senior management roles for more than 20 years in startups and established enterprises. Applied Management from Algonquin College.",
-    photo: "https://trycycle.ca/wp-content/uploads/2023/08/KELLYGREGOIRE-2023.png",
+    photo: "/images/team/KELLYGREGOIRE-2023.webp",
     linkedin: "https://www.linkedin.com/in/kgregoire/",
   },
   {
@@ -46,7 +46,7 @@ const LEADERS = [
     credentials: "MBA",
     title: "Chief Information Officer",
     bio: "Working at the intersection of technology and medical services for more than 25 years. Degrees from Purdue, University of Arizona, and an MBA from the University of Ottawa.",
-    photo: "https://trycycle.ca/wp-content/uploads/2023/08/GEOFFSCHAADT-2023.png",
+    photo: "/images/team/GEOFFSCHAADT-2023.webp",
     linkedin: "https://www.linkedin.com/in/gschaadt/",
   },
   {
@@ -54,7 +54,7 @@ const LEADERS = [
     credentials: "MD",
     title: "Chief Medical Officer",
     bio: "Directed an addiction medicine fellowship and served as Past-President of the Connecticut Chapter of the addiction medicine association. Board certified in Psychiatry/Neurology and Addiction Medicine.",
-    photo: "https://trycycle.ca/wp-content/uploads/2022/09/SAMSILVERMAN.png",
+    photo: "/images/team/SAMSILVERMAN.webp",
     linkedin: null,
   },
   {
@@ -62,7 +62,7 @@ const LEADERS = [
     credentials: null,
     title: "VP, Strategy & Alliances",
     bio: "Working in health and social services since 1984, addressing the needs of marginalized populations. BA from Carleton University, leadership programs at Queen's and University of Toronto.",
-    photo: "https://trycycle.ca/wp-content/uploads/2022/10/CAMMACLEOD-1.png",
+    photo: "/images/team/CAMMACLEOD-1.webp",
     linkedin: "https://www.linkedin.com/in/cameron-macleod-6954913/",
   },
   {
@@ -70,7 +70,7 @@ const LEADERS = [
     credentials: "RN",
     title: "Director of Nursing & Indigenous Business Development",
     bio: "Registered nurse with more than eight years serving remote Northern Ontario First Nations communities. A dedicated advocate for culturally responsive care.",
-    photo: "https://trycycle.ca/wp-content/uploads/2025/09/DONNAKOEGH.png",
+    photo: "/images/team/DONNAKOEGH.webp",
     linkedin: "https://ca.linkedin.com/in/donna-keogh-156050277",
   },
 ];
@@ -92,7 +92,7 @@ export default function Page() {
         description="The people building TryCycle's mission — bringing decades of experience in digital health, Indigenous community partnerships, clinical medicine, and social enterprise."
       />
 
-      <section className="py-16 lg:py-24 section-light" style={{ background: "var(--color-navy)" }}>
+      <section className="py-16 lg:py-24" style={{ background: "var(--color-navy)" }}>
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {LEADERS.map((person) => (
@@ -114,12 +114,9 @@ export default function Page() {
                     className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
-                  {/* Bottom fade */}
                   <div
                     className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
-                    style={{
-                      background: "linear-gradient(to top, var(--color-card), transparent)",
-                    }}
+                    style={{ background: "linear-gradient(to top, var(--color-card), transparent)" }}
                     aria-hidden="true"
                   />
                 </div>
