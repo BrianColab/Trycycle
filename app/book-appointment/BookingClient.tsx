@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useId, useCallback, useEffect } from "react";
-import { SectionEyebrow } from "@/components/ui";
+import { PageHero } from "@/components/ui";
 import {
   STAFF_MEMBERS,
   APPOINTMENT_REASONS,
@@ -13,39 +13,95 @@ import {
   type TimeSlot,
 } from "@/lib/booking-data";
 
-/* ── Safety disclaimer ── */
+/* ── Step card wrapper ── */
+function StepCard({
+  step,
+  title,
+  children,
+  error,
+}: {
+  step: number;
+  title: string;
+  children: React.ReactNode;
+  error?: string;
+}) {
+  return (
+    <div
+      className="rounded-2xl p-6"
+      style={{
+        background: "oklch(1 0 0)",
+        border: "1px solid oklch(0 0 0 / 0.08)",
+        boxShadow: "0 2px 12px oklch(0 0 0 / 0.05)",
+      }}
+    >
+      <div className="flex items-center gap-3 mb-5">
+        <div
+          className="w-7 h-7 rounded-full flex items-center justify-center text-[0.70rem] font-bold shrink-0"
+          style={{ background: "oklch(0.65 0.12 185)", color: "oklch(0.12 0.04 240)" }}
+          aria-hidden="true"
+        >
+          {step}
+        </div>
+        <h2
+          className="text-[0.92rem] font-semibold"
+          style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.14 0.04 240)" }}
+        >
+          {title}
+        </h2>
+      </div>
+      {error && (
+        <p
+          className="mb-3 text-[0.76rem] flex items-center gap-1.5"
+          style={{ color: "oklch(0.52 0.18 25)" }}
+          role="alert"
+        >
+          <svg className="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path
+              fillRule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          {error}
+        </p>
+      )}
+      {children}
+    </div>
+  );
+}
+
+/* ── Safety notice ── */
 function SafetyNotice() {
   return (
     <div
-      className="rounded-xl p-5 mb-10 flex gap-4"
+      className="rounded-xl p-5 mb-8 flex gap-4"
       style={{
-        background: "oklch(0.65 0.10 45 / 0.10)",
-        border: "1px solid oklch(0.65 0.10 45 / 0.30)",
+        background: "oklch(0.94 0.012 215 / 0.55)",
+        border: "1px solid oklch(0.65 0.12 185 / 0.20)",
+        borderLeft: "3px solid oklch(0.60 0.10 185 / 0.55)",
       }}
       role="note"
       aria-label="Important notice"
     >
-      <div className="mt-0.5 shrink-0">
-        <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <div className="mt-0.5 shrink-0" aria-hidden="true">
+        <svg className="w-4 h-4" viewBox="0 0 20 20" fill="oklch(0.50 0.09 185)">
           <path
-            d="M10 2L2 17h16L10 2z"
-            stroke="oklch(0.78 0.12 65)"
-            strokeWidth="1.5"
-            fill="oklch(0.78 0.12 65 / 0.15)"
+            fillRule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+            clipRule="evenodd"
           />
-          <path d="M10 8v4M10 14v.5" stroke="oklch(0.78 0.12 65)" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       </div>
       <div>
-        <p className="text-[0.85rem] font-semibold mb-1" style={{ color: "oklch(0.85 0.10 65)" }}>
+        <p className="text-[0.81rem] font-semibold mb-1" style={{ color: "oklch(0.22 0.06 215)" }}>
           Important Notice
         </p>
-        <p className="text-[0.82rem] leading-relaxed" style={{ color: "oklch(0.80 0.04 65)" }}>
+        <p className="text-[0.79rem] leading-relaxed" style={{ color: "oklch(0.36 0.04 215)" }}>
           This booking form is for <strong>demos, partnerships, media, program inquiries, and general
           meetings</strong> only. It is <strong>not</strong> for emergency, crisis, counselling,
           treatment, clinical support, or urgent help of any kind.
         </p>
-        <p className="text-[0.82rem] mt-2" style={{ color: "oklch(0.80 0.04 65)" }}>
+        <p className="text-[0.79rem] mt-1.5" style={{ color: "oklch(0.36 0.04 215)" }}>
           If you or someone you know is in crisis, please contact your local emergency services or a
           crisis helpline immediately.
         </p>
@@ -64,53 +120,77 @@ function StaffCard({
   selected: boolean;
   onSelect: () => void;
 }) {
+  const initials = member.name
+    .split(" ")
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join("");
+
   return (
     <button
       type="button"
       onClick={onSelect}
       aria-pressed={selected}
-      className="w-full text-left rounded-xl p-4 transition-all duration-200"
+      className="w-full text-left rounded-xl p-4 transition-all duration-200 relative overflow-hidden"
       style={{
-        background: selected ? "oklch(0.65 0.12 185 / 0.12)" : "var(--color-card)",
-        border: selected ? "1px solid oklch(0.65 0.12 185 / 0.50)" : "1px solid var(--color-border)",
-        boxShadow: selected ? "0 0 0 2px oklch(0.65 0.12 185 / 0.20)" : "none",
+        background: selected ? "oklch(0.65 0.12 185 / 0.06)" : "oklch(0.98 0.003 220)",
+        border: selected
+          ? "1px solid oklch(0.65 0.12 185 / 0.40)"
+          : "1px solid oklch(0 0 0 / 0.08)",
+        boxShadow: selected ? "0 0 0 3px oklch(0.65 0.12 185 / 0.10)" : "none",
       }}
     >
-      <div className="flex items-center gap-3 mb-2">
+      {selected && (
         <div
-          className="w-9 h-9 rounded-full flex items-center justify-center text-[0.72rem] font-bold shrink-0"
+          className="absolute inset-y-0 left-0 w-[3px] rounded-l-xl"
+          style={{ background: "oklch(0.65 0.12 185)" }}
+          aria-hidden="true"
+        />
+      )}
+      <div className="flex items-center gap-3">
+        <div
+          className="w-9 h-9 rounded-full flex items-center justify-center text-[0.70rem] font-bold shrink-0 transition-all duration-200"
           style={{
-            background: selected ? "oklch(0.65 0.12 185 / 0.20)" : "oklch(0 0 0 / 0.07)",
-            color: selected ? "var(--color-teal)" : "oklch(0.50 0.03 230)",
+            background: selected ? "oklch(0.65 0.12 185)" : "oklch(0.88 0.008 220)",
+            color: selected ? "oklch(0.12 0.04 240)" : "oklch(0.44 0.04 230)",
           }}
           aria-hidden="true"
         >
-          {member.name.split(" ")[0][0]}{member.name.split(" ")[1]?.[0] ?? ""}
+          {initials}
         </div>
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <p
-            className="text-[0.85rem] font-semibold truncate"
-            style={{ color: "var(--color-ivory)", fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+            className="text-[0.84rem] font-semibold leading-tight"
+            style={{ color: "oklch(0.14 0.04 240)", fontFamily: "var(--font-space-grotesk, sans-serif)" }}
           >
             {member.name}
           </p>
-          <p className="text-[0.75rem]" style={{ color: selected ? "var(--color-teal)" : "var(--color-muted)" }}>
+          <p
+            className="text-[0.72rem] mt-0.5"
+            style={{ color: selected ? "oklch(0.48 0.10 185)" : "oklch(0.52 0.02 230)" }}
+          >
             {member.role}
           </p>
         </div>
         {selected && (
           <div
-            className="ml-auto shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
-            style={{ background: "var(--color-teal)" }}
+            className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
+            style={{ background: "oklch(0.65 0.12 185)" }}
             aria-hidden="true"
           >
-            <svg className="w-3 h-3" fill="none" stroke="var(--color-navy)" strokeWidth={2.5} viewBox="0 0 24 24">
+            <svg
+              className="w-2.5 h-2.5"
+              fill="none"
+              stroke="oklch(0.12 0.04 240)"
+              strokeWidth={2.5}
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
         )}
       </div>
-      <p className="text-[0.78rem]" style={{ color: "var(--color-muted)" }}>
+      <p className="text-[0.75rem] mt-2.5 leading-relaxed ml-12" style={{ color: "oklch(0.46 0.02 230)" }}>
         {member.description}
       </p>
     </button>
@@ -148,7 +228,8 @@ function Calendar({
     else setViewMonth((m) => m + 1);
   };
 
-  const canGoBack = viewYear > today.getFullYear() || viewMonth > today.getMonth();
+  const canGoBack =
+    viewYear > today.getFullYear() || viewMonth > today.getMonth();
 
   const days: (number | null)[] = [
     ...Array(firstDayOfMonth).fill(null),
@@ -156,51 +237,52 @@ function Calendar({
   ];
 
   return (
-    <div
-      className="rounded-xl p-5"
-      style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
-    >
+    <div>
       <div className="flex items-center justify-between mb-4">
         <button
           type="button"
           onClick={prevMonth}
           disabled={!canGoBack}
-          className="p-1.5 rounded-lg transition-colors duration-150 disabled:opacity-30 disabled:cursor-not-allowed"
-          style={{ color: "var(--color-muted)" }}
+          className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-150 disabled:opacity-25 disabled:cursor-not-allowed hover:enabled:bg-black/[0.05]"
+          style={{ color: "oklch(0.44 0.03 230)" }}
           aria-label="Previous month"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
         <p
-          className="text-[0.88rem] font-semibold"
-          style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+          className="text-[0.87rem] font-semibold"
+          style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.14 0.04 240)" }}
         >
           {monthName}
         </p>
         <button
           type="button"
           onClick={nextMonth}
-          className="p-1.5 rounded-lg transition-colors duration-150"
-          style={{ color: "var(--color-muted)" }}
+          className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-150 hover:bg-black/[0.05]"
+          style={{ color: "oklch(0.44 0.03 230)" }}
           aria-label="Next month"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </button>
       </div>
 
-      <div className="grid grid-cols-7 mb-2">
+      <div className="grid grid-cols-7 mb-1">
         {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
-          <div key={d} className="text-center text-[0.68rem] font-medium py-1" style={{ color: "var(--color-muted)" }}>
+          <div
+            key={d}
+            className="text-center text-[0.63rem] font-semibold py-1 uppercase tracking-wide"
+            style={{ color: "oklch(0.60 0.02 230)" }}
+          >
             {d}
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-7 gap-y-1">
+      <div className="grid grid-cols-7 gap-y-0.5">
         {days.map((day, idx) => {
           if (day === null) return <div key={`empty-${idx}`} />;
           const date = new Date(viewYear, viewMonth, day);
@@ -217,23 +299,25 @@ function Calendar({
               type="button"
               disabled={isDisabled}
               onClick={() => !isDisabled && onSelect(dateStr)}
-              aria-label={`${date.toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" })}${isDisabled ? " (unavailable)" : ""}`}
+              aria-label={`${date.toLocaleDateString("en-CA", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+              })}${isDisabled ? " (unavailable)" : ""}`}
               aria-pressed={isSelected}
-              className="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-[0.82rem] font-medium transition-all duration-150 disabled:cursor-not-allowed hover:enabled:bg-black/[0.06]"
+              className="mx-auto flex h-8 w-8 items-center justify-center rounded-full text-[0.79rem] font-medium transition-all duration-150 disabled:cursor-not-allowed hover:enabled:bg-[oklch(0.65_0.12_185_/_0.10)]"
               style={{
-                background: isSelected
-                  ? "var(--color-teal)"
-                  : isToday && !isSelected
-                  ? "oklch(0.65 0.12 185 / 0.15)"
-                  : "transparent",
+                background: isSelected ? "oklch(0.65 0.12 185)" : "transparent",
                 color: isSelected
                   ? "oklch(1 0 0)"
                   : isDisabled
-                  ? "oklch(0 0 0 / 0.25)"
+                  ? "oklch(0.78 0.01 230)"
                   : isToday
-                  ? "var(--color-teal)"
-                  : "oklch(0.18 0.04 240)",
-                outline: isToday && !isSelected ? "1px solid oklch(0.65 0.12 185 / 0.40)" : "none",
+                  ? "oklch(0.42 0.10 185)"
+                  : "oklch(0.20 0.04 240)",
+                outline:
+                  isToday && !isSelected ? "1.5px solid oklch(0.65 0.12 185 / 0.50)" : "none",
+                fontWeight: isToday && !isSelected ? 700 : 500,
               }}
             >
               {day}
@@ -245,7 +329,7 @@ function Calendar({
   );
 }
 
-/* ── Time slot grid ── */
+/* ── Time slot picker ── */
 function TimeSlotPicker({
   selectedSlot,
   bookedSlots,
@@ -259,12 +343,12 @@ function TimeSlotPicker({
 }) {
   if (loading) {
     return (
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {TIME_SLOTS.map((slot) => (
           <div
             key={slot}
-            className="py-2.5 px-3 rounded-lg text-[0.8rem] animate-pulse"
-            style={{ background: "oklch(0 0 0 / 0.06)", height: "40px" }}
+            className="h-9 rounded-lg animate-pulse"
+            style={{ background: "oklch(0 0 0 / 0.05)" }}
             aria-hidden="true"
           />
         ))}
@@ -274,42 +358,43 @@ function TimeSlotPicker({
 
   return (
     <div>
-      <p className="mb-3 text-[0.8rem] font-medium" style={{ color: "var(--color-muted)" }}>
-        Available time slots (9:00 AM – 3:00 PM ET, weekdays only)
+      <p className="mb-3 text-[0.74rem]" style={{ color: "oklch(0.54 0.02 230)" }}>
+        9:00 AM – 3:00 PM ET · Weekdays only
       </p>
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {TIME_SLOTS.map((slot) => {
           const selected = selectedSlot === slot;
           const booked = bookedSlots.includes(slot);
-          const disabled = booked;
 
           return (
             <button
               key={slot}
               type="button"
-              disabled={disabled}
-              onClick={() => !disabled && onSelect(slot)}
+              disabled={booked}
+              onClick={() => !booked && onSelect(slot)}
               aria-pressed={selected}
               aria-label={`${formatTimeSlot(slot)}${booked ? " (unavailable)" : ""}`}
-              title={booked ? "This slot is already booked" : undefined}
-              className="py-2.5 px-3 rounded-lg text-[0.8rem] font-medium transition-all duration-150 disabled:cursor-not-allowed relative"
+              title={booked ? "Already booked" : undefined}
+              className="py-2 px-2 rounded-lg text-[0.76rem] font-medium transition-all duration-150 disabled:cursor-not-allowed"
               style={{
                 background: selected
-                  ? "var(--color-teal)"
+                  ? "oklch(0.65 0.12 185)"
                   : booked
-                  ? "oklch(0 0 0 / 0.03)"
+                  ? "oklch(0.94 0.003 220)"
                   : "oklch(1 0 0)",
                 color: selected
                   ? "oklch(0.12 0.04 240)"
                   : booked
-                  ? "oklch(0 0 0 / 0.28)"
-                  : "oklch(0.18 0.04 240)",
-                border: booked
-                  ? "1px solid oklch(0 0 0 / 0.06)"
-                  : selected
+                  ? "oklch(0.72 0.01 230)"
+                  : "oklch(0.22 0.04 240)",
+                border: selected
                   ? "none"
+                  : booked
+                  ? "1px solid oklch(0 0 0 / 0.05)"
                   : "1px solid oklch(0 0 0 / 0.11)",
                 textDecoration: booked ? "line-through" : "none",
+                fontWeight: selected ? 600 : 500,
+                boxShadow: selected ? "0 2px 8px oklch(0.65 0.12 185 / 0.25)" : "none",
               }}
             >
               {formatTimeSlot(slot)}
@@ -318,15 +403,41 @@ function TimeSlotPicker({
         })}
       </div>
       {bookedSlots.length > 0 && (
-        <p className="mt-2 text-[0.72rem]" style={{ color: "oklch(0 0 0 / 0.40)" }}>
-          Strikethrough slots are already booked for this date.
+        <p className="mt-2 text-[0.70rem]" style={{ color: "oklch(0.62 0.01 230)" }}>
+          Strikethrough slots are already booked.
         </p>
       )}
     </div>
   );
 }
 
-/* ── Form field wrapper ── */
+/* ── Input base style ── */
+const baseInput: React.CSSProperties = {
+  background: "oklch(0.98 0.003 220)",
+  border: "1px solid oklch(0 0 0 / 0.11)",
+  color: "oklch(0.14 0.04 240)",
+  borderRadius: "10px",
+  width: "100%",
+  padding: "10px 14px",
+  fontSize: "0.875rem",
+  outline: "none",
+};
+
+const onFocusInput = (
+  e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+) => {
+  e.currentTarget.style.borderColor = "oklch(0.65 0.12 185 / 0.55)";
+  e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 185 / 0.12)";
+};
+
+const onBlurInput = (
+  e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+) => {
+  e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.11)";
+  e.currentTarget.style.boxShadow = "none";
+};
+
+/* ── Field wrapper ── */
 function Field({
   label,
   id,
@@ -342,15 +453,32 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="block mb-1.5 text-[0.82rem] font-medium" style={{ color: "var(--color-ivory)" }}>
+      <label
+        htmlFor={id}
+        className="block mb-1.5 text-[0.79rem] font-medium"
+        style={{ color: "oklch(0.28 0.04 240)" }}
+      >
         {label}
         {required && (
-          <span className="ml-1" style={{ color: "var(--color-teal)" }} aria-hidden="true">*</span>
+          <span className="ml-1" style={{ color: "oklch(0.65 0.12 185)" }} aria-hidden="true">
+            *
+          </span>
         )}
       </label>
       {children}
       {error && (
-        <p className="mt-1 text-[0.75rem]" style={{ color: "oklch(0.72 0.15 25)" }} role="alert">
+        <p
+          className="mt-1 text-[0.72rem] flex items-center gap-1"
+          style={{ color: "oklch(0.52 0.18 25)" }}
+          role="alert"
+        >
+          <svg className="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path
+              fillRule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clipRule="evenodd"
+            />
+          </svg>
           {error}
         </p>
       )}
@@ -358,21 +486,51 @@ function Field({
   );
 }
 
-const inputStyle = {
-  background: "oklch(1 0 0)",
-  border: "1px solid oklch(0 0 0 / 0.13)",
-  color: "oklch(0.14 0.04 240)",
-  borderRadius: "12px",
-  width: "100%",
-  padding: "10px 14px",
-  fontSize: "0.88rem",
-  outline: "none",
-};
+/* ── Booking summary ── */
+function BookingSummary({
+  staffName,
+  date,
+  slot,
+}: {
+  staffName: string;
+  date: string;
+  slot: TimeSlot;
+}) {
+  const formatted = new Date(date + "T12:00:00").toLocaleDateString("en-CA", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
 
-const inputFocusStyle = {
-  borderColor: "oklch(0.65 0.12 185 / 0.60)",
-  boxShadow: "0 0 0 3px oklch(0.65 0.12 185 / 0.12)",
-};
+  return (
+    <div
+      className="rounded-xl p-4"
+      style={{
+        background: "oklch(0.65 0.12 185 / 0.07)",
+        border: "1px solid oklch(0.65 0.12 185 / 0.22)",
+      }}
+    >
+      <p
+        className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] mb-2.5"
+        style={{ color: "oklch(0.44 0.09 185)" }}
+      >
+        Appointment Summary
+      </p>
+      <div className="space-y-1.5 text-[0.79rem]">
+        {[
+          { label: "With", value: staffName },
+          { label: "Date", value: formatted },
+          { label: "Time", value: formatTimeSlot(slot) },
+        ].map(({ label, value }) => (
+          <div key={label} className="flex items-center gap-2">
+            <span style={{ color: "oklch(0.54 0.02 230)", minWidth: "44px" }}>{label}</span>
+            <span style={{ color: "oklch(0.18 0.04 240)", fontWeight: 600 }}>{value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 /* ── Success screen ── */
 function SuccessScreen({
@@ -396,61 +554,70 @@ function SuccessScreen({
   });
 
   return (
-    <div className="py-16 text-center max-w-lg mx-auto">
+    <div className="py-20 text-center max-w-md mx-auto">
       <div
         className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
-        style={{ background: "oklch(0.65 0.12 185 / 0.15)" }}
+        style={{
+          background: "oklch(0.65 0.12 185 / 0.10)",
+          border: "1px solid oklch(0.65 0.12 185 / 0.22)",
+        }}
         aria-hidden="true"
       >
-        <svg className="w-8 h-8" fill="none" stroke="var(--color-teal)" strokeWidth={2} viewBox="0 0 24 24">
+        <svg
+          className="w-7 h-7"
+          fill="none"
+          stroke="oklch(0.52 0.12 185)"
+          strokeWidth={2.5}
+          viewBox="0 0 24 24"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <SectionEyebrow className="mb-3 block">Booking Confirmed</SectionEyebrow>
-      <h2
-        className="text-2xl font-bold mb-4"
-        style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+      <p
+        className="text-[0.68rem] font-semibold tracking-[0.18em] uppercase mb-2"
+        style={{ color: "oklch(0.56 0.10 185)" }}
       >
-        Your appointment is booked
+        Booking Confirmed
+      </p>
+      <h2
+        className="text-2xl font-bold mb-6"
+        style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.14 0.04 240)" }}
+      >
+        Your appointment is scheduled
       </h2>
       <div
         className="rounded-xl p-5 mb-6 text-left"
-        style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
+        style={{
+          background: "oklch(1 0 0)",
+          border: "1px solid oklch(0 0 0 / 0.08)",
+          boxShadow: "0 2px 12px oklch(0 0 0 / 0.05)",
+        }}
       >
-        <dl className="space-y-2 text-[0.85rem]">
-          <div className="flex gap-3">
-            <dt style={{ color: "var(--color-muted)", minWidth: "80px" }}>With</dt>
-            <dd style={{ color: "var(--color-ivory)" }}>{staffName}</dd>
-          </div>
-          <div className="flex gap-3">
-            <dt style={{ color: "var(--color-muted)", minWidth: "80px" }}>Date</dt>
-            <dd style={{ color: "var(--color-ivory)" }}>{formatted}</dd>
-          </div>
-          <div className="flex gap-3">
-            <dt style={{ color: "var(--color-muted)", minWidth: "80px" }}>Time</dt>
-            <dd style={{ color: "var(--color-ivory)" }}>{formatTimeSlot(slot)}</dd>
-          </div>
+        <dl className="space-y-3 text-[0.84rem]">
+          {[
+            { label: "With", value: staffName },
+            { label: "Date", value: formatted },
+            { label: "Time", value: formatTimeSlot(slot) },
+          ].map(({ label, value }) => (
+            <div key={label} className="flex gap-4">
+              <dt style={{ color: "oklch(0.55 0.02 230)", minWidth: "56px" }}>{label}</dt>
+              <dd style={{ color: "oklch(0.18 0.04 240)", fontWeight: 500 }}>{value}</dd>
+            </div>
+          ))}
         </dl>
       </div>
-      {emailSent ? (
-        <p className="text-[0.85rem] mb-6" style={{ color: "var(--color-muted)" }}>
-          A confirmation email has been sent to you.
-          If you need to cancel or reschedule, please reply to that email at least 24 hours in advance.
-        </p>
-      ) : (
-        <p className="text-[0.85rem] mb-6" style={{ color: "var(--color-muted)" }}>
-          Your appointment request was saved.
-          A confirmation email may not have been sent — please keep a note of the details above.
-          If you need to cancel or reschedule, contact us directly.
-        </p>
-      )}
+      <p className="text-[0.82rem] mb-8 leading-relaxed" style={{ color: "oklch(0.46 0.02 230)" }}>
+        {emailSent
+          ? "A confirmation email has been sent to you. To cancel or reschedule, please reply at least 24 hours in advance."
+          : "Your appointment request was saved. A confirmation email may not have been sent — keep note of the details above and contact us directly to cancel or reschedule."}
+      </p>
       <button
         type="button"
         onClick={onReset}
-        className="text-[0.85rem] font-medium"
-        style={{ color: "var(--color-teal)" }}
+        className="text-[0.82rem] font-semibold transition-opacity hover:opacity-60"
+        style={{ color: "oklch(0.52 0.10 185)" }}
       >
-        Book another appointment
+        ← Book another appointment
       </button>
     </div>
   );
@@ -482,13 +649,14 @@ function buildAutoMessage(
     sentences.push(`My name is ${userName.trim()}${hasOrg ? ` from ${organization.trim()}` : ""}.`);
   }
 
-  if (hasReason) {
-    sentences.push(`I would like to meet regarding: ${reason}.`);
-  }
+  if (hasReason) sentences.push(`I would like to meet regarding: ${reason}.`);
 
   if (date) {
     const formatted = new Date(date + "T12:00:00").toLocaleDateString("en-CA", {
-      weekday: "long", year: "numeric", month: "long", day: "numeric",
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
     sentences.push(
       slot
@@ -526,13 +694,11 @@ const INITIAL_FORM: FormState = {
 type FormErrors = Partial<Record<keyof FormState | "staff" | "date" | "slot", string>>;
 
 /* ── Main component ── */
-
 export function BookingClient() {
   const [selectedStaff, setSelectedStaff] = useState<StaffMember | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
 
-  // Availability state
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
   const [slotsLoading, setSlotsLoading] = useState(false);
 
@@ -543,46 +709,36 @@ export function BookingClient() {
   const [submitted, setSubmitted] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
 
-  const nameId  = useId();
-  const emailId = useId();
-  const orgId   = useId();
-  const phoneId = useId();
+  const nameId   = useId();
+  const emailId  = useId();
+  const orgId    = useId();
+  const phoneId  = useId();
   const reasonId = useId();
-  const msgId   = useId();
+  const msgId    = useId();
 
-  // Fetch booked slots whenever staff + date both have values
   useEffect(() => {
     if (!selectedStaff || !selectedDate) {
       setBookedSlots([]);
       return;
     }
-
     let cancelled = false;
     setSlotsLoading(true);
-
-    fetch(`/api/availability?staffId=${encodeURIComponent(selectedStaff.id)}&date=${encodeURIComponent(selectedDate)}`)
+    fetch(
+      `/api/availability?staffId=${encodeURIComponent(selectedStaff.id)}&date=${encodeURIComponent(selectedDate)}`
+    )
       .then((r) => r.json())
       .then((data: { bookedSlots?: string[] }) => {
         if (!cancelled) {
           setBookedSlots(data.bookedSlots ?? []);
-          // If the previously selected slot is now booked, clear it
-          if (selectedSlot && data.bookedSlots?.includes(selectedSlot)) {
-            setSelectedSlot(null);
-          }
+          if (selectedSlot && data.bookedSlots?.includes(selectedSlot)) setSelectedSlot(null);
         }
       })
-      .catch(() => {
-        if (!cancelled) setBookedSlots([]);
-      })
-      .finally(() => {
-        if (!cancelled) setSlotsLoading(false);
-      });
-
+      .catch(() => { if (!cancelled) setBookedSlots([]); })
+      .finally(() => { if (!cancelled) setSlotsLoading(false); });
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStaff?.id, selectedDate]);
 
-  // Auto-populate message from current selections whenever user hasn't manually edited it
   useEffect(() => {
     if (messageEdited) return;
     const autoMsg = buildAutoMessage(
@@ -594,7 +750,15 @@ export function BookingClient() {
       selectedSlot
     );
     setForm((f) => ({ ...f, message: autoMsg }));
-  }, [selectedStaff?.name, form.name, form.organization, form.reason, selectedDate, selectedSlot, messageEdited]);
+  }, [
+    selectedStaff?.name,
+    form.name,
+    form.organization,
+    form.reason,
+    selectedDate,
+    selectedSlot,
+    messageEdited,
+  ]);
 
   const set = useCallback(<K extends keyof FormState>(key: K, val: FormState[K]) => {
     setForm((f) => ({ ...f, [key]: val }));
@@ -603,21 +767,21 @@ export function BookingClient() {
 
   function validate(): FormErrors {
     const errs: FormErrors = {};
-    if (!selectedStaff)          errs.staff           = "Please select a staff member.";
-    if (!selectedDate)           errs.date            = "Please select a date.";
-    if (!selectedSlot)           errs.slot            = "Please select a time slot.";
-    if (!form.name.trim())       errs.name            = "Full name is required.";
+    if (!selectedStaff)             errs.staff             = "Please select a staff member.";
+    if (!selectedDate)              errs.date              = "Please select a date.";
+    if (!selectedSlot)              errs.slot              = "Please select a time slot.";
+    if (!form.name.trim())          errs.name              = "Full name is required.";
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-                                 errs.email           = "A valid email address is required.";
-    if (!form.organization.trim()) errs.organization  = "Organization is required.";
-    if (!form.reason)            errs.reason          = "Please select a reason for your appointment.";
-    if (!form.agreeToDisclaimer) errs.agreeToDisclaimer = "You must acknowledge this before booking.";
+                                    errs.email             = "A valid email address is required.";
+    if (!form.organization.trim())  errs.organization      = "Organization is required.";
+    if (!form.reason)               errs.reason            = "Please select a reason.";
+    if (!form.agreeToDisclaimer)    errs.agreeToDisclaimer = "You must acknowledge this before booking.";
     return errs;
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (form.honeypot) return; // bot guard
+    if (form.honeypot) return;
 
     const errs = validate();
     if (Object.keys(errs).length > 0) {
@@ -644,15 +808,20 @@ export function BookingClient() {
         }),
       });
 
-      const json = await res.json() as { ok: boolean; error?: string; emailSent?: boolean; emailSkipped?: boolean };
+      const json = await res.json() as {
+        ok: boolean;
+        error?: string;
+        emailSent?: boolean;
+        emailSkipped?: boolean;
+      };
 
       if (!res.ok || !json.ok) {
         if (res.status === 409) {
-          // Slot was taken between availability check and submit
           setErrors({ slot: json.error ?? "That slot was just taken. Please choose another time." });
-          // Refresh booked slots so the UI reflects reality
           if (selectedStaff && selectedDate) {
-            fetch(`/api/availability?staffId=${encodeURIComponent(selectedStaff.id)}&date=${encodeURIComponent(selectedDate)}`)
+            fetch(
+              `/api/availability?staffId=${encodeURIComponent(selectedStaff.id)}&date=${encodeURIComponent(selectedDate)}`
+            )
               .then((r) => r.json())
               .then((data: { bookedSlots?: string[] }) => {
                 setBookedSlots(data.bookedSlots ?? []);
@@ -675,10 +844,13 @@ export function BookingClient() {
     }
   }
 
+  const showSummary = !!(selectedStaff && selectedDate && selectedSlot);
+
   if (submitted) {
     return (
-      <div className="min-h-screen pt-24 pb-24 section-light" style={{ background: "var(--color-navy)" }}>
-        <div className="mx-auto max-w-2xl px-6">
+      <div style={{ background: "oklch(0.96 0.006 60)", minHeight: "100vh" }}>
+        <PageHero eyebrow="Connect With Us" title="Book an" titleAccent="Appointment" />
+        <div className="mx-auto max-w-2xl px-6 py-16">
           <SuccessScreen
             staffName={selectedStaff!.name}
             date={selectedDate!}
@@ -703,30 +875,19 @@ export function BookingClient() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="pt-32 pb-12 section-light" style={{ background: "var(--color-navy)" }}>
-        <div className="mx-auto max-w-4xl px-6">
-          <SectionEyebrow className="mb-4 block">Connect With Us</SectionEyebrow>
-          <h1
-            className="text-4xl sm:text-5xl font-bold leading-tight tracking-tight mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
-          >
-            Book an{" "}
-            <span style={{ color: "var(--color-teal)" }}>Appointment</span>
-          </h1>
-          <p className="text-[0.95rem] leading-relaxed max-w-2xl" style={{ color: "var(--color-muted)" }}>
-            Connect with the right person on our team for demos, partnerships, media inquiries,
-            program questions, and general meetings.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Connect With Us"
+        title="Book an"
+        titleAccent="Appointment"
+        description="Connect with the right person on our team for demos, partnerships, media inquiries, program questions, and general meetings."
+      />
 
-      <section className="pb-24 section-light" style={{ background: "var(--color-navy)" }}>
-        <div className="mx-auto max-w-4xl px-6">
+      <section style={{ background: "oklch(0.96 0.006 60)" }} className="pt-10 pb-24">
+        <div className="mx-auto max-w-5xl px-6">
           <SafetyNotice />
 
           <form onSubmit={handleSubmit} noValidate aria-label="Appointment booking form">
-            {/* Honeypot — hidden from real users */}
+            {/* Honeypot */}
             <input
               type="text"
               name="website"
@@ -735,59 +896,46 @@ export function BookingClient() {
               tabIndex={-1}
               aria-hidden="true"
               autoComplete="off"
-              style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}
+              style={{
+                position: "absolute",
+                left: "-9999px",
+                width: "1px",
+                height: "1px",
+                overflow: "hidden",
+              }}
             />
 
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1fr_380px] lg:items-start">
 
-              {/* ── Left: Staff + Calendar + Slots ── */}
-              <div className="space-y-8">
+              {/* ── Left: Steps 1–3 ── */}
+              <div className="space-y-5">
 
-                {/* Staff */}
-                <fieldset>
-                  <legend
-                    className="text-[0.95rem] font-semibold mb-2 block"
-                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
-                  >
-                    1. Select a staff member
-                  </legend>
-                  <p className="mb-4 text-[0.73rem]" style={{ color: "oklch(0.58 0.02 90)" }}>
-                    Demo contacts shown for preview. Real staff will be confirmed before launch.
-                  </p>
-                  {errors.staff && (
-                    <p className="mb-3 text-[0.78rem]" style={{ color: "oklch(0.72 0.15 25)" }} role="alert">
-                      {errors.staff}
+                {/* Step 1 */}
+                <StepCard step={1} title="Who would you like to meet?" error={errors.staff}>
+                  <fieldset aria-label="Select a staff member">
+                    <legend className="sr-only">Select a staff member</legend>
+                    <p className="text-[0.72rem] mb-4" style={{ color: "oklch(0.58 0.02 230)" }}>
+                      Demo contacts shown for preview. Real staff confirmed before launch.
                     </p>
-                  )}
-                  <div className="space-y-3">
-                    {STAFF_MEMBERS.map((m) => (
-                      <StaffCard
-                        key={m.id}
-                        member={m}
-                        selected={selectedStaff?.id === m.id}
-                        onSelect={() => {
-                          setSelectedStaff(m);
-                          setSelectedSlot(null);
-                          setErrors((e) => ({ ...e, staff: undefined }));
-                        }}
-                      />
-                    ))}
-                  </div>
-                </fieldset>
+                    <div className="space-y-2.5">
+                      {STAFF_MEMBERS.map((m) => (
+                        <StaffCard
+                          key={m.id}
+                          member={m}
+                          selected={selectedStaff?.id === m.id}
+                          onSelect={() => {
+                            setSelectedStaff(m);
+                            setSelectedSlot(null);
+                            setErrors((e) => ({ ...e, staff: undefined }));
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </fieldset>
+                </StepCard>
 
-                {/* Calendar */}
-                <div>
-                  <p
-                    className="text-[0.95rem] font-semibold mb-4"
-                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
-                  >
-                    2. Select a date
-                  </p>
-                  {errors.date && (
-                    <p className="mb-2 text-[0.78rem]" style={{ color: "oklch(0.72 0.15 25)" }} role="alert">
-                      {errors.date}
-                    </p>
-                  )}
+                {/* Step 2 */}
+                <StepCard step={2} title="Choose a date" error={errors.date}>
                   <Calendar
                     selectedDate={selectedDate}
                     onSelect={(d) => {
@@ -796,27 +944,16 @@ export function BookingClient() {
                       setErrors((e) => ({ ...e, date: undefined, slot: undefined }));
                     }}
                   />
-                  <p className="mt-2 text-[0.75rem]" style={{ color: "var(--color-muted)" }}>
-                    Weekdays only. Past dates and weekends are unavailable.
+                  <p className="mt-3 text-[0.72rem]" style={{ color: "oklch(0.58 0.02 230)" }}>
+                    Weekdays only · Past dates and weekends are unavailable
                   </p>
-                </div>
+                </StepCard>
 
-                {/* Time slots */}
-                <div>
-                  <p
-                    className="text-[0.95rem] font-semibold mb-4"
-                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
-                  >
-                    3. Select a time
-                  </p>
-                  {errors.slot && (
-                    <p className="mb-2 text-[0.78rem]" style={{ color: "oklch(0.72 0.15 25)" }} role="alert">
-                      {errors.slot}
-                    </p>
-                  )}
+                {/* Step 3 */}
+                <StepCard step={3} title="Select a time" error={errors.slot}>
                   {!selectedDate || !selectedStaff ? (
-                    <p className="text-[0.82rem]" style={{ color: "var(--color-muted)" }}>
-                      Select a staff member and date to see available times.
+                    <p className="py-2 text-[0.82rem]" style={{ color: "oklch(0.60 0.02 230)" }}>
+                      Select a staff member and date above to see available times.
                     </p>
                   ) : (
                     <TimeSlotPicker
@@ -829,222 +966,257 @@ export function BookingClient() {
                       }}
                     />
                   )}
-                </div>
+                </StepCard>
 
               </div>
 
-              {/* ── Right: Contact form ── */}
-              <div className="space-y-5">
-                <p
-                  className="text-[0.95rem] font-semibold"
-                  style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
-                >
-                  4. Your information
-                </p>
-
-                <Field label="Full Name" id={nameId} required error={errors.name}>
-                  <input
-                    id={nameId}
-                    type="text"
-                    value={form.name}
-                    onChange={(e) => set("name", e.target.value)}
-                    autoComplete="name"
-                    required
-                    aria-invalid={!!errors.name}
-                    style={inputStyle}
-                    onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  />
-                </Field>
-
-                <Field label="Email Address" id={emailId} required error={errors.email}>
-                  <input
-                    id={emailId}
-                    type="email"
-                    value={form.email}
-                    onChange={(e) => set("email", e.target.value)}
-                    autoComplete="email"
-                    required
-                    aria-invalid={!!errors.email}
-                    style={inputStyle}
-                    onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  />
-                </Field>
-
-                <Field label="Organization" id={orgId} required error={errors.organization}>
-                  <input
-                    id={orgId}
-                    type="text"
-                    value={form.organization}
-                    onChange={(e) => set("organization", e.target.value)}
-                    autoComplete="organization"
-                    required
-                    aria-invalid={!!errors.organization}
-                    style={inputStyle}
-                    onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  />
-                </Field>
-
-                <Field label="Phone (optional)" id={phoneId}>
-                  <input
-                    id={phoneId}
-                    type="tel"
-                    value={form.phone}
-                    onChange={(e) => set("phone", e.target.value)}
-                    autoComplete="tel"
-                    style={inputStyle}
-                    onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  />
-                </Field>
-
-                <Field label="Reason for Appointment" id={reasonId} required error={errors.reason}>
-                  <select
-                    id={reasonId}
-                    value={form.reason}
-                    onChange={(e) => set("reason", e.target.value)}
-                    required
-                    aria-invalid={!!errors.reason}
-                    style={{
-                      ...inputStyle,
-                      appearance: "none",
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='oklch(0.70 0.02 90)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`,
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "right 14px center",
-                      paddingRight: "40px",
-                    }}
-                    onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  >
-                    <option value="" disabled style={{ background: "oklch(0.97 0.005 60)", color: "oklch(0.55 0.02 90)" }}>
-                      Select a reason…
-                    </option>
-                    {APPOINTMENT_REASONS.map((r) => (
-                      <option
-                        key={r}
-                        value={r}
-                        style={{ background: "oklch(1 0 0)", color: "oklch(0.14 0.04 240)" }}
-                      >
-                        {r}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-
-                {/* Message — auto-fills from selections, user can override */}
-                <div>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <label
-                      htmlFor={msgId}
-                      className="text-[0.82rem] font-medium"
-                      style={{ color: "var(--color-ivory)" }}
-                    >
-                      Message
-                      {!messageEdited && form.message && (
-                        <span
-                          className="ml-2 text-[0.68rem] font-medium px-1.5 py-0.5 rounded-full"
-                          style={{
-                            background: "oklch(0.65 0.12 185 / 0.12)",
-                            color: "var(--color-teal)",
-                            border: "1px solid oklch(0.65 0.12 185 / 0.22)",
-                          }}
-                        >
-                          auto-filled
-                        </span>
-                      )}
-                    </label>
-                    {messageEdited && (
-                      <button
-                        type="button"
-                        onClick={() => setMessageEdited(false)}
-                        className="text-[0.72rem] font-medium transition-opacity duration-150 hover:opacity-70"
-                        style={{ color: "var(--color-teal)" }}
-                      >
-                        Reset to auto
-                      </button>
-                    )}
-                  </div>
-                  <textarea
-                    id={msgId}
-                    value={form.message}
-                    onChange={(e) => {
-                      if (!messageEdited) setMessageEdited(true);
-                      set("message", e.target.value);
-                    }}
-                    rows={5}
-                    placeholder="Fill in your name, reason, and a date above and your message will write itself…"
-                    style={{ ...inputStyle, resize: "vertical", minHeight: "120px" }}
-                    onFocus={(e) => Object.assign(e.currentTarget.style, { ...inputFocusStyle, resize: "vertical" })}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.13)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  />
-                  <p className="mt-1.5 text-[0.72rem]" style={{ color: "oklch(0.58 0.02 90)" }}>
-                    Auto-filled from your selections. Edit freely to add more context.
-                  </p>
-                </div>
-
-                {/* Disclaimer checkbox */}
-                <div>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={form.agreeToDisclaimer}
-                      onChange={(e) => set("agreeToDisclaimer", e.target.checked)}
-                      aria-invalid={!!errors.agreeToDisclaimer}
-                      className="mt-0.5 h-4 w-4 shrink-0 rounded"
-                      style={{ accentColor: "var(--color-teal)" }}
-                    />
-                    <span className="text-[0.82rem] leading-relaxed" style={{ color: "var(--color-muted)" }}>
-                      I understand that this booking is for demos, partnerships, media, program
-                      inquiries, and general meetings only — and is{" "}
-                      <strong style={{ color: "var(--color-ivory)" }}>not</strong> for emergency,
-                      crisis, counselling, treatment, or clinical support.
-                    </span>
-                  </label>
-                  {errors.agreeToDisclaimer && (
-                    <p className="mt-1 text-[0.75rem] ml-7" style={{ color: "oklch(0.72 0.15 25)" }} role="alert">
-                      {errors.agreeToDisclaimer}
-                    </p>
-                  )}
-                </div>
-
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full py-3.5 text-[0.88rem] font-semibold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+              {/* ── Right: Step 4 (sticky on desktop) ── */}
+              <div className="lg:sticky lg:top-28 lg:self-start">
+                <div
+                  className="rounded-2xl p-6"
                   style={{
-                    borderRadius: "9999px",
-                    background: "var(--color-teal)",
-                    color: "var(--color-navy)",
-                    boxShadow: "var(--shadow-teal)",
+                    background: "oklch(1 0 0)",
+                    border: "1px solid oklch(0 0 0 / 0.08)",
+                    boxShadow: "0 2px 16px oklch(0 0 0 / 0.06)",
                   }}
                 >
-                  {submitting ? "Booking…" : "Confirm Appointment"}
-                </button>
+                  {/* Step 4 header */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <div
+                      className="w-7 h-7 rounded-full flex items-center justify-center text-[0.70rem] font-bold shrink-0"
+                      style={{ background: "oklch(0.65 0.12 185)", color: "oklch(0.12 0.04 240)" }}
+                      aria-hidden="true"
+                    >
+                      4
+                    </div>
+                    <h2
+                      className="text-[0.92rem] font-semibold"
+                      style={{
+                        fontFamily: "var(--font-space-grotesk, sans-serif)",
+                        color: "oklch(0.14 0.04 240)",
+                      }}
+                    >
+                      Your details
+                    </h2>
+                  </div>
 
-                <p className="text-center text-[0.75rem]" style={{ color: "var(--color-muted)" }}>
-                  * Required fields. You will receive a confirmation email after booking.
-                </p>
+                  <div className="space-y-4">
+
+                    <Field label="Full Name" id={nameId} required error={errors.name}>
+                      <input
+                        id={nameId}
+                        type="text"
+                        value={form.name}
+                        onChange={(e) => set("name", e.target.value)}
+                        autoComplete="name"
+                        required
+                        aria-invalid={!!errors.name}
+                        style={baseInput}
+                        onFocus={onFocusInput}
+                        onBlur={onBlurInput}
+                      />
+                    </Field>
+
+                    <Field label="Email Address" id={emailId} required error={errors.email}>
+                      <input
+                        id={emailId}
+                        type="email"
+                        value={form.email}
+                        onChange={(e) => set("email", e.target.value)}
+                        autoComplete="email"
+                        required
+                        aria-invalid={!!errors.email}
+                        style={baseInput}
+                        onFocus={onFocusInput}
+                        onBlur={onBlurInput}
+                      />
+                    </Field>
+
+                    <Field label="Organization" id={orgId} required error={errors.organization}>
+                      <input
+                        id={orgId}
+                        type="text"
+                        value={form.organization}
+                        onChange={(e) => set("organization", e.target.value)}
+                        autoComplete="organization"
+                        required
+                        aria-invalid={!!errors.organization}
+                        style={baseInput}
+                        onFocus={onFocusInput}
+                        onBlur={onBlurInput}
+                      />
+                    </Field>
+
+                    <Field label="Phone (optional)" id={phoneId}>
+                      <input
+                        id={phoneId}
+                        type="tel"
+                        value={form.phone}
+                        onChange={(e) => set("phone", e.target.value)}
+                        autoComplete="tel"
+                        style={baseInput}
+                        onFocus={onFocusInput}
+                        onBlur={onBlurInput}
+                      />
+                    </Field>
+
+                    <Field label="Reason for Appointment" id={reasonId} required error={errors.reason}>
+                      <select
+                        id={reasonId}
+                        value={form.reason}
+                        onChange={(e) => set("reason", e.target.value)}
+                        required
+                        aria-invalid={!!errors.reason}
+                        style={{
+                          ...baseInput,
+                          appearance: "none",
+                          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='oklch(0.55 0.02 230)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`,
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "right 14px center",
+                          paddingRight: "40px",
+                        }}
+                        onFocus={onFocusInput}
+                        onBlur={onBlurInput}
+                      >
+                        <option value="" disabled style={{ color: "oklch(0.55 0.02 230)" }}>
+                          Select a reason…
+                        </option>
+                        {APPOINTMENT_REASONS.map((r) => (
+                          <option
+                            key={r}
+                            value={r}
+                            style={{ background: "oklch(1 0 0)", color: "oklch(0.14 0.04 240)" }}
+                          >
+                            {r}
+                          </option>
+                        ))}
+                      </select>
+                    </Field>
+
+                    {/* Auto-message */}
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label
+                          htmlFor={msgId}
+                          className="text-[0.79rem] font-medium"
+                          style={{ color: "oklch(0.28 0.04 240)" }}
+                        >
+                          Message
+                          {!messageEdited && form.message && (
+                            <span
+                              className="ml-2 text-[0.63rem] font-medium px-1.5 py-0.5 rounded-full"
+                              style={{
+                                background: "oklch(0.65 0.12 185 / 0.10)",
+                                color: "oklch(0.48 0.10 185)",
+                                border: "1px solid oklch(0.65 0.12 185 / 0.22)",
+                              }}
+                            >
+                              auto-filled
+                            </span>
+                          )}
+                        </label>
+                        {messageEdited && (
+                          <button
+                            type="button"
+                            onClick={() => setMessageEdited(false)}
+                            className="text-[0.70rem] font-semibold transition-opacity hover:opacity-60"
+                            style={{ color: "oklch(0.52 0.10 185)" }}
+                          >
+                            Reset to auto
+                          </button>
+                        )}
+                      </div>
+                      <textarea
+                        id={msgId}
+                        value={form.message}
+                        onChange={(e) => {
+                          if (!messageEdited) setMessageEdited(true);
+                          set("message", e.target.value);
+                        }}
+                        rows={4}
+                        placeholder="Fill in your name, reason, and a date above and your message will write itself…"
+                        style={{ ...baseInput, resize: "vertical", minHeight: "96px" }}
+                        onFocus={onFocusInput}
+                        onBlur={onBlurInput}
+                      />
+                    </div>
+
+                  </div>
+
+                  {/* Booking summary */}
+                  {showSummary && (
+                    <div className="mt-5">
+                      <BookingSummary
+                        staffName={selectedStaff!.name}
+                        date={selectedDate!}
+                        slot={selectedSlot!}
+                      />
+                    </div>
+                  )}
+
+                  {/* Disclaimer */}
+                  <div className="mt-4">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={form.agreeToDisclaimer}
+                        onChange={(e) => set("agreeToDisclaimer", e.target.checked)}
+                        aria-invalid={!!errors.agreeToDisclaimer}
+                        className="mt-0.5 h-4 w-4 shrink-0 rounded"
+                        style={{ accentColor: "oklch(0.65 0.12 185)" }}
+                      />
+                      <span
+                        className="text-[0.74rem] leading-relaxed"
+                        style={{ color: "oklch(0.46 0.02 230)" }}
+                      >
+                        I understand this booking is for demos, partnerships, media, program inquiries,
+                        and general meetings only — and is{" "}
+                        <strong style={{ color: "oklch(0.22 0.04 240)" }}>not</strong> for emergency,
+                        crisis, counselling, treatment, or clinical support.
+                      </span>
+                    </label>
+                    {errors.agreeToDisclaimer && (
+                      <p
+                        className="mt-1.5 text-[0.72rem] ml-7 flex items-center gap-1"
+                        style={{ color: "oklch(0.52 0.18 25)" }}
+                        role="alert"
+                      >
+                        <svg
+                          className="w-3 h-3 shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        {errors.agreeToDisclaimer}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="mt-5 w-full py-3.5 text-[0.87rem] font-semibold tracking-wide transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    style={{
+                      borderRadius: "9999px",
+                      background: "oklch(0.65 0.12 185)",
+                      color: "oklch(0.12 0.04 240)",
+                      boxShadow: "0 8px 24px -8px oklch(0.65 0.12 185 / 0.40)",
+                    }}
+                  >
+                    {submitting ? "Booking…" : "Confirm Appointment →"}
+                  </button>
+
+                  <p className="mt-3 text-center text-[0.68rem]" style={{ color: "oklch(0.60 0.02 230)" }}>
+                    * Required · Confirmation email sent after booking
+                  </p>
+                </div>
               </div>
 
             </div>
