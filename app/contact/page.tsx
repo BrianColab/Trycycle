@@ -78,20 +78,26 @@ export default function Page() {
 
           {/* Safety notice */}
           <div
-            className="rounded-2xl p-5 mb-6"
+            className="rounded-xl p-4 mb-6 flex gap-3"
             style={{
-              background: "oklch(0.65 0.10 45 / 0.07)",
-              border: "1px solid oklch(0.65 0.10 45 / 0.20)",
+              background: "oklch(0.65 0.12 185 / 0.07)",
+              border: "1px solid oklch(0.65 0.12 185 / 0.18)",
+              borderLeft: "3px solid oklch(0.65 0.12 185 / 0.55)",
             }}
           >
-            <p className="text-[0.82rem] font-semibold mb-1" style={{ color: "oklch(0.85 0.10 65)" }}>
-              Not for emergency or clinical support
-            </p>
-            <p className="text-[0.8rem] leading-relaxed" style={{ color: "oklch(0.74 0.04 65)" }}>
-              This contact page is for general inquiries, partnerships, media, and program questions only.
-              If you or someone you know is in crisis, please contact your local emergency services
-              or a crisis helpline immediately.
-            </p>
+            <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" style={{ color: "oklch(0.48 0.10 185)" }} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+            </svg>
+            <div>
+              <p className="text-[0.80rem] font-semibold mb-0.5" style={{ color: "oklch(0.30 0.06 185)" }}>
+                Not for emergency or clinical support
+              </p>
+              <p className="text-[0.77rem] leading-relaxed" style={{ color: "oklch(0.42 0.04 185)" }}>
+                This contact page is for general inquiries, partnerships, media, and program questions only.
+                If you or someone you know is in crisis, please contact your local emergency services
+                or a crisis helpline immediately.
+              </p>
+            </div>
           </div>
 
           <p className="text-[0.78rem] text-center" style={{ color: "var(--color-muted)" }}>
