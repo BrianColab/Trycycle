@@ -1204,7 +1204,7 @@ export function BookingClient() {
                     disabled={submitting}
                     className="mt-5 w-full py-3.5 text-[0.87rem] font-semibold tracking-wide transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{
-                      borderRadius: "9999px",
+                      borderRadius: "6px",
                       background: "oklch(0.65 0.12 185)",
                       color: "oklch(0.12 0.04 240)",
                       boxShadow: "0 8px 24px -8px oklch(0.65 0.12 185 / 0.40)",

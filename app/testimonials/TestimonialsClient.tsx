@@ -111,7 +111,7 @@ function FilterPill({
       aria-pressed={active}
       className="flex items-center gap-2 px-4 py-2 text-[0.78rem] font-medium transition-all duration-200 shrink-0"
       style={{
-        borderRadius: "9999px",
+        borderRadius: "6px",
         background: active ? "var(--color-teal)" : "oklch(0 0 0 / 0.05)",
         color: active ? "oklch(0.12 0.04 240)" : "var(--color-muted)",
         border: active ? "none" : "1px solid oklch(0 0 0 / 0.10)",

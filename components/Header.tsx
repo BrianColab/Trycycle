@@ -281,7 +281,7 @@ function MobileMenu({ open, onClose, onContact }: { open: boolean; onClose: () =
           onClick={onClose}
           className="flex items-center justify-center w-full px-6 py-3 text-[0.85rem] font-semibold transition-colors duration-200"
           style={{
-            borderRadius: "9999px",
+            borderRadius: "6px",
             background: "var(--color-teal)",
             color: "var(--color-navy)",
           }}
@@ -292,7 +292,7 @@ function MobileMenu({ open, onClose, onContact }: { open: boolean; onClose: () =
           onClick={() => { onClose(); onContact(); }}
           className="flex items-center justify-center w-full px-6 py-3 text-[0.85rem] font-medium transition-colors duration-200 mt-2"
           style={{
-            borderRadius: "9999px",
+            borderRadius: "6px",
             border: "1px solid oklch(0 0 0 / 0.12)",
             color: "oklch(0.28 0.04 240)",
           }}
@@ -369,7 +369,7 @@ export function Header() {
               href="/book-appointment"
               className="hidden lg:inline-flex items-center px-5 py-2 text-[0.78rem] font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.99]"
               style={{
-                borderRadius: "9999px",
+                borderRadius: "6px",
                 background: "var(--color-teal)",
                 color: "oklch(0.12 0.04 240)",
                 boxShadow: "var(--shadow-teal)",
