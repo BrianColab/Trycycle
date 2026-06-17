@@ -26,6 +26,7 @@ const RESOURCES = [
 
 const LEGAL = [
   { label: "Privacy Notice", href: "/privacy" },
+  { label: "Cookies Notice", href: "/cookies" },
   { label: "Terms / Waiver", href: "/terms" },
   { label: "Accessibility", href: "/accessibility" },
   { label: "Sitemap", href: "/sitemap-page" },
