@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
@@ -155,7 +155,7 @@ function DropdownMenu({ item }: { item: NavItem & { children: { label: string; h
             <div
               className="h-[2px] w-full"
               style={{
-                background: "linear-gradient(to right, transparent, oklch(0.65 0.12 185 / 0.60), transparent)",
+                background: "linear-gradient(to right, transparent, oklch(0.72 0.19 45 / 0.60), transparent)",
               }}
             />
             {item.children.map((child) => (
@@ -248,7 +248,7 @@ function MobileMenu({ open, onClose, onContact }: { open: boolean; onClose: () =
                         href={child.href}
                         onClick={onClose}
                         className="block py-2 text-[0.85rem] transition-colors"
-                        style={{ color: "oklch(0.45 0.05 185)" }}
+                        style={{ color: "oklch(0.53 0.14 45)" }}
                       >
                         {child.label}
                       </Link>

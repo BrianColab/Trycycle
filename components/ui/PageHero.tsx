@@ -1,4 +1,4 @@
-interface PageHeroProps {
+﻿interface PageHeroProps {
   eyebrow: string;
   title: string;
   titleAccent?: string;
@@ -17,7 +17,7 @@ export function PageHero({ eyebrow, title, titleAccent, description, children }:
       {/* Subtle teal glow top-right */}
       <div
         className="pointer-events-none absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full opacity-[0.07]"
-        style={{ background: "radial-gradient(circle, oklch(0.65 0.12 185) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, oklch(0.72 0.19 45) 0%, transparent 70%)" }}
         aria-hidden="true"
       />
 
@@ -26,13 +26,13 @@ export function PageHero({ eyebrow, title, titleAccent, description, children }:
         <div className="flex items-center gap-3 mb-5">
           <span
             className="text-[0.68rem] font-semibold tracking-[0.22em] uppercase"
-            style={{ color: "oklch(0.65 0.12 185)" }}
+            style={{ color: "oklch(0.72 0.19 45)" }}
           >
             {eyebrow}
           </span>
           <span
             className="flex-1 max-w-[60px] h-px"
-            style={{ background: "oklch(0.65 0.12 185 / 0.35)" }}
+            style={{ background: "oklch(0.72 0.19 45 / 0.35)" }}
             aria-hidden="true"
           />
         </div>
@@ -49,7 +49,7 @@ export function PageHero({ eyebrow, title, titleAccent, description, children }:
         >
           {title}
           {titleAccent && (
-            <> <span style={{ color: "oklch(0.65 0.12 185)" }}>{titleAccent}</span></>
+            <> <span style={{ color: "oklch(0.72 0.19 45)" }}>{titleAccent}</span></>
           )}
         </h1>
 
@@ -59,7 +59,7 @@ export function PageHero({ eyebrow, title, titleAccent, description, children }:
             {/* Teal rule */}
             <div
               className="shrink-0 w-12 h-[3px] mt-1 rounded-full lg:mt-2"
-              style={{ background: "oklch(0.65 0.12 185)" }}
+              style={{ background: "oklch(0.72 0.19 45)" }}
               aria-hidden="true"
             />
             <p

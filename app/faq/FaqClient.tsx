@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useMemo, useId } from "react";
 import { PageHero, SectionEyebrow, Button } from "@/components/ui";
@@ -189,8 +189,8 @@ export function FaqClient() {
                 borderRadius: "12px",
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = "oklch(0.65 0.12 185 / 0.60)";
-                e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 185 / 0.12)";
+                e.currentTarget.style.borderColor = "oklch(0.72 0.19 45 / 0.60)";
+                e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.72 0.19 45 / 0.12)";
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.12)";

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -18,8 +18,8 @@ const inputBase: React.CSSProperties = {
 };
 
 function focusInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
-  e.currentTarget.style.borderColor = "oklch(0.65 0.12 185 / 0.60)";
-  e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 185 / 0.12)";
+  e.currentTarget.style.borderColor = "oklch(0.72 0.19 45 / 0.60)";
+  e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.72 0.19 45 / 0.12)";
   e.currentTarget.style.background = "oklch(1 0 0)";
 }
 function blurInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -103,7 +103,7 @@ export function ContactDrawer({ open, onClose }: { open: boolean; onClose: () =>
         {/* Teal accent top bar */}
         <div
           className="h-[3px] w-full shrink-0"
-          style={{ background: "linear-gradient(to right, var(--color-teal), oklch(0.65 0.12 185 / 0.40))" }}
+          style={{ background: "linear-gradient(to right, var(--color-teal), oklch(0.72 0.19 45 / 0.40))" }}
           aria-hidden="true"
         />
 
@@ -158,7 +158,7 @@ export function ContactDrawer({ open, onClose }: { open: boolean; onClose: () =>
           {status === "done" ? (
             <div
               className="rounded-xl p-6 text-center"
-              style={{ background: "oklch(0.65 0.12 185 / 0.08)", border: "1px solid oklch(0.65 0.12 185 / 0.22)" }}
+              style={{ background: "oklch(0.72 0.19 45 / 0.08)", border: "1px solid oklch(0.72 0.19 45 / 0.22)" }}
             >
               <svg
                 className="w-9 h-9 mx-auto mb-3"

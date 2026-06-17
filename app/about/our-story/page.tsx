@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { PageHero, SectionEyebrow } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -58,9 +58,9 @@ export default function Page() {
                     <div
                       className="text-[0.75rem] font-bold tracking-wide px-3 py-1 rounded-full relative z-10"
                       style={{
-                        background: "oklch(0.65 0.12 185 / 0.12)",
+                        background: "oklch(0.72 0.19 45 / 0.12)",
                         color: "var(--color-teal)",
-                        border: "1px solid oklch(0.65 0.12 185 / 0.22)",
+                        border: "1px solid oklch(0.72 0.19 45 / 0.22)",
                       }}
                     >
                       {m.year}

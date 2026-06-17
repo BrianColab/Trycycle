@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/ui";
@@ -132,7 +132,7 @@ export default function Page() {
                     </p>
                     <p
                       className="text-[0.62rem] font-semibold tracking-[0.12em] uppercase leading-snug"
-                      style={{ color: "oklch(0.75 0.12 185)" }}
+                      style={{ color: "oklch(0.80 0.16 45)" }}
                     >
                       {person.title}
                     </p>

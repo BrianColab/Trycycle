@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui";
 
@@ -245,7 +245,7 @@ function StatsStrip() {
                 style={{
                   fontFamily: "var(--font-space-grotesk, sans-serif)",
                   fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-                  color: "oklch(0.65 0.12 185)",
+                  color: "oklch(0.72 0.19 45)",
                   letterSpacing: "-0.02em",
                 }}
               >
@@ -277,7 +277,7 @@ function SolutionsSection() {
         <div className="max-w-2xl mb-12">
           <p
             className="text-[0.68rem] font-semibold tracking-[0.22em] uppercase mb-3"
-            style={{ color: "oklch(0.65 0.12 185)" }}
+            style={{ color: "oklch(0.72 0.19 45)" }}
           >
             Our Solutions
           </p>
@@ -290,7 +290,7 @@ function SolutionsSection() {
             }}
           >
             Four platforms built{" "}
-            <span style={{ color: "oklch(0.65 0.12 185)" }}>with</span> the communities
+            <span style={{ color: "oklch(0.72 0.19 45)" }}>with</span> the communities
             that need them most
           </h2>
           <p className="text-[0.85rem] leading-relaxed" style={{ color: "oklch(0.62 0.02 90)" }}>
@@ -335,7 +335,7 @@ function SolutionsSection() {
 
                 <p
                   className="text-[0.68rem] font-semibold tracking-wide uppercase mb-1.5"
-                  style={{ color: "oklch(0.55 0.05 185)" }}
+                  style={{ color: "oklch(0.62 0.14 45)" }}
                 >
                   {s.tag}
                 </p>
@@ -358,7 +358,7 @@ function SolutionsSection() {
 
                 <div
                   className="flex items-center gap-1 mt-5 text-[0.74rem] font-semibold"
-                  style={{ color: "oklch(0.48 0.10 185)" }}
+                  style={{ color: "oklch(0.56 0.17 45)" }}
                 >
                   Learn more
                   <svg
@@ -397,7 +397,7 @@ function VideosSection() {
           <div>
             <p
               className="text-[0.68rem] font-semibold tracking-[0.22em] uppercase mb-2"
-              style={{ color: "oklch(0.65 0.12 185)" }}
+              style={{ color: "oklch(0.72 0.19 45)" }}
             >
               In Action
             </p>
@@ -453,7 +453,7 @@ function VideosSection() {
                 <Link
                   href={v.href}
                   className="text-[0.72rem] font-semibold hover:opacity-70 transition-opacity shrink-0"
-                  style={{ color: "oklch(0.65 0.12 185)" }}
+                  style={{ color: "oklch(0.72 0.19 45)" }}
                 >
                   Learn more →
                 </Link>
@@ -475,7 +475,7 @@ function TestimonialsSection() {
           <div>
             <p
               className="text-[0.68rem] font-semibold tracking-[0.22em] uppercase mb-2"
-              style={{ color: "oklch(0.48 0.10 185)" }}
+              style={{ color: "oklch(0.56 0.17 45)" }}
             >
               Community Voices
             </p>
@@ -493,7 +493,7 @@ function TestimonialsSection() {
           <Link
             href="/testimonials"
             className="text-[0.76rem] font-semibold hover:opacity-75 transition-opacity shrink-0"
-            style={{ color: "oklch(0.45 0.10 185)" }}
+            style={{ color: "oklch(0.53 0.17 45)" }}
           >
             View all testimonials →
           </Link>
@@ -515,7 +515,7 @@ function TestimonialsSection() {
                 className="w-5 h-5 mb-3 shrink-0"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                style={{ color: "oklch(0.55 0.10 185)" }}
+                style={{ color: "oklch(0.62 0.17 45)" }}
                 aria-hidden="true"
               >
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
@@ -534,7 +534,7 @@ function TestimonialsSection() {
               >
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center text-[0.67rem] font-bold shrink-0"
-                  style={{ background: "oklch(0.65 0.12 185 / 0.15)", color: "oklch(0.48 0.10 185)" }}
+                  style={{ background: "oklch(0.72 0.19 45 / 0.15)", color: "oklch(0.56 0.17 45)" }}
                   aria-hidden="true"
                 >
                   {t.initials}
@@ -553,8 +553,8 @@ function TestimonialsSection() {
                 <span
                   className="ml-auto shrink-0 text-[0.60rem] font-semibold tracking-wide uppercase px-2 py-0.5 rounded-full"
                   style={{
-                    background: "oklch(0.55 0.10 185 / 0.10)",
-                    color: "oklch(0.45 0.10 185)",
+                    background: "oklch(0.62 0.17 45 / 0.10)",
+                    color: "oklch(0.53 0.17 45)",
                   }}
                 >
                   {t.cat}
@@ -583,7 +583,7 @@ function FaqSection() {
           <div>
             <p
               className="text-[0.68rem] font-semibold tracking-[0.22em] uppercase mb-2"
-              style={{ color: "oklch(0.48 0.10 185)" }}
+              style={{ color: "oklch(0.56 0.17 45)" }}
             >
               Help & Information
             </p>
@@ -601,7 +601,7 @@ function FaqSection() {
           <Link
             href="/faq"
             className="text-[0.76rem] font-semibold hover:opacity-75 transition-opacity shrink-0"
-            style={{ color: "oklch(0.45 0.10 185)" }}
+            style={{ color: "oklch(0.53 0.17 45)" }}
           >
             View all FAQs →
           </Link>
@@ -674,7 +674,7 @@ function CtaStrip() {
         <div className="text-center mb-10">
           <p
             className="text-[0.68rem] font-semibold tracking-[0.22em] uppercase mb-3"
-            style={{ color: "oklch(0.65 0.12 185)" }}
+            style={{ color: "oklch(0.72 0.19 45)" }}
           >
             Get in Touch
           </p>
@@ -703,7 +703,7 @@ function CtaStrip() {
             >
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-colors duration-200 group-hover:bg-teal/10"
-                style={{ background: "oklch(0.65 0.12 185 / 0.12)" }}
+                style={{ background: "oklch(0.72 0.19 45 / 0.12)" }}
                 aria-hidden="true"
               >
                 <svg
@@ -712,7 +712,7 @@ function CtaStrip() {
                   stroke="currentColor"
                   strokeWidth={1.5}
                   viewBox="0 0 24 24"
-                  style={{ color: "oklch(0.65 0.12 185)" }}
+                  style={{ color: "oklch(0.72 0.19 45)" }}
                   aria-hidden="true"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d={card.iconPath} />
@@ -729,7 +729,7 @@ function CtaStrip() {
               </p>
               <div
                 className="flex items-center gap-1 text-[0.74rem] font-semibold mt-auto"
-                style={{ color: "oklch(0.65 0.12 185)" }}
+                style={{ color: "oklch(0.72 0.19 45)" }}
               >
                 Get started
                 <svg

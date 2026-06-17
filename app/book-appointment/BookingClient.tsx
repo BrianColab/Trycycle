@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useId, useCallback, useEffect } from "react";
 import { PageHero } from "@/components/ui";
@@ -37,7 +37,7 @@ function StepCard({
       <div className="flex items-center gap-3 mb-5">
         <div
           className="w-7 h-7 rounded-full flex items-center justify-center text-[0.70rem] font-bold shrink-0"
-          style={{ background: "oklch(0.65 0.12 185)", color: "oklch(0.12 0.04 240)" }}
+          style={{ background: "oklch(0.72 0.19 45)", color: "oklch(0.12 0.04 240)" }}
           aria-hidden="true"
         >
           {step}
@@ -77,14 +77,14 @@ function SafetyNotice() {
       className="rounded-xl p-5 mb-8 flex gap-4"
       style={{
         background: "oklch(0.94 0.012 215 / 0.55)",
-        border: "1px solid oklch(0.65 0.12 185 / 0.20)",
-        borderLeft: "3px solid oklch(0.60 0.10 185 / 0.55)",
+        border: "1px solid oklch(0.72 0.19 45 / 0.20)",
+        borderLeft: "3px solid oklch(0.67 0.17 45 / 0.55)",
       }}
       role="note"
       aria-label="Important notice"
     >
       <div className="mt-0.5 shrink-0" aria-hidden="true">
-        <svg className="w-4 h-4" viewBox="0 0 20 20" fill="oklch(0.50 0.09 185)">
+        <svg className="w-4 h-4" viewBox="0 0 20 20" fill="oklch(0.58 0.16 45)">
           <path
             fillRule="evenodd"
             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
@@ -133,17 +133,17 @@ function StaffCard({
       aria-pressed={selected}
       className="w-full text-left rounded-xl p-4 transition-all duration-200 relative overflow-hidden"
       style={{
-        background: selected ? "oklch(0.65 0.12 185 / 0.06)" : "oklch(0.98 0.003 220)",
+        background: selected ? "oklch(0.72 0.19 45 / 0.06)" : "oklch(0.98 0.003 220)",
         border: selected
-          ? "1px solid oklch(0.65 0.12 185 / 0.40)"
+          ? "1px solid oklch(0.72 0.19 45 / 0.40)"
           : "1px solid oklch(0 0 0 / 0.08)",
-        boxShadow: selected ? "0 0 0 3px oklch(0.65 0.12 185 / 0.10)" : "none",
+        boxShadow: selected ? "0 0 0 3px oklch(0.72 0.19 45 / 0.10)" : "none",
       }}
     >
       {selected && (
         <div
           className="absolute inset-y-0 left-0 w-[3px] rounded-l-xl"
-          style={{ background: "oklch(0.65 0.12 185)" }}
+          style={{ background: "oklch(0.72 0.19 45)" }}
           aria-hidden="true"
         />
       )}
@@ -151,7 +151,7 @@ function StaffCard({
         <div
           className="w-9 h-9 rounded-full flex items-center justify-center text-[0.70rem] font-bold shrink-0 transition-all duration-200"
           style={{
-            background: selected ? "oklch(0.65 0.12 185)" : "oklch(0.88 0.008 220)",
+            background: selected ? "oklch(0.72 0.19 45)" : "oklch(0.88 0.008 220)",
             color: selected ? "oklch(0.12 0.04 240)" : "oklch(0.44 0.04 230)",
           }}
           aria-hidden="true"
@@ -167,7 +167,7 @@ function StaffCard({
           </p>
           <p
             className="text-[0.72rem] mt-0.5"
-            style={{ color: selected ? "oklch(0.48 0.10 185)" : "oklch(0.52 0.02 230)" }}
+            style={{ color: selected ? "oklch(0.56 0.17 45)" : "oklch(0.52 0.02 230)" }}
           >
             {member.role}
           </p>
@@ -175,7 +175,7 @@ function StaffCard({
         {selected && (
           <div
             className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
-            style={{ background: "oklch(0.65 0.12 185)" }}
+            style={{ background: "oklch(0.72 0.19 45)" }}
             aria-hidden="true"
           >
             <svg
@@ -305,18 +305,18 @@ function Calendar({
                 day: "numeric",
               })}${isDisabled ? " (unavailable)" : ""}`}
               aria-pressed={isSelected}
-              className="mx-auto flex h-8 w-8 items-center justify-center rounded-full text-[0.79rem] font-medium transition-all duration-150 disabled:cursor-not-allowed hover:enabled:bg-[oklch(0.65_0.12_185_/_0.10)]"
+              className="mx-auto flex h-8 w-8 items-center justify-center rounded-full text-[0.79rem] font-medium transition-all duration-150 disabled:cursor-not-allowed hover:enabled:bg-[oklch(0.72_0.19_45_/_0.10)]"
               style={{
-                background: isSelected ? "oklch(0.65 0.12 185)" : "transparent",
+                background: isSelected ? "oklch(0.72 0.19 45)" : "transparent",
                 color: isSelected
                   ? "oklch(1 0 0)"
                   : isDisabled
                   ? "oklch(0.78 0.01 230)"
                   : isToday
-                  ? "oklch(0.42 0.10 185)"
+                  ? "oklch(0.50 0.17 45)"
                   : "oklch(0.20 0.04 240)",
                 outline:
-                  isToday && !isSelected ? "1.5px solid oklch(0.65 0.12 185 / 0.50)" : "none",
+                  isToday && !isSelected ? "1.5px solid oklch(0.72 0.19 45 / 0.50)" : "none",
                 fontWeight: isToday && !isSelected ? 700 : 500,
               }}
             >
@@ -378,7 +378,7 @@ function TimeSlotPicker({
               className="py-2 px-2 rounded-lg text-[0.76rem] font-medium transition-all duration-150 disabled:cursor-not-allowed"
               style={{
                 background: selected
-                  ? "oklch(0.65 0.12 185)"
+                  ? "oklch(0.72 0.19 45)"
                   : booked
                   ? "oklch(0.94 0.003 220)"
                   : "oklch(1 0 0)",
@@ -394,7 +394,7 @@ function TimeSlotPicker({
                   : "1px solid oklch(0 0 0 / 0.11)",
                 textDecoration: booked ? "line-through" : "none",
                 fontWeight: selected ? 600 : 500,
-                boxShadow: selected ? "0 2px 8px oklch(0.65 0.12 185 / 0.25)" : "none",
+                boxShadow: selected ? "0 2px 8px oklch(0.72 0.19 45 / 0.25)" : "none",
               }}
             >
               {formatTimeSlot(slot)}
@@ -426,8 +426,8 @@ const baseInput: React.CSSProperties = {
 const onFocusInput = (
   e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 ) => {
-  e.currentTarget.style.borderColor = "oklch(0.65 0.12 185 / 0.55)";
-  e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 185 / 0.12)";
+  e.currentTarget.style.borderColor = "oklch(0.72 0.19 45 / 0.55)";
+  e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.72 0.19 45 / 0.12)";
 };
 
 const onBlurInput = (
@@ -460,7 +460,7 @@ function Field({
       >
         {label}
         {required && (
-          <span className="ml-1" style={{ color: "oklch(0.65 0.12 185)" }} aria-hidden="true">
+          <span className="ml-1" style={{ color: "oklch(0.72 0.19 45)" }} aria-hidden="true">
             *
           </span>
         )}
@@ -506,13 +506,13 @@ function BookingSummary({
     <div
       className="rounded-xl p-4"
       style={{
-        background: "oklch(0.65 0.12 185 / 0.07)",
-        border: "1px solid oklch(0.65 0.12 185 / 0.22)",
+        background: "oklch(0.72 0.19 45 / 0.07)",
+        border: "1px solid oklch(0.72 0.19 45 / 0.22)",
       }}
     >
       <p
         className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] mb-2.5"
-        style={{ color: "oklch(0.44 0.09 185)" }}
+        style={{ color: "oklch(0.52 0.16 45)" }}
       >
         Appointment Summary
       </p>
@@ -558,15 +558,15 @@ function SuccessScreen({
       <div
         className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
         style={{
-          background: "oklch(0.65 0.12 185 / 0.10)",
-          border: "1px solid oklch(0.65 0.12 185 / 0.22)",
+          background: "oklch(0.72 0.19 45 / 0.10)",
+          border: "1px solid oklch(0.72 0.19 45 / 0.22)",
         }}
         aria-hidden="true"
       >
         <svg
           className="w-7 h-7"
           fill="none"
-          stroke="oklch(0.52 0.12 185)"
+          stroke="oklch(0.60 0.19 45)"
           strokeWidth={2.5}
           viewBox="0 0 24 24"
         >
@@ -575,7 +575,7 @@ function SuccessScreen({
       </div>
       <p
         className="text-[0.68rem] font-semibold tracking-[0.18em] uppercase mb-2"
-        style={{ color: "oklch(0.56 0.10 185)" }}
+        style={{ color: "oklch(0.63 0.17 45)" }}
       >
         Booking Confirmed
       </p>
@@ -615,7 +615,7 @@ function SuccessScreen({
         type="button"
         onClick={onReset}
         className="text-[0.82rem] font-semibold transition-opacity hover:opacity-60"
-        style={{ color: "oklch(0.52 0.10 185)" }}
+        style={{ color: "oklch(0.60 0.17 45)" }}
       >
         ← Book another appointment
       </button>
@@ -984,7 +984,7 @@ export function BookingClient() {
                   <div className="flex items-center gap-3 mb-5">
                     <div
                       className="w-7 h-7 rounded-full flex items-center justify-center text-[0.70rem] font-bold shrink-0"
-                      style={{ background: "oklch(0.65 0.12 185)", color: "oklch(0.12 0.04 240)" }}
+                      style={{ background: "oklch(0.72 0.19 45)", color: "oklch(0.12 0.04 240)" }}
                       aria-hidden="true"
                     >
                       4
@@ -1106,9 +1106,9 @@ export function BookingClient() {
                             <span
                               className="ml-2 text-[0.63rem] font-medium px-1.5 py-0.5 rounded-full"
                               style={{
-                                background: "oklch(0.65 0.12 185 / 0.10)",
-                                color: "oklch(0.48 0.10 185)",
-                                border: "1px solid oklch(0.65 0.12 185 / 0.22)",
+                                background: "oklch(0.72 0.19 45 / 0.10)",
+                                color: "oklch(0.56 0.17 45)",
+                                border: "1px solid oklch(0.72 0.19 45 / 0.22)",
                               }}
                             >
                               auto-filled
@@ -1120,7 +1120,7 @@ export function BookingClient() {
                             type="button"
                             onClick={() => setMessageEdited(false)}
                             className="text-[0.70rem] font-semibold transition-opacity hover:opacity-60"
-                            style={{ color: "oklch(0.52 0.10 185)" }}
+                            style={{ color: "oklch(0.60 0.17 45)" }}
                           >
                             Reset to auto
                           </button>
@@ -1163,7 +1163,7 @@ export function BookingClient() {
                         onChange={(e) => set("agreeToDisclaimer", e.target.checked)}
                         aria-invalid={!!errors.agreeToDisclaimer}
                         className="mt-0.5 h-4 w-4 shrink-0 rounded"
-                        style={{ accentColor: "oklch(0.65 0.12 185)" }}
+                        style={{ accentColor: "oklch(0.72 0.19 45)" }}
                       />
                       <span
                         className="text-[0.74rem] leading-relaxed"
@@ -1205,9 +1205,9 @@ export function BookingClient() {
                     className="mt-5 w-full py-3.5 text-[0.87rem] font-semibold tracking-wide transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{
                       borderRadius: "6px",
-                      background: "oklch(0.65 0.12 185)",
+                      background: "oklch(0.72 0.19 45)",
                       color: "oklch(0.12 0.04 240)",
-                      boxShadow: "0 8px 24px -8px oklch(0.65 0.12 185 / 0.40)",
+                      boxShadow: "0 8px 24px -8px oklch(0.72 0.19 45 / 0.40)",
                     }}
                   >
                     {submitting ? "Booking…" : "Confirm Appointment →"}

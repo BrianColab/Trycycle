@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 @theme {
   /* ── Palette ── */
@@ -7,13 +7,13 @@
   --color-forest:      oklch(0.22 0.07 155);
   --color-card:        oklch(0.17 0.04 230);
   --color-card-hover:  oklch(0.20 0.05 230);
-  --color-teal:        oklch(0.65 0.12 185);
-  --color-teal-light:  oklch(0.78 0.10 185);
-  --color-teal-dim:    oklch(0.55 0.10 185);
+  --color-teal:        oklch(0.72 0.19 45);
+  --color-teal-light:  oklch(0.82 0.15 45);
+  --color-teal-dim:    oklch(0.62 0.17 45);
   --color-ivory:       oklch(0.96 0.01 90);
   --color-muted:       oklch(0.70 0.02 90);
   --color-border:      oklch(1 0 0 / 0.10);
-  --color-border-teal: oklch(0.65 0.12 185 / 0.30);
+  --color-border-teal: oklch(0.72 0.19 45 / 0.30);
 
   /* ── Typography ── */
   --font-display: "Space Grotesk", Inter, sans-serif;
@@ -21,7 +21,7 @@
 
   /* ── Shadows ── */
   --shadow-base: 0 20px 60px -20px oklch(0 0 0 / 0.55);
-  --shadow-teal: 0 10px 40px -10px oklch(0.65 0.12 185 / 0.25);
+  --shadow-teal: 0 10px 40px -10px oklch(0.72 0.19 45 / 0.25);
   --shadow-card: 0 4px 24px -4px oklch(0 0 0 / 0.40);
 
   /* ── Border radius ── */
@@ -83,7 +83,7 @@ body {
 
 /* ── Selection ── */
 ::selection {
-  background: oklch(0.65 0.12 185 / 0.30);
+  background: oklch(0.72 0.19 45 / 0.30);
   color: var(--color-ivory);
 }
 

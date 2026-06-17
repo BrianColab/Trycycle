@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { SectionEyebrow, Button } from "@/components/ui";
@@ -198,7 +198,7 @@ export default function Page() {
               >
                 <div
                   className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
-                  style={{ background: "oklch(0.65 0.12 185 / 0.10)", border: "1px solid oklch(0.65 0.12 185 / 0.20)" }}
+                  style={{ background: "oklch(0.72 0.19 45 / 0.10)", border: "1px solid oklch(0.72 0.19 45 / 0.20)" }}
                   aria-hidden="true"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" style={{ color: "var(--color-teal)" }}>

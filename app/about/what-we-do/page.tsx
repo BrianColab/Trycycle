@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { PageHero, SectionEyebrow, Button } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -63,9 +63,9 @@ export default function Page() {
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center text-[0.72rem] font-bold shrink-0 mt-0.5"
                   style={{
-                    background: "oklch(0.65 0.12 185 / 0.12)",
+                    background: "oklch(0.72 0.19 45 / 0.12)",
                     color: "var(--color-teal)",
-                    border: "1px solid oklch(0.65 0.12 185 / 0.20)",
+                    border: "1px solid oklch(0.72 0.19 45 / 0.20)",
                   }}
                   aria-hidden="true"
                 >

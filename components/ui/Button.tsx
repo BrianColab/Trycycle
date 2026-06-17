@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { type ComponentPropsWithoutRef } from "react";
 
 type Variant = "primary" | "ghost" | "dark";
@@ -36,7 +36,7 @@ function getStyles(variant: Variant) {
       return {
         background: "transparent",
         color: "var(--color-teal)",
-        border: "1px solid oklch(0.65 0.12 185 / 0.40)",
+        border: "1px solid oklch(0.72 0.19 45 / 0.40)",
       };
     case "dark":
       return {

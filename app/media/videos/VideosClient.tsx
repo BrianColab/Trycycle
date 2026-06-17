@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useMemo, useEffect, useRef, useId } from "react";
 import Image from "next/image";
@@ -15,7 +15,7 @@ import {
 function PlayIcon({ size = 48 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
-      <circle cx="24" cy="24" r="24" fill="oklch(0.65 0.12 185 / 0.90)" />
+      <circle cx="24" cy="24" r="24" fill="oklch(0.72 0.19 45 / 0.90)" />
       <polygon points="19,15 37,24 19,33" fill="white" />
     </svg>
   );
@@ -55,7 +55,7 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
         <div
           className="h-[2px] w-full"
           style={{
-            background: "linear-gradient(to right, transparent, oklch(0.65 0.12 185 / 0.70), transparent)",
+            background: "linear-gradient(to right, transparent, oklch(0.72 0.19 45 / 0.70), transparent)",
           }}
           aria-hidden="true"
         />
@@ -149,7 +149,7 @@ function VideoCard({ video, onPlay, featured = false }: { video: Video; onPlay: 
         <div
           className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[0.65rem] font-semibold tracking-[0.10em] uppercase"
           style={{
-            background: "oklch(0.65 0.12 185 / 0.90)",
+            background: "oklch(0.72 0.19 45 / 0.90)",
             color: "var(--color-navy)",
           }}
         >
@@ -298,8 +298,8 @@ export function VideosClient() {
                   borderRadius: "12px",
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = "oklch(0.65 0.12 185 / 0.60)";
-                  e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 185 / 0.12)";
+                  e.currentTarget.style.borderColor = "oklch(0.72 0.19 45 / 0.60)";
+                  e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.72 0.19 45 / 0.12)";
                 }}
                 onBlur={(e) => {
                   e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.12)";

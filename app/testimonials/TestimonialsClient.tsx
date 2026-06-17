@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useMemo, useId } from "react";
 import { PageHero, SectionEyebrow, Button } from "@/components/ui";
@@ -32,7 +32,7 @@ function Avatar({ initials }: { initials: string }) {
   return (
     <div
       className="w-10 h-10 rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0"
-      style={{ background: "oklch(0.65 0.12 185 / 0.20)", color: "var(--color-teal)" }}
+      style={{ background: "oklch(0.72 0.19 45 / 0.20)", color: "var(--color-teal)" }}
       aria-hidden="true"
     >
       {initials}
@@ -81,9 +81,9 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         <span
           className="ml-auto shrink-0 text-[0.65rem] font-medium tracking-[0.16em] uppercase px-2.5 py-1 rounded-full"
           style={{
-            background: "oklch(0.65 0.12 185 / 0.12)",
+            background: "oklch(0.72 0.19 45 / 0.12)",
             color: "var(--color-teal)",
-            border: "1px solid oklch(0.65 0.12 185 / 0.20)",
+            border: "1px solid oklch(0.72 0.19 45 / 0.20)",
           }}
         >
           {t.category}
@@ -206,8 +206,8 @@ export function TestimonialsClient() {
                 borderRadius: "12px",
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = "oklch(0.65 0.12 185 / 0.60)";
-                e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 185 / 0.12)";
+                e.currentTarget.style.borderColor = "oklch(0.72 0.19 45 / 0.60)";
+                e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.72 0.19 45 / 0.12)";
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = "oklch(0 0 0 / 0.12)";

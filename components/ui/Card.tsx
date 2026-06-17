@@ -1,4 +1,4 @@
-interface CardProps {
+﻿interface CardProps {
   children: React.ReactNode;
   className?: string;
   hover?: boolean;
@@ -25,7 +25,7 @@ export function Card({ children, className = "", hover = false, accent = false }
           }`}
           style={{
             background:
-              "linear-gradient(to right, transparent, oklch(0.65 0.12 185 / 0.65), transparent)",
+              "linear-gradient(to right, transparent, oklch(0.72 0.19 45 / 0.65), transparent)",
           }}
           aria-hidden="true"
         />

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/ui";
@@ -109,12 +109,12 @@ const NEWS = [
 
 const TAG_COLORS: Record<string, string> = {
   "Community Impact": "oklch(0.22 0.07 155 / 0.15)",
-  "Product Launch": "oklch(0.65 0.12 185 / 0.15)",
+  "Product Launch": "oklch(0.72 0.19 45 / 0.15)",
   "Recognition": "oklch(0.75 0.15 55 / 0.15)",
-  "Launch": "oklch(0.65 0.12 185 / 0.15)",
+  "Launch": "oklch(0.72 0.19 45 / 0.15)",
   "Announcement": "oklch(0 0 0 / 0.06)",
   "Veterans": "oklch(0.38 0.06 240 / 0.15)",
-  "Team": "oklch(0.65 0.12 185 / 0.15)",
+  "Team": "oklch(0.72 0.19 45 / 0.15)",
   "Funding": "oklch(0.22 0.07 155 / 0.15)",
 };
 
