@@ -256,7 +256,7 @@ export function ContactDrawer({ open, onClose }: { open: boolean; onClose: () =>
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full py-3 text-[0.88rem] font-semibold rounded-full transition-all duration-200 disabled:opacity-60 hover:brightness-105 active:scale-[0.99]"
+                className="w-full py-3 text-[0.88rem] font-semibold rounded-md transition-all duration-200 disabled:opacity-60 hover:brightness-105 active:scale-[0.99]"
                 style={{ background: "var(--color-teal)", color: "oklch(0.12 0.04 240)" }}
               >
                 {status === "sending" ? "Sending…" : "Send Message"}

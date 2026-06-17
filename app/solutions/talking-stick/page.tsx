@@ -131,7 +131,7 @@ export default function Page() {
                   href="https://my.talkingstick.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[0.82rem] font-medium rounded-full transition-colors duration-200"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[0.82rem] font-medium rounded-md transition-colors duration-200"
                   style={{ border: "1px solid var(--color-border)", color: "var(--color-ivory)" }}
                 >
                   Visit talkingstick.app

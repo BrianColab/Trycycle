@@ -129,7 +129,7 @@ export default function Page() {
                     href={person.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-4 self-start px-3 py-1.5 rounded-full text-[0.72rem] font-semibold transition-all duration-200 hover:opacity-80"
+                    className="inline-flex items-center gap-2 mt-4 self-start px-3 py-1.5 rounded-md text-[0.72rem] font-semibold transition-all duration-200 hover:opacity-80"
                     style={{
                       background: "oklch(0.20 0.10 240 / 0.08)",
                       color: "oklch(0.25 0.10 240)",

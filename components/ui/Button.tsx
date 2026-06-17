@@ -61,7 +61,7 @@ export function Button(props: ButtonProps) {
       <Link
         href={props.href}
         className={combinedClass}
-        style={{ ...style, borderRadius: "9999px" }}
+        style={{ ...style, borderRadius: "6px" }}
       >
         {props.children}
       </Link>
@@ -75,7 +75,7 @@ export function Button(props: ButtonProps) {
     <button
       {...rest}
       className={combinedClass}
-      style={{ ...style, borderRadius: "9999px" }}
+      style={{ ...style, borderRadius: "6px" }}
     />
   );
 }
