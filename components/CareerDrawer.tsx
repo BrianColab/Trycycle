@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const inputBase: React.CSSProperties = {
   background: "oklch(0.97 0.005 60)",
@@ -137,6 +138,16 @@ export function CareerDrawer({ open, onClose }: { open: boolean; onClose: () => 
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
+
+          {/* Logo (white wordmark version for dark/orange background) */}
+          <Image
+            src="/logo.webp"
+            alt="TryCycle Data Systems"
+            width={800}
+            height={210}
+            className="relative h-8 w-auto mb-5"
+            priority
+          />
 
           <p className="relative text-[0.66rem] font-semibold tracking-[0.22em] uppercase mb-2" style={{ color: "oklch(1 0 0 / 0.80)" }}>
             Join the Team
