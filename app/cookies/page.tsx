@@ -226,7 +226,7 @@ export default function Page() {
             Managing your cookie preferences
           </h2>
           <p className="text-[0.83rem] leading-[1.80] mb-4" style={{ color: "oklch(0.38 0.02 240)" }}>
-            You can manage your cookie preferences through the Digital Advertising Alliance of Canada's opt-out
+            You can manage your cookie preferences through the Digital Advertising Alliance of Canada&rsquo;s opt-out
             tools, or through the cookie settings on our website.
           </p>
           <p className="text-[0.83rem] leading-[1.80] mb-10" style={{ color: "oklch(0.38 0.02 240)" }}>

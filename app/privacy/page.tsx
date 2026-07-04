@@ -129,7 +129,7 @@ export default function Page() {
             phone number, email address, or identity.
           </P>
           <P>
-            Users under 13 are not permitted. Parents believing their child's information was collected should contact
+            Users under 13 are not permitted. Parents believing their child&rsquo;s information was collected should contact
             TryCycle immediately for removal.
           </P>
 
@@ -237,8 +237,8 @@ export default function Page() {
           <UL>
             <LI>Identity cannot be confirmed</LI>
             <LI>Information retrieval burden exceeds proportionate value</LI>
-            <LI>Information doesn't exist or cannot be located</LI>
-            <LI>Disclosure compromises another person's confidentiality or safety</LI>
+            <LI>Information doesn&rsquo;t exist or cannot be located</LI>
+            <LI>Disclosure compromises another person&rsquo;s confidentiality or safety</LI>
             <LI>Legal non-disclosure requirements apply</LI>
           </UL>
           <P>Declined requests receive documented reasons, subject to legal restrictions.</P>
@@ -520,15 +520,15 @@ export default function Page() {
 
           <H2>1. Purpose of this privacy notice</H2>
           <P>
-            This notice addresses Personal Information collection, use, and disclosure by Buddy's Quest regarding the
-            Buddy's Quest website (buddysquest.com) and application.
+            This notice addresses Personal Information collection, use, and disclosure by Buddy&rsquo;s Quest regarding the
+            Buddy&rsquo;s Quest website (buddysquest.com) and application.
           </P>
           <P>
             The app is a game environment also offering anonymous, one-to-one text chats with a peer who has shared
             lived experiences. It explicitly excludes emergency services or professional health support.
           </P>
           <P>
-            The platform minimizes Personal Information collection; accounts aren't required. Automatic chat deletion
+            The platform minimizes Personal Information collection; accounts aren&rsquo;t required. Automatic chat deletion
             occurs. Users under 13 are not permitted, with no design intent to attract younger audiences.
           </P>
 
@@ -557,7 +557,7 @@ export default function Page() {
           </P>
 
           <H2>3. When and to whom we disclose your Personal Information</H2>
-          <P>Buddy's Quest will never sell your Personal Information.</P>
+          <P>Buddy&rsquo;s Quest will never sell your Personal Information.</P>
           <P>Personal Information disclosure occurs only in exceptional cases:</P>
           <UL>
             <LI>Legal requirements or authorization</LI>
@@ -636,7 +636,7 @@ export default function Page() {
             className="rounded-xl p-5 mt-2 mb-10 text-[0.82rem] leading-relaxed"
             style={{ background: "oklch(0 0 0 / 0.03)", border: "1px solid oklch(0 0 0 / 0.08)", color: "oklch(0.38 0.02 240)" }}
           >
-            <p className="font-semibold mb-1" style={{ color: "oklch(0.20 0.04 240)" }}>Buddy's Quest</p>
+            <p className="font-semibold mb-1" style={{ color: "oklch(0.20 0.04 240)" }}>Buddy&rsquo;s Quest</p>
             <p>7 Bayview Station Rd</p>
             <p>Ottawa, ON K1Y 2C5</p>
             <p className="mt-1">
