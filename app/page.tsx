@@ -520,16 +520,21 @@ function TestimonialsSection() {
           {TESTIMONIALS.map((t) => (
             <div
               key={t.name}
-              className="rounded-xl p-5 flex flex-col"
+              className="group relative rounded-xl p-5 flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1.5 shadow-[0_2px_10px_oklch(0_0_0_/_0.05)] hover:shadow-[0_16px_32px_oklch(0.72_0.19_45_/_0.14)]"
               style={{
                 background: "oklch(1 0 0)",
                 border: "1px solid oklch(0 0 0 / 0.07)",
-                boxShadow: "0 2px 10px oklch(0 0 0 / 0.05)",
               }}
             >
+              {/* Left accent bar — sweeps in on hover */}
+              <span
+                className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"
+                style={{ background: "linear-gradient(to bottom, oklch(0.72 0.19 45), oklch(0.64 0.17 38))" }}
+                aria-hidden="true"
+              />
               {/* Quote mark */}
               <svg
-                className="w-5 h-5 mb-3 shrink-0"
+                className="w-6 h-6 mb-3 shrink-0 transition-transform duration-300 group-hover:scale-110"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 style={{ color: "oklch(0.62 0.17 45)" }}
@@ -550,8 +555,7 @@ function TestimonialsSection() {
                 style={{ borderTop: "1px solid oklch(0 0 0 / 0.06)" }}
               >
                 <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-[0.67rem] font-bold shrink-0"
-                  style={{ background: "oklch(0.72 0.19 45 / 0.15)", color: "oklch(0.56 0.17 45)" }}
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-[0.67rem] font-bold shrink-0 transition-colors duration-300 bg-[oklch(0.72_0.19_45_/_0.15)] text-[oklch(0.56_0.17_45)] group-hover:bg-[oklch(0.72_0.19_45)] group-hover:text-white"
                   aria-hidden="true"
                 >
                   {t.initials}
@@ -628,22 +632,37 @@ function FaqSection() {
           {FAQ_PREVIEW.map((item) => (
             <div
               key={item.q}
-              className="rounded-xl p-5"
+              className="group relative rounded-xl p-5 overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-[0_1px_4px_oklch(0_0_0_/_0.04)] hover:shadow-[0_14px_28px_oklch(0.72_0.19_45_/_0.12)]"
               style={{
                 background: "oklch(1 0 0)",
                 border: "1px solid oklch(0 0 0 / 0.08)",
-                boxShadow: "0 1px 4px oklch(0 0 0 / 0.04)",
               }}
             >
-              <p
-                className="text-[0.85rem] font-semibold mb-2"
-                style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.18 0.04 240)" }}
-              >
-                {item.q}
-              </p>
-              <p className="text-[0.78rem] leading-relaxed" style={{ color: "oklch(0.46 0.02 90)" }}>
-                {item.a}
-              </p>
+              {/* Left accent bar — sweeps in on hover */}
+              <span
+                className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"
+                style={{ background: "linear-gradient(to bottom, oklch(0.72 0.19 45), oklch(0.64 0.17 38))" }}
+                aria-hidden="true"
+              />
+              <div className="flex items-start gap-3">
+                <span
+                  className="mt-0.5 shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-[0.82rem] font-bold transition-colors duration-300 bg-[oklch(0.72_0.19_45_/_0.12)] text-[oklch(0.56_0.17_45)] group-hover:bg-[oklch(0.72_0.19_45)] group-hover:text-white"
+                  aria-hidden="true"
+                >
+                  ?
+                </span>
+                <div>
+                  <p
+                    className="text-[0.85rem] font-semibold mb-2"
+                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.18 0.04 240)" }}
+                  >
+                    {item.q}
+                  </p>
+                  <p className="text-[0.78rem] leading-relaxed" style={{ color: "oklch(0.46 0.02 90)" }}>
+                    {item.a}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
