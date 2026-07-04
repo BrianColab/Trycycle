@@ -101,6 +101,40 @@ body {
   --shadow-card:      0 2px 12px oklch(0 0 0 / 0.07);
 }
 
+/* ── Soft aurora (dark page heroes) — very faint, slowly drifting ── */
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  will-change: transform;
+}
+@keyframes aurora-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33%      { transform: translate3d(8%, 10%, 0) scale(1.18); }
+  66%      { transform: translate3d(-6%, 4%, 0) scale(0.94); }
+}
+@keyframes aurora-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.12); }
+  50%      { transform: translate3d(-10%, -8%, 0) scale(1); }
+}
+@keyframes aurora-3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(7%, -10%, 0) scale(1.22); }
+}
+.aurora-1 { animation: aurora-1 24s ease-in-out infinite; }
+.aurora-2 { animation: aurora-2 30s ease-in-out infinite; }
+.aurora-3 { animation: aurora-3 27s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .aurora-1, .aurora-2, .aurora-3 { animation: none; }
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;

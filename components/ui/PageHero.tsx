@@ -1,4 +1,6 @@
-﻿interface PageHeroProps {
+﻿import { Aurora } from "./Aurora";
+
+interface PageHeroProps {
   eyebrow: string;
   title: string;
   titleAccent?: string;
@@ -14,12 +16,8 @@ export function PageHero({ eyebrow, title, titleAccent, description, children }:
         background: "oklch(0.11 0.04 240)",
       }}
     >
-      {/* Subtle teal glow top-right */}
-      <div
-        className="pointer-events-none absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full opacity-[0.07]"
-        style={{ background: "radial-gradient(circle, oklch(0.72 0.19 45) 0%, transparent 70%)" }}
-        aria-hidden="true"
-      />
+      {/* Soft aurora backdrop */}
+      <Aurora />
 
       <div className="relative mx-auto max-w-6xl px-6">
         {/* Eyebrow row */}
