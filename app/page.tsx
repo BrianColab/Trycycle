@@ -271,13 +271,13 @@ function SolutionsSection() {
     <section
       id="solutions"
       className="py-16 lg:py-24"
-      style={{ background: "var(--color-navy)" }}
+      style={{ background: "oklch(0.97 0.004 60)" }}
     >
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl mb-12">
           <p
             className="text-[0.68rem] font-semibold tracking-[0.22em] uppercase mb-3"
-            style={{ color: "oklch(0.72 0.19 45)" }}
+            style={{ color: "oklch(0.60 0.17 45)" }}
           >
             Our Solutions
           </p>
@@ -285,7 +285,7 @@ function SolutionsSection() {
             className="text-[1.9rem] font-bold leading-tight mb-4"
             style={{
               fontFamily: "var(--font-space-grotesk, sans-serif)",
-              color: "oklch(0.96 0.01 90)",
+              color: "oklch(0.14 0.04 240)",
               letterSpacing: "-0.02em",
             }}
           >
@@ -293,36 +293,53 @@ function SolutionsSection() {
             <span style={{ color: "oklch(0.72 0.19 45)" }}>with</span> the communities
             that need them most
           </h2>
-          <p className="text-[0.85rem] leading-relaxed" style={{ color: "oklch(0.62 0.02 90)" }}>
+          <p className="text-[0.85rem] leading-relaxed" style={{ color: "oklch(0.46 0.02 90)" }}>
             Every TryCycle solution is developed alongside community partners — shaped by lived
             experience, cultural knowledge, and frontline expertise.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {SOLUTIONS.map((s) => (
             <Link
               key={s.href}
               href={s.href}
-              className="group flex flex-col rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+              className="group flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
               style={{
-                background: "oklch(0.97 0.004 60)",
-                border: "1px solid oklch(0 0 0 / 0.07)",
-                boxShadow: "0 2px 12px oklch(0 0 0 / 0.06)",
+                background: "oklch(1 0 0)",
+                border: `1px solid ${s.accentColor}22`,
+                boxShadow: `0 2px 16px ${s.accentColor}18`,
               }}
             >
-              {/* Product color accent bar */}
-              <div className="h-1 w-full" style={{ background: s.accentColor }} aria-hidden="true" />
-
-              <div className="flex flex-col flex-1 p-6">
-                {/* Icon */}
+              {/* Colored hero band */}
+              <div
+                className="relative flex items-center justify-center py-8 overflow-hidden"
+                style={{ background: s.accentColor }}
+              >
+                {/* Large watermark icon */}
+                <svg
+                  className="absolute opacity-10 w-28 h-28 -right-4 -bottom-4"
+                  fill="white"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d={s.iconPath} />
+                </svg>
+                {/* Tag pill */}
+                <span
+                  className="absolute top-3 left-3 text-[0.60rem] font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded"
+                  style={{ background: "oklch(1 0 0 / 0.18)", color: "oklch(1 0 0 / 0.90)" }}
+                >
+                  {s.tag}
+                </span>
+                {/* Centred icon */}
                 <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
-                  style={{ background: s.accentColor }}
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                  style={{ background: "oklch(1 0 0 / 0.18)" }}
                   aria-hidden="true"
                 >
                   <svg
-                    className="w-5 h-5"
+                    className="w-7 h-7"
                     fill="none"
                     stroke="white"
                     strokeWidth={1.5}
@@ -332,15 +349,12 @@ function SolutionsSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" d={s.iconPath} />
                   </svg>
                 </div>
+              </div>
 
-                <p
-                  className="text-[0.68rem] font-semibold tracking-wide uppercase mb-1.5"
-                  style={{ color: "oklch(0.62 0.14 45)" }}
-                >
-                  {s.tag}
-                </p>
+              {/* Content */}
+              <div className="flex flex-col flex-1 p-5">
                 <h3
-                  className="text-[0.92rem] font-bold mb-3"
+                  className="text-[0.95rem] font-bold mb-2"
                   style={{
                     fontFamily: "var(--font-space-grotesk, sans-serif)",
                     color: "oklch(0.14 0.04 240)",
@@ -351,14 +365,17 @@ function SolutionsSection() {
                 </h3>
                 <p
                   className="text-[0.78rem] leading-relaxed flex-1"
-                  style={{ color: "oklch(0.43 0.02 90)" }}
+                  style={{ color: "oklch(0.44 0.02 90)" }}
                 >
                   {s.description}
                 </p>
 
                 <div
-                  className="flex items-center gap-1 mt-5 text-[0.74rem] font-semibold"
-                  style={{ color: "oklch(0.56 0.17 45)" }}
+                  className="flex items-center gap-1 mt-5 pt-4 text-[0.74rem] font-semibold transition-colors duration-200"
+                  style={{
+                    borderTop: `1px solid ${s.accentColor}22`,
+                    color: s.accentColor,
+                  }}
                 >
                   Learn more
                   <svg
