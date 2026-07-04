@@ -54,14 +54,14 @@ type NavItem =
 function Logo({ onClick }: { onClick?: () => void }) {
   return (
     <Link href="/" className="shrink-0 flex items-center gap-2" onClick={onClick}>
-      {/* Colored bicycle icon — mix-blend:multiply keeps colors, hides white */}
+      {/* Logo icon */}
       <span className="relative block" style={{ width: 38, height: 38 }}>
         <Image
-          src="/logo.webp"
+          src="/images/logo-bk.png"
           alt=""
           fill
           className="object-left object-contain"
-          style={{ mixBlendMode: "multiply", objectPosition: "left center" }}
+          style={{ objectPosition: "left center" }}
           sizes="38px"
           priority
         />

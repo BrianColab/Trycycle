@@ -115,11 +115,11 @@ export function ContactDrawer({ open, onClose }: { open: boolean; onClose: () =>
           <Link href="/" onClick={onClose} className="flex items-center gap-2">
             <span className="relative block" style={{ width: 30, height: 30 }}>
               <Image
-                src="/logo.webp"
+                src="/images/logo-bk.png"
                 alt=""
                 fill
                 className="object-contain"
-                style={{ mixBlendMode: "multiply", objectPosition: "left center" }}
+                style={{ objectPosition: "left center" }}
                 sizes="30px"
               />
             </span>
