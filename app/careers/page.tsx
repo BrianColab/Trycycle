@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { PageHero, Button } from "@/components/ui";
+import { PageHero } from "@/components/ui";
+import { ApplyButton } from "./ApplyButton";
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -62,9 +63,7 @@ export default function Page() {
               We&apos;re growing. Check back soon — or send us a general application
               and we&apos;ll keep you in mind for future opportunities.
             </p>
-            <Button href="mailto:careers@trycycle.ca" variant="ghost" size="md">
-              Send a General Application
-            </Button>
+            <ApplyButton />
           </div>
 
           {/* Values */}
