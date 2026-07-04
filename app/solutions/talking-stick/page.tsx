@@ -190,28 +190,43 @@ export default function Page() {
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {FEATURES.map((f) => (
+            {FEATURES.map((f, i) => (
               <div
                 key={f.title}
-                className="rounded-2xl p-7"
-                style={{ background: "oklch(1 0 0)", border: "1px solid var(--color-border)", boxShadow: "var(--shadow-card)" }}
+                className="group relative rounded-2xl p-7 overflow-hidden transition-all duration-300 hover:-translate-y-1.5"
+                style={{ background: "oklch(1 0 0)", border: "1px solid oklch(0 0 0 / 0.07)", boxShadow: "0 2px 14px oklch(0 0 0 / 0.05)" }}
               >
+                {/* Animated top accent */}
                 <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
-                  style={{ background: "oklch(0.72 0.19 45 / 0.10)", border: "1px solid oklch(0.72 0.19 45 / 0.20)" }}
+                  className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                  style={{ background: "linear-gradient(to right, oklch(0.72 0.19 45), oklch(0.80 0.16 55))" }}
+                  aria-hidden="true"
+                />
+                {/* Watermark index */}
+                <span
+                  className="absolute -top-4 right-3 text-[5rem] font-bold leading-none pointer-events-none select-none"
+                  style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.72 0.19 45 / 0.07)" }}
                   aria-hidden="true"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" style={{ color: "var(--color-teal)" }}>
+                  {i + 1}
+                </span>
+                {/* Icon tile */}
+                <div
+                  className="relative w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-105"
+                  style={{ background: "linear-gradient(135deg, oklch(0.72 0.19 45), oklch(0.66 0.19 36))", boxShadow: "0 8px 18px -6px oklch(0.72 0.19 45 / 0.50)" }}
+                  aria-hidden="true"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="white" strokeWidth={1.6} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d={f.icon} />
                   </svg>
                 </div>
                 <h3
-                  className="text-[0.95rem] font-semibold mb-2"
-                  style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--color-ivory)" }}
+                  className="relative text-[1rem] font-bold mb-2.5"
+                  style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.14 0.04 240)" }}
                 >
                   {f.title}
                 </h3>
-                <p className="text-[0.82rem] leading-[1.75]" style={{ color: "var(--color-muted)" }}>
+                <p className="relative text-[0.82rem] leading-[1.75]" style={{ color: "oklch(0.44 0.02 240)" }}>
                   {f.body}
                 </p>
               </div>
