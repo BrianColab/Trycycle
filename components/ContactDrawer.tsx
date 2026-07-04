@@ -112,23 +112,14 @@ export function ContactDrawer({ open, onClose }: { open: boolean; onClose: () =>
           className="flex items-center justify-between px-6 py-5 border-b shrink-0"
           style={{ borderColor: "oklch(0 0 0 / 0.08)" }}
         >
-          <Link href="/" onClick={onClose} className="flex items-center gap-2">
-            <span className="relative block" style={{ width: 30, height: 30 }}>
-              <Image
-                src="/images/logo-bk.png"
-                alt=""
-                fill
-                className="object-contain"
-                style={{ objectPosition: "left center" }}
-                sizes="30px"
-              />
-            </span>
-            <span
-              className="text-[1rem] font-bold tracking-tight leading-none"
-              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "oklch(0.12 0.04 240)" }}
-            >
-              TryCycle
-            </span>
+          <Link href="/" onClick={onClose} className="flex items-center" aria-label="TryCycle Data Systems">
+            <Image
+              src="/images/logo-bk.png"
+              alt="TryCycle Data Systems"
+              width={800}
+              height={210}
+              className="h-9 w-auto"
+            />
           </Link>
 
           <button

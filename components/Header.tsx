@@ -48,35 +48,18 @@ type NavItem =
   | { label: string; href: string; children?: never }
   | { label: string; children: { label: string; href: string }[]; href?: never };
 
-/* ── Logo: icon is colored (shows on white), text is white (hidden on white).
-   We render the icon portion with mix-blend-mode:multiply and add the wordmark
-   as HTML text. Replace /logo-dark.webp once a dark version is available. ── */
+/* ── Logo: full TryCycle Data Systems lockup ── */
 function Logo({ onClick }: { onClick?: () => void }) {
   return (
-    <Link href="/" className="shrink-0 flex items-center gap-2" onClick={onClick}>
-      {/* Logo icon */}
-      <span className="relative block" style={{ width: 38, height: 38 }}>
-        <Image
-          src="/images/logo-bk.png"
-          alt=""
-          fill
-          className="object-left object-contain"
-          style={{ objectPosition: "left center" }}
-          sizes="38px"
-          priority
-        />
-      </span>
-      {/* Wordmark as HTML since logo.webp has white text (invisible on white bg) */}
-      <span
-        aria-label="TryCycle"
-        className="text-[1.15rem] font-bold tracking-tight leading-none"
-        style={{
-          fontFamily: "var(--font-space-grotesk, sans-serif)",
-          color: "oklch(0.12 0.04 240)",
-        }}
-      >
-        TryCycle
-      </span>
+    <Link href="/" className="shrink-0 flex items-center" onClick={onClick} aria-label="TryCycle Data Systems">
+      <Image
+        src="/images/logo-bk.png"
+        alt="TryCycle Data Systems"
+        width={800}
+        height={210}
+        className="h-12 w-auto"
+        priority
+      />
     </Link>
   );
 }
