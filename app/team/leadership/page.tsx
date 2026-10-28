@@ -2,13 +2,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/ui";
+import { BioReadMore } from "./BioReadMore";
 
 export const metadata: Metadata = {
   title: "Leadership",
   description: "Meet the TryCycle leadership team — experts in digital health, community partnerships, Indigenous wellness, and social enterprise.",
 };
 
-const LEADERS = [
+const LEADERS: {
+  name: string;
+  credentials: string | null;
+  title: string;
+  bio: string;
+  fullBio?: string;
+  photo: string;
+  linkedin: string | null;
+}[] = [
   {
     name: "John MacBeth",
     credentials: null,
@@ -67,11 +76,29 @@ const LEADERS = [
   },
   {
     name: "Donna Keogh",
-    credentials: "RN",
+    credentials: "RN, BScN",
     title: "Director of Nursing & Indigenous Business Development",
     bio: "Registered nurse with more than eight years serving remote Northern Ontario First Nations communities. A dedicated advocate for culturally responsive care.",
     photo: "/images/team/DONNAKOEGH.png",
     linkedin: "https://ca.linkedin.com/in/donna-keogh-156050277",
+  },
+  {
+    name: "Mylène (Mimi) Mailloux",
+    credentials: "RN, BScN",
+    title: "Manager of Nursing Services",
+    bio: "Registered Nurse with 17+ years in emergency medicine, acute care, community health, and healthcare leadership, much of it serving Indigenous communities across Northern Ontario.",
+    fullBio: "Mimi is a Registered Nurse with 17+ years of experience in emergency medicine, acute care, community health, and healthcare leadership. Much of her career has focused on serving Indigenous communities across Northern Ontario, including as Nurse in Charge and Acting Nurse Zone Manager. Mimi is committed to improving access to high-quality, culturally respectful care & making a meaningful difference in the lives of the people and communities she serves. She holds a Bachelor of Science in Nursing with Honours from York University.",
+    photo: "/images/team/MIMIMAILLOUX.png",
+    linkedin: null,
+  },
+  {
+    name: "Chelsey Stonestand",
+    credentials: null,
+    title: "Mentor, Peer Support Specialist",
+    bio: "Member of James Smith Cree Nation and a Peer Advocate with Talking Stick since 2022, now mentoring Indigenous Peers across Canada and the United States.",
+    fullBio: "Chelsey is a member of James Smith Cree Nation and a Community Addictions Worker with over a decade of experience in Child Welfare, Justice, Mental Health, and Addictions. She holds a Bachelor of Arts in Sociology, concentrating in Indigenous Justice and Criminology, with a minor in Law, Crime and Justice from the University of Saskatchewan. A Peer Advocate with Talking Stick since its inception in 2022, Chelsey now mentors and supports Indigenous Peers across Canada and the United States, helping strengthen the program’s culturally grounded approach to wellness.",
+    photo: "/images/team/CHELSEYSTONESTAND.png",
+    linkedin: null,
   },
 ];
 
@@ -153,6 +180,7 @@ export default function Page() {
                   >
                     {person.bio}
                   </p>
+                  {person.fullBio && <BioReadMore person={{ ...person, fullBio: person.fullBio }} />}
                   {person.linkedin && (
                     <Link
                       href={person.linkedin}
